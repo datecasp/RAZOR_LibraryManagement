@@ -2,11 +2,11 @@
 
 namespace RAZOR_LibraryManagement.Domain.ViewModels
 {
-    public class vmBookIndex
+    public class vmCategoryIndex
     {
         [Required]
-        public string Title { get; set; }
+        public string Name { get; set; }
         [Required]
-        public string Author { get; set; }
+        public bool IsActive { get; set; }
     }
 }

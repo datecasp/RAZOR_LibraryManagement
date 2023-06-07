@@ -1,26 +1,27 @@
 ﻿@page
-@model RAZOR_LibraryManagement.Web.Pages.Books.ListModel
-@{ 
+@model RAZOR_LibraryManagement.Web.Pages.Categories.ListModel
+@{
 }
+
 
 <div class="container">
     <table class="table table-hover">
         <thead>
             <tr>
                 <th>
-                    Title
+                    Category name
                 </th>
                 <th>
-                    Author
+                    Is active?
                 </th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var book in Model.vmBookIndexList)
+            @foreach (var category in Model.vmCategoryIndexList)
             {
                 <tr>
-                    <td>@book.Title</td>
-                    <td>@book.Author</td>
+                    <td>@category.Name</td>
+                    <td>@category.IsActive</td>
                 </tr>
             }
         </tbody>

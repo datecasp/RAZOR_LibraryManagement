@@ -2,8 +2,8 @@
 
 namespace RAZOR_LibraryManagement.Domain.Interfaces
 {
-    public interface IBookRepository
+    public interface ICategoryRepository
     {
-        Task<IEnumerable<Book>> GetAllBooks();
+        Task<IEnumerable<Category>> GetAllCategories();
     }
 }

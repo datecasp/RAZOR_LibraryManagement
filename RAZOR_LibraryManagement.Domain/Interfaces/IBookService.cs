@@ -1,4 +1,5 @@
 ﻿using RAZOR_LibraryManagement.Domain.Models;
+using RAZOR_LibraryManagement.Domain.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace RAZOR_LibraryManagement.Domain.Interfaces
 {
     public interface IBookService
     {
-        Task<IEnumerable<Book>> GetAllBooksService();
+        Task<IEnumerable<vmBookIndex>> GetAllBooksService();
     }
 }

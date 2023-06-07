@@ -10,8 +10,12 @@ namespace RAZOR_LibraryManagement.Web.Configuration
         public static IServiceCollection ResolveDependencies(this IServiceCollection services)
         {
             services.AddScoped<IBookRepository, BookRepository>();
-            services.AddScoped<IBookService, BookService>();
-          
+            services.AddScoped<IBookService, BookService>(); 
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<ICategoryService, CategoryService>();
+
             return services;
         }
     }

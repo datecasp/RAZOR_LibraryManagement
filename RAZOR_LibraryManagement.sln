@@ -3,24 +3,24 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RAZOR_LibraryManagement.Web", "RAZOR_LibraryManagement.Web\RAZOR_LibraryManagement.Web.csproj", "{70F6A7C3-1368-4188-AFFD-E8B9E7578EBD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RAZOR_LibraryManagement.Web", "RAZOR_LibraryManagement.Web\RAZOR_LibraryManagement.Web.csproj", "{70F6A7C3-1368-4188-AFFD-E8B9E7578EBD}"
 	ProjectSection(ProjectDependencies) = postProject
 		{09364C77-4941-49DD-AE14-011A835A9333} = {09364C77-4941-49DD-AE14-011A835A9333}
 		{603310ED-C560-435D-961B-84D15BB1599A} = {603310ED-C560-435D-961B-84D15BB1599A}
 		{8034B556-5AE4-4A3F-BCF6-E44285ABF20B} = {8034B556-5AE4-4A3F-BCF6-E44285ABF20B}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RAZOR_LibraryManagement.Domain", "RAZOR_LibraryManagement.Domain\RAZOR_LibraryManagement.Domain.csproj", "{603310ED-C560-435D-961B-84D15BB1599A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RAZOR_LibraryManagement.Domain", "RAZOR_LibraryManagement.Domain\RAZOR_LibraryManagement.Domain.csproj", "{603310ED-C560-435D-961B-84D15BB1599A}"
 	ProjectSection(ProjectDependencies) = postProject
 		{09364C77-4941-49DD-AE14-011A835A9333} = {09364C77-4941-49DD-AE14-011A835A9333}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RAZOR_LibraryManagement.Infra", "RAZOR_LibraryManagement.Infra\RAZOR_LibraryManagement.Infra.csproj", "{8034B556-5AE4-4A3F-BCF6-E44285ABF20B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RAZOR_LibraryManagement.Infra", "RAZOR_LibraryManagement.Infra\RAZOR_LibraryManagement.Infra.csproj", "{8034B556-5AE4-4A3F-BCF6-E44285ABF20B}"
 	ProjectSection(ProjectDependencies) = postProject
 		{603310ED-C560-435D-961B-84D15BB1599A} = {603310ED-C560-435D-961B-84D15BB1599A}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RAZOR_LibraryManagement.Lang", "RAZOR_LibraryManagement.Lang\RAZOR_LibraryManagement.Lang.csproj", "{09364C77-4941-49DD-AE14-011A835A9333}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RAZOR_LibraryManagement.Lang", "RAZOR_LibraryManagement.Lang\RAZOR_LibraryManagement.Lang.csproj", "{09364C77-4941-49DD-AE14-011A835A9333}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

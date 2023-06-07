@@ -19,19 +19,7 @@ namespace RAZOR_LibraryManagement.Web.Pages.Books
 
         public async Task OnGet()
         {
-            var booksList = await _bookService.GetAllBooksService();
-            var bookIndexList = new List<vmBookIndex>();
-            foreach (var book in booksList)
-            {
-                var vwBook = new vmBookIndex
-                {
-                    Title = book.Title,
-                    Author = book.Author
-                };
-
-                bookIndexList.Add(vwBook);
-            }
-            vmBookIndexList = bookIndexList.ToList();
+            vmBookIndexList = (await _bookService.GetAllBooksService()).ToList();
         }
     }
 }

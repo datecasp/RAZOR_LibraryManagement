@@ -1,5 +1,6 @@
 ﻿using RAZOR_LibraryManagement.Domain.Interfaces;
 using RAZOR_LibraryManagement.Domain.Models;
+using RAZOR_LibraryManagement.Domain.ViewModels;
 
 namespace RAZOR_LibraryManagement.Domain.Services
 {
@@ -12,17 +13,28 @@ namespace RAZOR_LibraryManagement.Domain.Services
            _bookRepository = bookRepository;
         }
 
-        public async Task<IEnumerable<Book>> GetAllBooksService()
+        public async Task<IEnumerable<vmBookIndex>> GetAllBooksService()
         {
-            var result =new List<Book>();
+            var booksList =new List<Book>();
+            var bookIndexList = new List<vmBookIndex>();
             try
             {
-                result = (await _bookRepository.GetAllBooks()).ToList();
+                booksList = (await _bookRepository.GetAllBooks()).ToList();
+                foreach (var book in booksList)
+                {
+                    var vwBook = new vmBookIndex
+                    {
+                        Title = book.Title,
+                        Author = book.Author
+                    };
+
+                    bookIndexList.Add(vwBook);
+                }
             }
             catch(Exception ex)
             {
 
             }
-            return result;        }
+            return bookIndexList;        }
     }
 }

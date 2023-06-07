@@ -1,6 +1,6 @@
 ﻿@page
 @model RAZOR_LibraryManagement.Web.Pages.Books.ListModel
-@{ 
+@{
 }
 
 <div class="container">
@@ -13,7 +13,9 @@
                 <th>
                     Author
                 </th>
-                <th></th>
+                <th>
+                    Actions
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -22,7 +24,19 @@
                 <tr>
                     <td>@book.Title</td>
                     <td>@book.Author</td>
-                    <td><a href="/Books/Details/@book.Id"><i class="bi bi-book"></i></a></td>
+                    <td class="d-flex">
+                        <a href="/Books/Details/@book.Id"><i class="bi bi-book btn-outline-success"></i></a>
+                        <div>
+                            @if (book.IsLoanable)
+                            {
+                                <i class="bi bi-check-lg btn-outline-success mx-3"></i>
+                            }
+                            else
+                            {
+                                <i class="bi bi-x-lg btn-outline-danger mx-3"></i>
+                            }
+                        </div>
+                    </td>
                 </tr>
             }
         </tbody>

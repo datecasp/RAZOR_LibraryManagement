@@ -26,7 +26,8 @@ namespace RAZOR_LibraryManagement.Domain.Services
                     {
                         Id = book.BookId,
                         Title = book.Title,
-                        Author = book.Author
+                        Author = book.Author,
+                        IsLoanable= book.IsLoanable
                     };
 
                     bookIndexList.Add(vwBook);

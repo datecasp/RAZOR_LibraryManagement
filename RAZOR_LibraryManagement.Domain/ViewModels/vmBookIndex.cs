@@ -10,5 +10,7 @@ namespace RAZOR_LibraryManagement.Domain.ViewModels
         public string Title { get; set; }
         [Required]
         public string Author { get; set; }
+        [Required]
+        public bool IsLoanable { get; set; }
     }
 }

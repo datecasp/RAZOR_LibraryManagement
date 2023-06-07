@@ -32,5 +32,19 @@ namespace RAZOR_LibraryManagement.Infra.Repositories
             return result;
 
         }
+
+        public async Task<Book> GetBookById(int id)
+        {
+            var result = new Book();
+            try
+            { 
+            result = await _lM_DbContext.FindAsync<Book>(id);
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return result;
+        }
     }
 }

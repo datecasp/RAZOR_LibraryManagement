@@ -11,5 +11,6 @@ namespace RAZOR_LibraryManagement.Domain.Interfaces
     public interface IBookService
     {
         Task<IEnumerable<vmBookIndex>> GetAllBooksService();
+        Task<vmBookDetails> GetBookByIdService(int id);
     }
 }

@@ -24,6 +24,7 @@ namespace RAZOR_LibraryManagement.Domain.Services
                 {
                     var vwBook = new vmBookIndex
                     {
+                        Id = book.BookId,
                         Title = book.Title,
                         Author = book.Author
                     };
@@ -36,5 +37,28 @@ namespace RAZOR_LibraryManagement.Domain.Services
 
             }
             return bookIndexList;        }
+
+        public async Task<vmBookDetails> GetBookByIdService(int id)
+        {
+            var vmBook = new vmBookDetails();
+            try
+            {
+                var book = await _bookRepository.GetBookById(id);
+                if(book != null)
+                {
+                    vmBook.Title = book.Title;
+                    vmBook.Author = book.Author;
+                    vmBook.Description = book.Description;
+                    vmBook.isLoanable = book.IsLoanable;
+                    vmBook.Id = id;
+                    vmBook.ImageUrl = book.ImageUrl;
+                }
+            }
+            catch(Exception ex)
+            {
+
+            }
+            return vmBook;
+        }
     }
 }

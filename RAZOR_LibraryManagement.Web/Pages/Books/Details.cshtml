@@ -3,6 +3,20 @@
 @{
 }
 <div class="container">
-    <h1>@Model.vmBookDetails.Title</h1>
-    <img src="@Model.vmBookDetails.ImageUrl" width="250" />
+    <div class="card mb-3" style="max-width: 720px;">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="@Model.vmBookDetails.ImageUrl" class="img-fluid rounded-start" alt="Book cover">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h4 class="card-title mb-2">@Model.vmBookDetails.Title</h4>
+                    <h5 class="card-subtitle mb-4">@Model.vmBookDetails.Author</h5>
+                    <h6 class="card-text mb-2">Description</h6> @* <-- TODO link from resource file*@
+                    <p class="card-text">@Model.vmBookDetails.Description</p>
+                </div>
+            </div>
+            <p class="card-footer">Is loanable? @Model.vmBookDetails.isLoanable</p>
+        </div>
+    </div>
 </div>

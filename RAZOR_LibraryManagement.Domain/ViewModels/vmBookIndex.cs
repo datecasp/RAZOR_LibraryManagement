@@ -11,6 +11,6 @@ namespace RAZOR_LibraryManagement.Domain.ViewModels
         [Required]
         public string Author { get; set; }
         [Required]
-        public bool IsLoanable { get; set; }
+        public bool IsBorrowable { get; set; }
     }
 }

@@ -20,6 +20,6 @@ namespace RAZOR_LibraryManagement.Domain.ViewModels
         [Required]
         public string ImageUrl { get; set; }
         [Required]
-        public bool isLoanable { get; set; }
+        public bool isBorrowable { get; set; }
     }
 }

@@ -27,7 +27,7 @@ namespace RAZOR_LibraryManagement.Domain.Services
                         Id = book.BookId,
                         Title = book.Title,
                         Author = book.Author,
-                        IsLoanable= book.IsLoanable
+                        IsBorrowable= book.IsBorrowable
                     };
 
                     bookIndexList.Add(vwBook);
@@ -50,7 +50,7 @@ namespace RAZOR_LibraryManagement.Domain.Services
                     vmBook.Title = book.Title;
                     vmBook.Author = book.Author;
                     vmBook.Description = book.Description;
-                    vmBook.isLoanable = book.IsLoanable;
+                    vmBook.isBorrowable = book.IsBorrowable;
                     vmBook.Id = id;
                     vmBook.ImageUrl = book.ImageUrl;
                 }

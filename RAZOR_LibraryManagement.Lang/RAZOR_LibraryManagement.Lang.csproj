@@ -9,21 +9,20 @@
   <ItemGroup>
     <Folder Include="Book\" />
     <Folder Include="Category\" />
-    <Folder Include="User\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="_Layout\layout.Designer.cs">
+    <Compile Update="User\UsersList.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>layout.resx</DependentUpon>
+      <DependentUpon>UsersList.resx</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="_Layout\layout.resx">
+    <EmbeddedResource Update="User\UsersList.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>layout.Designer.cs</LastGenOutput>
+      <LastGenOutput>UsersList.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 

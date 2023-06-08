@@ -16,7 +16,7 @@ namespace RAZOR_LibraryManagement.Domain.Models
         public User User { get; set; }
         //Indicates if this user book relation is actual or past
         public bool IsActualUser { get; set; }
-        //Date qhen user loan the book
-        public DateTime LoanDate { get; set; }
+        //Date qhen user borrow the book
+        public DateTime BorrowDate { get; set; }
     }
 }

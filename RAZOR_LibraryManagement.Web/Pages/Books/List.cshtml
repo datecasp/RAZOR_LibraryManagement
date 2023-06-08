@@ -1,20 +1,22 @@
 ﻿@page
 @model RAZOR_LibraryManagement.Web.Pages.Books.ListModel
 @{
+    ViewData["Title"] = "Books list";
 }
 
 <div class="container">
+    <h1 class="text-dark mb-3">Books list</h1> @* <-- TODO link from resource file*@
     <table class="table table-hover">
         <thead>
             <tr>
                 <th>
-                    Title
+                    Title @* <-- TODO link from resource file*@
                 </th>
                 <th>
-                    Author
+                    Author @* <-- TODO link from resource file*@
                 </th>
                 <th>
-                    Actions
+                    Actions @* <-- TODO link from resource file*@
                 </th>
             </tr>
         </thead>
@@ -27,7 +29,7 @@
                     <td class="d-flex">
                         <a href="/Books/Details/@book.Id"><i class="bi bi-book btn-outline-success"></i></a>
                         <div>
-                            @if (book.IsLoanable)
+                            @if (book.IsBorrowable)
                             {
                                 <i class="bi bi-check-lg btn-outline-success mx-3"></i>
                             }

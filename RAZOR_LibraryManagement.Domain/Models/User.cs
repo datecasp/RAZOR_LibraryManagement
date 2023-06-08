@@ -12,7 +12,7 @@ namespace RAZOR_LibraryManagement.Domain.Models
         public string UserName { get; set; } 
         public string Email { get; set; }
         public string Password { get; set; }
-        //Indicates if user is active for loans
+        //Indicates if user is active for borrows
         public bool IsActive { get; set; }
 
         //Nav props

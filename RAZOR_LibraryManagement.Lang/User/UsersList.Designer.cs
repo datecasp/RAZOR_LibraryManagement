@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace RAZOR_LibraryManagement.Lang._Layout {
+namespace RAZOR_LibraryManagement.Lang.User {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace RAZOR_LibraryManagement.Lang._Layout {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class layout {
+    public class UsersList {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal layout() {
+        internal UsersList() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace RAZOR_LibraryManagement.Lang._Layout {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("RAZOR_LibraryManagement.Lang._Layout.layout", typeof(layout).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("RAZOR_LibraryManagement.Lang.User.UsersList", typeof(UsersList).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -57,15 +57,6 @@ namespace RAZOR_LibraryManagement.Lang._Layout {
             }
             set {
                 resourceCulture = value;
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Library Manager.
-        /// </summary>
-        public static string Title {
-            get {
-                return ResourceManager.GetString("Title", resourceCulture);
             }
         }
     }

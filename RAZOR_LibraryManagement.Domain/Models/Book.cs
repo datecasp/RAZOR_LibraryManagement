@@ -17,7 +17,7 @@ namespace RAZOR_LibraryManagement.Domain.Models
         //Sets a human readable URL for the book
         public string UrlHandle { get; set; }
         //Indicates if book is active or inactive in library funds
-        public bool IsLoanable { get; set; }
+        public bool IsBorrowable { get; set; }
 
         //Nav props
         public ICollection<BookUser>? BookUsers { get; set; }

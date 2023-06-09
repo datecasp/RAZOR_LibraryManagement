@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using RAZOR_LibraryManagement.Domain.Interfaces;
 using RAZOR_LibraryManagement.Domain.Models;
@@ -15,6 +16,16 @@ builder.Services.AddDbContext<LM_DbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("connStr"));
 });
+
+
+//For use Identity
+builder.Services.AddDbContext<AuthDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("authStr"));
+});
+
+builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+    .AddEntityFrameworkStores<AuthDbContext>();
 
 builder.Services.Configure<AppSettingsModel>(builder.Configuration.GetSection("AppConfigs"));
 
@@ -36,6 +47,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

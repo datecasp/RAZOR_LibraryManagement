@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RAZOR_LibraryManagement.Domain.Interfaces;
 using RAZOR_LibraryManagement.Domain.ViewModels;
@@ -9,6 +8,7 @@ namespace RAZOR_LibraryManagement.Web.Pages.Users
     {
         private readonly IUserService _userService;
         public List<vmUserIndex> vmUserIndexList;
+
 
         public ListModel(IUserService userService)
         {

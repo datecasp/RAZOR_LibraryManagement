@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace RAZOR_LibraryManagement.Lang.User {
+namespace RAZOR_LibraryManagement.Lang.Category {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace RAZOR_LibraryManagement.Lang.User {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class UsersList {
+    public class CategoriesList {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal UsersList() {
+        internal CategoriesList() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace RAZOR_LibraryManagement.Lang.User {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("RAZOR_LibraryManagement.Lang.User.UsersList", typeof(UsersList).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("RAZOR_LibraryManagement.Lang.Category.CategoriesList", typeof(CategoriesList).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,29 +61,29 @@ namespace RAZOR_LibraryManagement.Lang.User {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a List of users.
+        ///   Busca una cadena traducida similar a Category.
+        /// </summary>
+        public static string Category {
+            get {
+                return ResourceManager.GetString("Category", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Is active?.
+        /// </summary>
+        public static string IsActive {
+            get {
+                return ResourceManager.GetString("IsActive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a List of categories.
         /// </summary>
         public static string Title {
             get {
                 return ResourceManager.GetString("Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Email.
-        /// </summary>
-        public static string UserEmail {
-            get {
-                return ResourceManager.GetString("UserEmail", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Name of user.
-        /// </summary>
-        public static string UserName {
-            get {
-                return ResourceManager.GetString("UserName", resourceCulture);
             }
         }
     }

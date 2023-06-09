@@ -17,6 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RAZOR_LibraryManagement.Dom
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RAZOR_LibraryManagement.Infra", "RAZOR_LibraryManagement.Infra\RAZOR_LibraryManagement.Infra.csproj", "{8034B556-5AE4-4A3F-BCF6-E44285ABF20B}"
 	ProjectSection(ProjectDependencies) = postProject
+		{09364C77-4941-49DD-AE14-011A835A9333} = {09364C77-4941-49DD-AE14-011A835A9333}
 		{603310ED-C560-435D-961B-84D15BB1599A} = {603310ED-C560-435D-961B-84D15BB1599A}
 	EndProjectSection
 EndProject

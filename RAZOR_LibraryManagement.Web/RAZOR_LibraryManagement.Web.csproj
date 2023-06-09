@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RAZOR_LibraryManagement.Infra\RAZOR_LibraryManagement.Infra.csproj" />
+    <ProjectReference Include="..\RAZOR_LibraryManagement.Lang\RAZOR_LibraryManagement.Lang.csproj" />
   </ItemGroup>
 
 </Project>

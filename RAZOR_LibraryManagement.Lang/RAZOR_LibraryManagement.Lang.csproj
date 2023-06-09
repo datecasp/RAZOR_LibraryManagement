@@ -1,17 +1,33 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+	  <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Book\" />
-    <Folder Include="Category\" />
-  </ItemGroup>
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Book\BookDetails.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>BookDetails.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Book\BooksList.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>BooksList.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Category\CategoriesList.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CategoriesList.resx</DependentUpon>
+    </Compile>
     <Compile Update="User\UsersList.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -20,6 +36,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Book\BookDetails.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>BookDetails.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Book\BooksList.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>BooksList.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Category\CategoriesList.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CategoriesList.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="User\UsersList.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>UsersList.Designer.cs</LastGenOutput>

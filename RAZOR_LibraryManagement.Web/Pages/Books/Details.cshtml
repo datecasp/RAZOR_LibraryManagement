@@ -1,10 +1,11 @@
 ﻿@page "{id:int}"
 @model RAZOR_LibraryManagement.Web.Pages.Books.DetailsModel
+@using RAZOR_LibraryManagement.Lang.Book
 @{
     ViewData["Title"] = "Book details";
 }
 <div class="container">
-    <h1 class="text-dark mb-3">@Model.vmBookDetails.Title details</h1> @* <-- TODO link from resource file*@
+    <h1 class="text-dark mb-3">@Model.vmBookDetails.Title @BookDetails.Details</h1>
     <div class="card mb-3" style="max-width: 720px;">
         <div class="row g-0">
             <div class="col-md-4">
@@ -14,11 +15,11 @@
                 <div class="card-body">
                     <h4 class="card-title mb-2">@Model.vmBookDetails.Title</h4>
                     <h5 class="card-subtitle mb-4">@Model.vmBookDetails.Author</h5>
-                    <h6 class="card-text mb-2">Description</h6> @* <-- TODO link from resource file*@
+                    <h6 class="card-text mb-2">@BookDetails.BookDescription</h6> 
                     <p class="card-text">@Model.vmBookDetails.Description</p>
                 </div>
             </div>
-            <p class="card-footer">Is borrowable? @Model.vmBookDetails.isBorrowable</p> @* <-- TODO link from resource file*@
+            <p class="card-footer">@BookDetails.IsBorrowable @Model.vmBookDetails.isBorrowable</p> 
         </div>
     </div>
 </div>

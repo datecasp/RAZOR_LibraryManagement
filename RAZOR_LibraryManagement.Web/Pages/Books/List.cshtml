@@ -1,22 +1,23 @@
 ﻿@page
 @model RAZOR_LibraryManagement.Web.Pages.Books.ListModel
+@using RAZOR_LibraryManagement.Lang.Book
 @{
     ViewData["Title"] = "Books list";
 }
 
 <div class="container">
-    <h1 class="text-dark mb-3">Books list</h1> @* <-- TODO link from resource file*@
+    <h1 class="text-dark mb-3">@BooksList.Title</h1>
     <table class="table table-hover">
         <thead>
             <tr>
                 <th>
-                    Title @* <-- TODO link from resource file*@
+                    @BooksList.BookTitle 
                 </th>
                 <th>
-                    Author @* <-- TODO link from resource file*@
+                    @BooksList.BookAuthor 
                 </th>
                 <th>
-                    Actions @* <-- TODO link from resource file*@
+                    @BooksList.Actions 
                 </th>
             </tr>
         </thead>

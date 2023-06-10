@@ -23,14 +23,14 @@ namespace RAZOR_LibraryManagement.Infra.DataContext
                 new IdentityRole()
                 {
                     Name = "SuperAdmin",
-                    NormalizedName = "SuperAdmin",
+                    NormalizedName = "SUPERADMIN",
                     Id = superAdminRoleId,
                     ConcurrencyStamp = superAdminRoleId
                 },
                 new IdentityRole()
                 {
                     Name = "Admin",
-                    NormalizedName = "Admin",
+                    NormalizedName = "ADMIN",
                     Id = adminRoleId,
                     ConcurrencyStamp = adminRoleId
                 },
@@ -43,7 +43,7 @@ namespace RAZOR_LibraryManagement.Infra.DataContext
             {
                 Id = superAdminId,
                 UserName = "superadmin",
-                Email = "superAdminId@mail.com",
+                Email = "superAdmin@mail.com"
             };
             superAdminUser.PasswordHash = new PasswordHasher<IdentityUser>()
                 .HashPassword(superAdminUser, "superadmin123");

@@ -1,18 +1,18 @@
-﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RAZOR_LibraryManagement.Domain.ViewModels;
 
 namespace RAZOR_LibraryManagement.Web.Pages
 {
-    public class IndexModel : PageModel
+    public class LoginModel : PageModel
     {
         private readonly SignInManager<IdentityUser> _signManager;
 
         [BindProperty]
         public vmLogin vmLogin { get; set; }
 
-        public IndexModel(SignInManager<IdentityUser> signManager)
+        public LoginModel(SignInManager<IdentityUser> signManager)
         {
             _signManager = signManager;
         }
@@ -24,14 +24,14 @@ namespace RAZOR_LibraryManagement.Web.Pages
         public async Task<IActionResult> OnPost()
         {
             var result = await _signManager.PasswordSignInAsync(vmLogin.UserName, vmLogin.Password, false, false);
-            if (result.Succeeded)
+            if(result.Succeeded)
             {
                 ViewData["Notification"] = new vmNotification
                 {
                     Message = "Login successfully",
                     Type = Lang.Notification.NotificationType.Success
                 };
-                return RedirectToPage("/Books/List");
+                return RedirectToPage("Index");
             }
             else
             {

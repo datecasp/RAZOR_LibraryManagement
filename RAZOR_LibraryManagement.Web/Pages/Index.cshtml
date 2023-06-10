@@ -4,7 +4,28 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+<div class="container mx-auto">
+    <div class="row justify-content-center">
+        <div class="clo-12 col-lg-6">
+            <div class="text-center">
+                <h1 class="display-4">Welcome</h1>  @* TODO link with resource*@
+                <p>Please login to enter the manager</p>  @* TODO link with resource*@
+                <partial name="_Notification" />
+            </div>
+            <form method="post">
+                <div class="mb-3">
+                    <label class="form-label">UserName</label>  @* TODO link with resource*@
+                    <input type="text" class="form-control" asp-for="vmLogin.UserName" />
+                </div>
+                <div class="mb-5">
+                    <label class="form-label">Password</label>  @* TODO link with resource*@
+                    <input type="text" class="form-control" asp-for="vmLogin.Password" />
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-info">Login</button>  @* TODO link with resource*@
+                </div>
+            </form>
+        </div>
+    </div>
 </div>

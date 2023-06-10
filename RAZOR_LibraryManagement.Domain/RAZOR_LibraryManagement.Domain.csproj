@@ -10,4 +10,8 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.16" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\RAZOR_LibraryManagement.Lang\RAZOR_LibraryManagement.Lang.csproj" />
+  </ItemGroup>
+
 </Project>

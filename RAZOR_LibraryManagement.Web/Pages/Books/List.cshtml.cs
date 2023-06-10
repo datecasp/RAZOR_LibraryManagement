@@ -1,9 +1,6 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RAZOR_LibraryManagement.Domain.Interfaces;
-using RAZOR_LibraryManagement.Domain.Services;
 using RAZOR_LibraryManagement.Domain.ViewModels;
-using RAZOR_LibraryManagement.Infra.DataContext;
 
 namespace RAZOR_LibraryManagement.Web.Pages.Books
 {

@@ -1,5 +1,6 @@
 ﻿@page
 @model RAZOR_LibraryManagement.Web.Pages.Admins.CreateModel
+@using RAZOR_LibraryManagement.Lang.LoginCreate
 @{
 }
 
@@ -7,24 +8,24 @@
     <div class="row justify-content-center">
         <div class="clo-12 col-lg-6">
             <div class="text-center">
-                <h1 class="display-4">Create admin</h1>  @* TODO link with resource*@
+                <h1 class="display-4">@LoginCreate.pCreate</h1> 
                 <partial name="_Notification" />
             </div>
             <form method="post">
                 <div class="mb-3">
-                    <label class="form-label">UserName</label>  @* TODO link with resource*@
+                    <label class="form-label">@LoginCreate.UserName</label> 
                     <input type="text" class="form-control" asp-for="vmCreateAdmin.UserName" />
                 </div>
                  <div class="mb-3">
-                    <label class="form-label">Email</label>  @* TODO link with resource*@
+                    <label class="form-label">@LoginCreate.Email</label>  
                     <input type="email" class="form-control" asp-for="vmCreateAdmin.Email" />
                 </div>
                 <div class="mb-5">
-                    <label class="form-label">Password</label>  @* TODO link with resource*@
+                    <label class="form-label">@LoginCreate.Password</label> 
                     <input type="text" class="form-control" asp-for="vmCreateAdmin.Password" />
                 </div>
                 <div class="mb-3">
-                    <button type="submit" class="btn btn-info">Create</button>  @* TODO link with resource*@
+                    <button type="submit" class="btn btn-info">@LoginCreate.btnCreate</button>  
                 </div>
             </form>
         </div>

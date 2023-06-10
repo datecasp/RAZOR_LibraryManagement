@@ -1,5 +1,6 @@
 ﻿@page
 @model IndexModel
+@using RAZOR_LibraryManagement.Lang.LoginCreate
 @{
     ViewData["Title"] = "Home page";
 }
@@ -9,21 +10,21 @@
     <div class="row justify-content-center">
         <div class="clo-12 col-lg-6">
             <div class="text-center">
-                <h1 class="display-4">Welcome</h1>  @* TODO link with resource*@
-                <p>Please login to enter the manager</p>  @* TODO link with resource*@
+                <h1 class="display-4">@LoginCreate.Welcome</h1>
+                <p>@LoginCreate.pLogin</p>
                 <partial name="_Notification" />
             </div>
             <form method="post">
                 <div class="mb-3">
-                    <label class="form-label">UserName</label>  @* TODO link with resource*@
+                    <label class="form-label">@LoginCreate.UserName</label>
                     <input type="text" class="form-control" asp-for="vmLogin.UserName" />
                 </div>
                 <div class="mb-5">
-                    <label class="form-label">Password</label>  @* TODO link with resource*@
+                    <label class="form-label">@LoginCreate.Password</label>
                     <input type="text" class="form-control" asp-for="vmLogin.Password" />
                 </div>
                 <div class="mb-3">
-                    <button type="submit" class="btn btn-info">Login</button>  @* TODO link with resource*@
+                    <button type="submit" class="btn btn-info">@LoginCreate.btnLogin</button>
                 </div>
             </form>
         </div>

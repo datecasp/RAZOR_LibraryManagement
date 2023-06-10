@@ -43,7 +43,9 @@ namespace RAZOR_LibraryManagement.Infra.DataContext
             {
                 Id = superAdminId,
                 UserName = "superadmin",
-                Email = "superAdmin@mail.com"
+                Email = "superAdmin@mail.com",
+                NormalizedUserName = "SUPERADMIN",
+                NormalizedEmail = "SUPERADMIN@MAIL.COM"
             };
             superAdminUser.PasswordHash = new PasswordHasher<IdentityUser>()
                 .HashPassword(superAdminUser, "superadmin123");

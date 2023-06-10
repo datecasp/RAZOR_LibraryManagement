@@ -15,15 +15,27 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-info border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">Library Manager</a>
+                <a class="navbar-brand" asp-area="">Library Manager</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    @if(sigInManager.IsSignedIn(User))
+                    @if (sigInManager.IsSignedIn(User))
                     {
                         <ul class="navbar-nav flex-grow-1">
+                            @if (sigInManager.IsSignedIn(User) && User.IsInRole("SuperAdmin"))
+                            {
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle text-dark" href="#" data-bs-toggle="dropdown" role="button" 
+                                        aria-expanded="false" id="navBarSAMenu">SA Menu</a>
+                                    <ul class="dropdown-menu" aria-labelledBy="navBarSAMenu">
+                                        <li>
+                                            <a class="dropdown-item" href="/admins/create">Create Admin</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            }
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-page="/Books/List">Books</a>
                             </li>
@@ -35,11 +47,11 @@
                             </li>
                         </ul>
                         <div class="d-flex align-items-center">
-                        
-                                <div class="me-3 text-black">
-                                    @User?.Identity?.Name
-                                </div>
-                                <a href="/Logout" class="btn btn-primary text-light me-3">Logout</a>
+
+                            <div class="me-3 text-black">
+                                @User?.Identity?.Name
+                            </div>
+                            <a href="/Logout" class="btn btn-primary text-light me-3">Logout</a>
                         </div>
                     }
                 </div>

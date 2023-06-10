@@ -1,0 +1,32 @@
+﻿@page
+@model RAZOR_LibraryManagement.Web.Pages.Admins.CreateModel
+@{
+}
+
+<div class="container mx-auto">
+    <div class="row justify-content-center">
+        <div class="clo-12 col-lg-6">
+            <div class="text-center">
+                <h1 class="display-4">Create admin</h1>  @* TODO link with resource*@
+                <partial name="_Notification" />
+            </div>
+            <form method="post">
+                <div class="mb-3">
+                    <label class="form-label">UserName</label>  @* TODO link with resource*@
+                    <input type="text" class="form-control" asp-for="vmCreateAdmin.UserName" />
+                </div>
+                 <div class="mb-3">
+                    <label class="form-label">Email</label>  @* TODO link with resource*@
+                    <input type="email" class="form-control" asp-for="vmCreateAdmin.Email" />
+                </div>
+                <div class="mb-5">
+                    <label class="form-label">Password</label>  @* TODO link with resource*@
+                    <input type="text" class="form-control" asp-for="vmCreateAdmin.Password" />
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-info">Create</button>  @* TODO link with resource*@
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -29,6 +29,12 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>()
 
 builder.Services.Configure<AppSettingsModel>(builder.Configuration.GetSection("AppConfigs"));
 
+//If not logged, redirects to Index, where login lives
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Index";
+});
+
 builder.Services.AddControllers();
 
 builder.Services.ResolveDependencies();

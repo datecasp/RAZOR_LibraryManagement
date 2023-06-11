@@ -18,14 +18,13 @@ namespace RAZOR_LibraryManagement.Domain.Services
             _userRepository = userRepository;
         }
 
-        public async Task<vmCreateUser> CreateUserService(vmCreateUser vmCreateUser)
+        public async Task<vmUserCreate> CreateUserService(vmUserCreate vmCreateUser)
         {
-            var vmUserResult = new vmCreateUser();
+            var vmUserResult = new vmUserCreate();
             var createUser = new User
             {
                 UserName = vmCreateUser.UserName,
                 Email = vmCreateUser.Email,
-                Password = vmCreateUser.Password,
                 IsActive = true
             };
             try
@@ -33,7 +32,6 @@ namespace RAZOR_LibraryManagement.Domain.Services
                 var userResult = await _userRepository.CreateUser(createUser);
                 vmUserResult.UserName = userResult.UserName;
                 vmUserResult.Email = userResult.Email;
-                vmUserResult.Password = userResult.Password;
             }
             catch (Exception ex)
             {

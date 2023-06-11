@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace RAZOR_LibraryManagement.Domain.ViewModels
 {
-    public class vmCreateUser
+    public class vmAdminUserCreate
     {
         public string UserName { get; set; }
         public string Email { get; set; }

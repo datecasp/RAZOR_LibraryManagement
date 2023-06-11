@@ -11,7 +11,7 @@ namespace RAZOR_LibraryManagement.Web.Pages.Users
         private readonly IUserService _userService;
 
         [BindProperty]
-        public vmCreateUser vmCreateUser { get; set; }
+        public vmUserCreate vmCreateUser { get; set; }
 
         public CreateModel(IUserService userService)
         {
@@ -21,7 +21,7 @@ namespace RAZOR_LibraryManagement.Web.Pages.Users
         {
         }
 
-        public async Task<IActionResult> OnPost(vmCreateUser vmCreateUser)
+        public async Task<IActionResult> OnPost(vmUserCreate vmCreateUser)
         {
             var userResult = await _userService.CreateUserService(vmCreateUser);
            

@@ -24,7 +24,7 @@ namespace RAZOR_LibraryManagement.Infra.Repositories
             try
             {
                 _lM_DbContext.Categories.Add(category);
-                _lM_DbContext.SaveChangesAsync();
+                await _lM_DbContext.SaveChangesAsync();
                 return category;
             }
             catch (Exception ex)

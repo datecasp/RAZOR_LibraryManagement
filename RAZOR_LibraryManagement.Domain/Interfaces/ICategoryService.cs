@@ -10,5 +10,7 @@ namespace RAZOR_LibraryManagement.Domain.Interfaces
     public interface ICategoryService
     {
         Task<IEnumerable<vmCategoryIndex>> GetAllCategoriesService();
+        Task<vmCategoryIndex> CreateCategoryService(vmCategoryIndex vmCategoryIndex);
+
     }
 }

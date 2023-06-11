@@ -18,6 +18,21 @@ namespace RAZOR_LibraryManagement.Infra.Repositories
         {
             _lM_DbContext = lM_DbContext;
         }
+
+        public async Task<Category> CreateCategory(Category category)
+        {
+            try
+            {
+                _lM_DbContext.Categories.Add(category);
+                _lM_DbContext.SaveChangesAsync();
+                return category;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
         public async Task<IEnumerable<Category>> GetAllCategories()
         {
             var result = new List<Category>();

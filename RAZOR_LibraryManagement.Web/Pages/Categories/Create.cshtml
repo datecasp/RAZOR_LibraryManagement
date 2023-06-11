@@ -1,0 +1,31 @@
+﻿@page
+@model RAZOR_LibraryManagement.Web.Pages.Categories.CreateModel
+@using RAZOR_LibraryManagement.Lang.Category
+
+@{
+}
+
+<div class="container mx-auto">
+    <div class="row justify-content-center">
+        <div class="clo-12 col-lg-6">
+            <div class="text-center">
+                <h1 class="display-4">@CategoriesList.pCreate</h1>
+                <partial name="_Notification" />
+            </div>
+            <form method="post">
+                <div class="mb-3">
+                    <label class="form-label">@CategoriesList.Category</label>
+                    <input type="text" class="form-control" asp-for="vmCategoryIndex.Name" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">@CategoriesList.IsActive</label>
+                    <input type="text" class="form-control" asp-for="vmCategoryIndex.IsActive" />
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-info">@CategoriesList.btnCreate</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

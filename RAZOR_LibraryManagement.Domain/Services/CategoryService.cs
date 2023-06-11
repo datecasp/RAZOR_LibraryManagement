@@ -18,6 +18,27 @@ namespace RAZOR_LibraryManagement.Domain.Services
             _categoryRepository = categoryRepository;
         }
 
+        public async Task<vmCategoryIndex> CreateCategoryService(vmCategoryIndex vmCategoryIndex)
+        {
+            var vmCategory = new vmCategoryIndex();
+            var category = new Category
+            { 
+                Name = vmCategoryIndex.Name,
+                IsActive = (bool)vmCategoryIndex.IsActive
+            };
+            try
+            {
+                var categoryResult = await _categoryRepository.CreateCategory(category);
+                vmCategory.Name = categoryResult.Name;
+                vmCategory.IsActive = (bool)categoryResult.IsActive;
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return vmCategory;
+        }
+
         public async Task<IEnumerable<vmCategoryIndex>> GetAllCategoriesService()
         {
             var categorysList = new List<Category>();

@@ -61,6 +61,15 @@ namespace RAZOR_LibraryManagement.Lang.Category {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Create.
+        /// </summary>
+        public static string btnCreate {
+            get {
+                return ResourceManager.GetString("btnCreate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Category.
         /// </summary>
         public static string Category {
@@ -75,6 +84,15 @@ namespace RAZOR_LibraryManagement.Lang.Category {
         public static string IsActive {
             get {
                 return ResourceManager.GetString("IsActive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Create a new category.
+        /// </summary>
+        public static string pCreate {
+            get {
+                return ResourceManager.GetString("pCreate", resourceCulture);
             }
         }
         

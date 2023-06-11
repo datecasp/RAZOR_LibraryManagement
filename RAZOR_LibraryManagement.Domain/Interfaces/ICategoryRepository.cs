@@ -5,5 +5,7 @@ namespace RAZOR_LibraryManagement.Domain.Interfaces
     public interface ICategoryRepository
     {
         Task<IEnumerable<Category>> GetAllCategories();
+        Task<Category> CreateCategory(Category category);
+
     }
 }

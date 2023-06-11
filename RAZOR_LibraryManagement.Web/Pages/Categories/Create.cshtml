@@ -18,8 +18,12 @@
                     <input type="text" class="form-control" asp-for="vmCategoryIndex.Name" />
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">@CategoriesList.IsActive</label>
-                    <input type="text" class="form-control" asp-for="vmCategoryIndex.IsActive" />
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" asp-for="vmCategoryIndex.IsActive" />
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Is Active
+                        </label>
+                    </div>
                 </div>
                 <div class="mb-3">
                     <button type="submit" class="btn btn-info">@CategoriesList.btnCreate</button>

@@ -12,7 +12,7 @@ namespace RAZOR_LibraryManagement.Web.Pages.Admins
         private readonly UserManager<IdentityUser> _userManager;
 
         [BindProperty]
-        public vmCreateAdmin vmCreateAdmin { get; set; }
+        public vmCreateUser vmCreateUser { get; set; }
 
         public CreateModel(UserManager<IdentityUser> userManager)
         {
@@ -27,13 +27,13 @@ namespace RAZOR_LibraryManagement.Web.Pages.Admins
             //Seed admin
             var admin = new IdentityUser
             {
-                UserName = vmCreateAdmin.UserName,
-                NormalizedUserName = vmCreateAdmin.UserName.ToUpper(),
-                Email = vmCreateAdmin.Email,
-                NormalizedEmail = vmCreateAdmin.Email.ToLower()
+                UserName = vmCreateUser.UserName,
+                NormalizedUserName = vmCreateUser.UserName.ToUpper(),
+                Email = vmCreateUser.Email,
+                NormalizedEmail = vmCreateUser.Email.ToLower()
             };
                       
-            var identityResult = await _userManager.CreateAsync(admin, vmCreateAdmin.Password);
+            var identityResult = await _userManager.CreateAsync(admin, vmCreateUser.Password);
 
             if (identityResult.Succeeded)
             {

@@ -18,13 +18,36 @@ namespace RAZOR_LibraryManagement.Domain.Services
             _userRepository = userRepository;
         }
 
+        public async Task<vmCreateUser> CreateUserService(vmCreateUser vmCreateUser)
+        {
+            var vmUserResult = new vmCreateUser();
+            var createUser = new User
+            {
+                UserName = vmCreateUser.UserName,
+                Email = vmCreateUser.Email,
+                Password = vmCreateUser.Password,
+                IsActive = true
+            };
+            try
+            {
+                var userResult = await _userRepository.CreateUser(createUser);
+                vmUserResult.UserName = userResult.UserName;
+                vmUserResult.Email = userResult.Email;
+                vmUserResult.Password = userResult.Password;
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return vmUserResult;
+        }
+
         public async Task<IEnumerable<vmUserIndex>> GetAllUsersService()
         {
-            var usersList = new List<User>();
             var bookIndexList = new List<vmUserIndex>();
             try
             {
-                usersList = (await _userRepository.GetAllUsers()).ToList();
+                var usersList = (await _userRepository.GetAllUsers()).ToList();
                 foreach (var user in usersList)
                 {
                     var vwUser = new vmUserIndex

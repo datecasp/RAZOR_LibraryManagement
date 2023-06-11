@@ -32,5 +32,19 @@ namespace RAZOR_LibraryManagement.Infra.Repositories
             return result;
 
         }
+
+        public async Task<User> CreateUser(User user) 
+        {
+            try
+            {
+                _lM_DbContext.Users.Add(user);
+                _lM_DbContext.SaveChangesAsync();
+                return user;
+            }
+            catch(Exception ex) 
+            {
+                return null;
+            }
+        }
     }
 }

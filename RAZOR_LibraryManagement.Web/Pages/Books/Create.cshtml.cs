@@ -30,7 +30,7 @@ namespace RAZOR_LibraryManagement.Web.Pages.Books
         }
         public async void OnGet()
         {
-            vmCategoryIndexList = (List<vmCategoryIndex>)_categoryService.GetAllCategoriesService().Result;
+            vmCategoryIndexList = (List<vmCategoryIndex>)_categoryService.GetActiveCategoriesService().Result;
         }
 
 

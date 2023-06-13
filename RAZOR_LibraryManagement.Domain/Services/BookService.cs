@@ -9,10 +9,12 @@ namespace RAZOR_LibraryManagement.Domain.Services
     public class BookService : IBookService
     {
         private readonly IBookRepository _bookRepository;
+        private readonly ICategoryRepository _categoryRepository;
 
-        public BookService(IBookRepository bookRepository)
+        public BookService(IBookRepository bookRepository, ICategoryRepository categoryRepository)
         {
            _bookRepository = bookRepository;
+            _categoryRepository = categoryRepository;
         }
 
         public async Task<vmBookCreate> CreateBookService(vmBookCreate vmCreateBook)
@@ -77,6 +79,7 @@ namespace RAZOR_LibraryManagement.Domain.Services
             try
             {
                 var book = await _bookRepository.GetBookById(id);
+                var categoryName = _categoryRepository.GetCategoryById(book.Category.CategoryId).Result.Name;
                 if(book != null)
                 {
                     vmBook.Title = book.Title;
@@ -85,6 +88,7 @@ namespace RAZOR_LibraryManagement.Domain.Services
                     vmBook.isBorrowable = book.IsBorrowable;
                     vmBook.Id = id;
                     vmBook.ImageUrl = book.ImageUrl;
+                    vmBook.Category = categoryName;
                 }
             }
             catch(Exception ex)

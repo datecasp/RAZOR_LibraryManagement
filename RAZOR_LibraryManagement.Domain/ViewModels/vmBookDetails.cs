@@ -21,5 +21,7 @@ namespace RAZOR_LibraryManagement.Domain.ViewModels
         public string ImageUrl { get; set; }
         [Required]
         public bool isBorrowable { get; set; }
+        [Required]
+        public string Category { get; set; }
     }
 }

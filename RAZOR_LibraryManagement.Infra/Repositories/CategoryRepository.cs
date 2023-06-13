@@ -47,5 +47,19 @@ namespace RAZOR_LibraryManagement.Infra.Repositories
             return result;
 
         }
+
+        public async Task<Category> GetCategoryById(int id)
+        {
+            var result = new Category();
+            try
+            {
+                result = await _lM_DbContext.FindAsync<Category>(id);
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return result;
+        }
     }
 }

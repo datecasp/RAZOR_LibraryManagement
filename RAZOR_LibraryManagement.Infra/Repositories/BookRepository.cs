@@ -37,8 +37,9 @@ namespace RAZOR_LibraryManagement.Infra.Repositories
         {
             var result = new Book();
             try
-            { 
-            result = await _lM_DbContext.FindAsync<Book>(id);
+            {
+                var book = _lM_DbContext.Books.Include(b => b.Category).Where(b => b.BookId == id).FirstOrDefault();
+                result = book;
             }
             catch (Exception ex)
             {

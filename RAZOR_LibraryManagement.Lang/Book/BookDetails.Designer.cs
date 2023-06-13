@@ -61,6 +61,15 @@ namespace RAZOR_LibraryManagement.Lang.Book {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Category:.
+        /// </summary>
+        public static string BookCategory {
+            get {
+                return ResourceManager.GetString("BookCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Description:.
         /// </summary>
         public static string BookDescription {

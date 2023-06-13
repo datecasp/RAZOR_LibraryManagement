@@ -33,13 +33,8 @@ namespace RAZOR_LibraryManagement.Web.Pages.Books
             vmCategoryIndexList = (List<vmCategoryIndex>)_categoryService.GetActiveCategoriesService().Result;
         }
 
-
-        //https://geeks.ms/etomas/2011/07/09/binding-de-colecciones-en-asp-net-mvc/
-
-
         public async Task<IActionResult> OnPost(string radioCategory)
         {
-            //vmBookCreate.Category = vmCat;
             vmBookCreate.Category = radioCategory;
             var bookResult = await _bookService.CreateBookService(vmBookCreate);
 
@@ -65,10 +60,5 @@ namespace RAZOR_LibraryManagement.Web.Pages.Books
 
         }
 
-
-        public void SetCategory(vmCategoryIndex vmCat)
-        {
-            //vmBookCreate.Category = vmCat;
-        }
     }
 }

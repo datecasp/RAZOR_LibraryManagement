@@ -6,6 +6,6 @@ namespace RAZOR_LibraryManagement.Domain.Interfaces
     {
         Task<IEnumerable<Category>> GetAllCategories();
         Task<Category> CreateCategory(Category category);
-
+        Task<Category> GetCategoryById(int id);
     }
 }

@@ -46,5 +46,19 @@ namespace RAZOR_LibraryManagement.Infra.Repositories
             }
             return result;
         }
+
+        public async Task<Book> CreateBook(Book book)
+        {
+            try
+            {
+                _lM_DbContext.Books.Add(book);
+                await _lM_DbContext.SaveChangesAsync();
+                return book;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
     }
 }

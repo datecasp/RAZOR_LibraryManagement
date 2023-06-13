@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using RAZOR_LibraryManagement.Domain.Models;
 
 namespace RAZOR_LibraryManagement.Domain.ViewModels
 {
@@ -14,6 +15,7 @@ namespace RAZOR_LibraryManagement.Domain.ViewModels
         [Required]
         public string ImageUrl { get; set; }
         [Required]
-        public bool isBorrowable { get; set; }
+        public bool IsBorrowable { get; set; }
+        public string Category { get; set; }
     }
 }

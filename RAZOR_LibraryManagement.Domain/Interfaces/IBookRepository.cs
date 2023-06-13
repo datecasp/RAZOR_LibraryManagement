@@ -6,5 +6,6 @@ namespace RAZOR_LibraryManagement.Domain.Interfaces
     {
         Task<IEnumerable<Book>> GetAllBooks();
         Task<Book> GetBookById(int id);
+        Task<Book> CreateBook(Book book);
     }
 }

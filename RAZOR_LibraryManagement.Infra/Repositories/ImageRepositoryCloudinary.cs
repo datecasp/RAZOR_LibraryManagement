@@ -10,7 +10,7 @@ using RAZOR_LibraryManagement.Domain.Interfaces;
 
 namespace RAZOR_LibraryManagement.Infra.Repositories
 {
-    internal class ImageRepositoryCloudinary : IImageRepository
+    public class ImageRepositoryCloudinary : IImageRepository
     {
         private readonly Account _account;
         public ImageRepositoryCloudinary(IConfiguration configuration)

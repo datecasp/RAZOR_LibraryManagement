@@ -1,4 +1,96 @@
 ﻿@page
 @model RAZOR_LibraryManagement.Web.Pages.Books.CreateModel
+@using RAZOR_LibraryManagement.Domain.ViewModels
 @{
+}
+
+<div class="container mx-auto">
+    <div class="row justify-content-center">
+        <fieldset class="clo-12 col-lg-6">
+            <div class="text-center">
+                <h1 class="display-4">Create a new book</h1>
+                <partial name="_Notification" />
+            </div>
+            <form method="post">
+                <div class="mb-3">
+                    <label class="form-label">Title</label>
+                    <input type="text" class="form-control" asp-for="vmBookCreate.Title" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Author</label>
+                    <input type="text" class="form-control" asp-for="vmBookCreate.Author" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Description</label>
+                    <input type="text" class="form-control" asp-for="vmBookCreate.Description" />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Featured image upload</label>
+                    <input type="file" asp-for="FeaturedImage" id="featuredImageId" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">ImageUrl</label>
+                    <input type="text" class="form-control" asp-for="vmBookCreate.ImageUrl" id="imageUrlCloudinary" />
+                </div>
+                <fieldset class="row mb-3">
+                    <legend class="col-form-label">
+                        Select category:
+                    </legend>
+                    @foreach (var cat in Model.vmCategoryIndexList)
+                    {
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" asp-for="vmBookCreate.Category" value="@cat.Name" name="radioCategory" id="@cat.Name">
+                            <label class="form-check-label" for="@cat.Name">
+                                @cat.Name
+                            </label>
+                        </div>
+                    }
+                </fieldset>
+                <div class="mb-3">
+                    <label class="form-check-label" for="flexRadioDefault">
+                        Is the book ready to borrow?
+                    </label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" asp-for="vmBookCreate.IsBorrowable" />
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Yes!
+                        </label>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-info">Create</button>
+                </div>
+            </form>
+    </div>
+</div>
+</div>
+
+@section Scripts{
+    <script>
+        const featuredImageElement = document.getElementById('featuredImageId');
+        const imageUrlCloudinaryElement = document.getElementById('imageUrlCloudinary')
+
+
+        async function uploadFeaturedImage(e) {
+            let data = new FormData();
+            data.append('file', e.target.files[0]);
+
+            await fetch('/api/image', {
+                method: 'POST',
+                headers: {
+                    'Accept': '*/*',
+                },
+                body: data
+            }).then(response => response.json())
+                .then(result => {
+                    imageUrlCloudinaryElement.value = result.link;
+
+                });
+        }
+
+        featuredImageElement.addEventListener('change', uploadFeaturedImage);
+
+
+    </script>
 }

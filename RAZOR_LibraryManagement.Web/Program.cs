@@ -11,6 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddControllers();
 
 builder.Services.AddDbContext<LM_DbContext>(options =>
 {
@@ -35,8 +36,6 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.LoginPath = "/Index";
 });
 
-builder.Services.AddControllers();
-
 builder.Services.ResolveDependencies();
 
 var app = builder.Build();
@@ -59,5 +58,6 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();
+app.MapControllers();
 
 app.Run();

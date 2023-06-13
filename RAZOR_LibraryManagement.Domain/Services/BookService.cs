@@ -1,4 +1,6 @@
-﻿using RAZOR_LibraryManagement.Domain.Interfaces;
+﻿using System.Text.RegularExpressions;
+using System.Xml.Linq;
+using RAZOR_LibraryManagement.Domain.Interfaces;
 using RAZOR_LibraryManagement.Domain.Models;
 using RAZOR_LibraryManagement.Domain.ViewModels;
 
@@ -11,6 +13,36 @@ namespace RAZOR_LibraryManagement.Domain.Services
         public BookService(IBookRepository bookRepository)
         {
            _bookRepository = bookRepository;
+        }
+
+        public async Task<vmBookCreate> CreateBookService(vmBookCreate vmCreateBook)
+        {
+            var vmBookResult = new vmBookCreate();
+            var createBook = new Book
+            {
+             Title = vmCreateBook.Title,
+             Author= vmCreateBook.Author,
+             Description= vmCreateBook.Description,
+             ImageUrl= vmCreateBook.ImageUrl,
+             IsBorrowable= vmCreateBook.IsBorrowable,
+             UrlHandle = FormatUrl(vmCreateBook.Title),
+             Category = VmCategoryStringToCategory(vmCreateBook.Category)
+            };
+            try
+            {
+                var bookResult = await _bookRepository.CreateBook(createBook);
+                vmBookResult.Title= bookResult.Title;
+                vmBookResult.Author= bookResult.Author;
+                vmBookResult.Description= bookResult.Description;
+                vmBookResult.ImageUrl= bookResult.ImageUrl;
+                vmBookResult.IsBorrowable = bookResult.IsBorrowable;
+                vmBookResult.Category = bookResult.Category.Name;
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return vmBookResult;
         }
 
         public async Task<IEnumerable<vmBookIndex>> GetAllBooksService()
@@ -61,5 +93,49 @@ namespace RAZOR_LibraryManagement.Domain.Services
             }
             return vmBook;
         }
+
+
+        #region Private methods
+
+        //Replace white spaces with dashes for readability in url 
+        private static string FormatUrl(string url)
+        {
+            var result = Regex.Replace(url, " ", "-");
+            return result;
+        }
+
+        private vmCategoryIndex CategoryToVmCategory(Category category)
+        {
+            var result = new vmCategoryIndex
+            {
+                Name= category.Name,
+                IsActive= category.IsActive
+            };
+
+            return result;
+        }
+
+        private Category VmCategoryToCategory(vmCategoryIndex vmCategory)
+        {
+            var result = new Category
+            {
+                Name = vmCategory.Name,
+                IsActive = vmCategory.IsActive
+            };
+
+            return result;
+        }
+
+        private Category VmCategoryStringToCategory(string vmCategory)
+        {
+            var result = new Category
+            {
+                Name = vmCategory,
+                IsActive = true
+            };
+
+            return result;
+        }
+        #endregion
     }
 }

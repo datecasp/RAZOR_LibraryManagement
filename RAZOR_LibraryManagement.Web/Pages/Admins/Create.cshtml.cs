@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -42,13 +43,13 @@ namespace RAZOR_LibraryManagement.Web.Pages.Admins
 
                 if(addRolesResult.Succeeded)
                 {
-                    ViewData["Notification"] = new vmNotification
+                    var notification = new vmNotification
                     {
                         Type = Lang.Notification.NotificationType.Success,
                         Message = "Admin created successfully"
                     };
-
-                    return Page();
+                    TempData["Notification"] = JsonSerializer.Serialize(notification);
+                    return RedirectToPage("/books/list");
                 }
             }
 

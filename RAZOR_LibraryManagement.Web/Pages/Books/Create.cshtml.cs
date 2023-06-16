@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RAZOR_LibraryManagement.Domain.Interfaces;
@@ -38,13 +39,13 @@ namespace RAZOR_LibraryManagement.Web.Pages.Books
 
             if (bookResult != null)
             {
-                ViewData["Notification"] = new vmNotification
+                var notification = new vmNotification
                 {
                     Type = Lang.Notification.NotificationType.Success,
                     Message = "Book created successfully"
                 };
-
-                return Page();
+                TempData["Notification"] = JsonSerializer.Serialize(notification);
+                return RedirectToPage("/books/list");
             }
 
             ViewData["Notification"] = new vmNotification

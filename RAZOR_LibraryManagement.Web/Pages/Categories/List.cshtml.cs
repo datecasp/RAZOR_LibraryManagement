@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -19,6 +20,11 @@ namespace RAZOR_LibraryManagement.Web.Pages.Categories
 
         public async Task OnGet()
         {
+            var notificationJson = (string)TempData["Notification"];
+            if (notificationJson != null)
+            {
+                ViewData["Notification"] = JsonSerializer.Deserialize<vmNotification>(notificationJson);
+            }
             vmCategoryIndexList = (await _categoryService.GetAllCategoriesService()).ToList();
         }
     }

@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RAZOR_LibraryManagement.Domain.Interfaces;
@@ -18,6 +19,11 @@ namespace RAZOR_LibraryManagement.Web.Pages.Books
 
         public async Task OnGet()
         {
+            var notificationJson = (string)TempData["Notification"];
+            if (notificationJson != null)
+            {
+                ViewData["Notification"] = JsonSerializer.Deserialize<vmNotification>(notificationJson);
+            }
             vmBookIndexList = (await _bookService.GetAllBooksService()).ToList();
         }
     }

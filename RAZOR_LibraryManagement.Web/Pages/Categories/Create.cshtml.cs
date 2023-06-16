@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RAZOR_LibraryManagement.Domain.Interfaces;
@@ -26,13 +27,13 @@ namespace RAZOR_LibraryManagement.Web.Pages.Categories
 
             if (categoryResult != null)
             {
-                ViewData["Notification"] = new vmNotification
+                var notification = new vmNotification
                 {
                     Type = Lang.Notification.NotificationType.Success,
                     Message = "Category created successfully"
                 };
-
-                return Page();
+                TempData["Notification"] = JsonSerializer.Serialize(notification);
+                return RedirectToPage("/categories/list");
             }
 
             ViewData["Notification"] = new vmNotification

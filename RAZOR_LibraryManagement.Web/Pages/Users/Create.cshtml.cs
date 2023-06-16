@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -28,13 +29,15 @@ namespace RAZOR_LibraryManagement.Web.Pages.Users
            
             if (userResult != null)
             {
-                ViewData["Notification"] = new vmNotification
+                var notification = new vmNotification
                 {
                     Type = Lang.Notification.NotificationType.Success,
                     Message = "User created successfully"
                 };
 
-                return Page();
+                TempData["Notification"] = JsonSerializer.Serialize(notification);
+
+                return RedirectToPage("/users/list");
             }
 
             ViewData["Notification"] = new vmNotification

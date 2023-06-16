@@ -6,11 +6,11 @@ namespace RAZOR_LibraryManagement.Domain.Services
 {
     public class UserService : IUserService
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public UserService(IUserRepository userRepository)
+        public UserService(IUnitOfWork unitOfWork)
         {
-            _userRepository = userRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<vmUserCreate> CreateUserService(vmUserCreate vmCreateUser)
@@ -25,7 +25,7 @@ namespace RAZOR_LibraryManagement.Domain.Services
             };
             try
             {
-                var userResult = await _userRepository.CreateUser(createUser);
+                var userResult = await _unitOfWork.UserRepository.CreateUser(createUser);
                 vmUserResult.UserName = userResult.UserName;
                 vmUserResult.Email = userResult.Email;
                 vmUserResult.PhoneNumber = userResult.PhoneNumber;
@@ -42,7 +42,7 @@ namespace RAZOR_LibraryManagement.Domain.Services
             var bookIndexList = new List<vmUserIndex>();
             try
             {
-                var usersList = (await _userRepository.GetAllUsers()).ToList();
+                var usersList = (await _unitOfWork.UserRepository.GetAllUsers()).ToList();
                 foreach (var user in usersList)
                 {
                     var vwUser = new vmUserIndex

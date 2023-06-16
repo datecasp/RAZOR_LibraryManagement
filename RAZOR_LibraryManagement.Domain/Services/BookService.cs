@@ -7,13 +7,11 @@ namespace RAZOR_LibraryManagement.Domain.Services
 {
     public class BookService : IBookService
     {
-        private readonly IBookRepository _bookRepository;
-        private readonly ICategoryRepository _categoryRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public BookService(IBookRepository bookRepository, ICategoryRepository categoryRepository)
+        public BookService(IBookRepository bookRepository, IUnitOfWork unitOfWork)
         {
-           _bookRepository = bookRepository;
-            _categoryRepository = categoryRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<vmBookCreate> CreateBookService(vmBookCreate vmCreateBook)
@@ -27,17 +25,17 @@ namespace RAZOR_LibraryManagement.Domain.Services
              ImageUrl= vmCreateBook.ImageUrl,
              IsBorrowable= vmCreateBook.IsBorrowable,
              UrlHandle = FormatUrl(vmCreateBook.Title),
-             Category = VmCategoryStringToCategory(vmCreateBook.Category)
+             CategoryId = vmCreateBook.CategoryId 
             };
             try
             {
-                var bookResult = await _bookRepository.CreateBook(createBook);
+                var bookResult = await _unitOfWork.BookRepository.CreateBook(createBook);
                 vmBookResult.Title= bookResult.Title;
                 vmBookResult.Author= bookResult.Author;
                 vmBookResult.Description= bookResult.Description;
                 vmBookResult.ImageUrl= bookResult.ImageUrl;
                 vmBookResult.IsBorrowable = bookResult.IsBorrowable;
-                vmBookResult.Category =  _categoryRepository.GetCategoryById(bookResult.CategoryId).Result.Name;
+                vmBookResult.CategoryId = bookResult.CategoryId;
             }
             catch (Exception ex)
             {
@@ -52,7 +50,7 @@ namespace RAZOR_LibraryManagement.Domain.Services
             var bookIndexList = new List<vmBookIndex>();
             try
             {
-                booksList = (await _bookRepository.GetAllBooks()).ToList();
+                booksList = (await _unitOfWork.BookRepository.GetAllBooks()).ToList();
                 foreach (var book in booksList)
                 {
                     var vwBook = new vmBookIndex
@@ -77,8 +75,8 @@ namespace RAZOR_LibraryManagement.Domain.Services
             var vmBook = new vmBookDetails();
             try
             {
-                var book = await _bookRepository.GetBookById(id);
-                var categoryName = _categoryRepository.GetCategoryById(book.CategoryId).Result.Name;
+                var book = await _unitOfWork.BookRepository.GetBookById(id);
+                var categoryName = _unitOfWork.CategoryRepository.GetCategoryById(book.CategoryId).Result.Name;
                 if(book != null)
                 {
                     vmBook.Title = book.Title;

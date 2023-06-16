@@ -1,4 +1,5 @@
-﻿using RAZOR_LibraryManagement.Domain.Interfaces;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Conventions;
+using RAZOR_LibraryManagement.Domain.Interfaces;
 using RAZOR_LibraryManagement.Infra.DataContext;
 using RAZOR_LibraryManagement.Infra.Repositories;
 
@@ -8,11 +9,15 @@ namespace RAZOR_LibraryManagement.Infra.UnitOfWork
     {
         private readonly LM_DbContext _context;
         public ICategoryRepository CategoryRepository { get; set; }
+        public IBookRepository BookRepository { get; set; }
+        public IUserRepository UserRepository { get; set; }
 
         public UnitOfWork(LM_DbContext lM_DbContext)
         {
             _context = lM_DbContext;
             CategoryRepository = new CategoryRepository(_context);
+            BookRepository = new BookRepository(_context);
+            UserRepository = new UserRepository(_context);
         }
 
         public void Save()

@@ -31,9 +31,9 @@ namespace RAZOR_LibraryManagement.Web.Pages.Books
             vmCategoryIndexList = (List<vmCategoryIndex>)_categoryService.GetActiveCategoriesService().Result;
         }
 
-        public async Task<IActionResult> OnPost(string radioCategory)
+        public async Task<IActionResult> OnPost(int radioCategory)
         {
-            vmBookCreate.Category = radioCategory;
+            vmBookCreate.CategoryId = radioCategory;
             var bookResult = await _bookService.CreateBookService(vmBookCreate);
 
             if (bookResult != null)

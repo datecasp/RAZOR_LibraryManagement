@@ -40,7 +40,7 @@
                     @foreach (var cat in Model.vmCategoryIndexList)
                     {
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" asp-for="vmBookCreate.Category" value="@cat.Name" name="radioCategory" id="@cat.Name">
+                            <input class="form-check-input" type="radio" asp-for="vmBookCreate.CategoryId" value="@cat.CatId" name="radioCategory" id="@cat.Name">
                             <label class="form-check-label" for="@cat.Name">
                                 @cat.Name
                             </label>

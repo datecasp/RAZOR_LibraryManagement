@@ -6,13 +6,11 @@ namespace RAZOR_LibraryManagement.Domain.Services
 {
     public class CategoryService : ICategoryService
     {
-        private readonly ICategoryRepository _categoryRepository;
         private readonly IUnitOfWork _unitOfWork
             ;
 
-        public CategoryService(ICategoryRepository categoryRepository, IUnitOfWork unitOfWork)
+        public CategoryService(IUnitOfWork unitOfWork)
         {
-            _categoryRepository = categoryRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -79,6 +77,7 @@ namespace RAZOR_LibraryManagement.Domain.Services
                 {
                     var vwCategory = new vmCategoryIndex
                     {
+                        CatId = category.CategoryId,
                         Name = category.Name,
                         IsActive = category.IsActive
                     };

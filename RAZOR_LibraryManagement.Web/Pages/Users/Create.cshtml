@@ -21,6 +21,10 @@
                     <input type="email" class="form-control" asp-for="vmCreateUser.Email" />
                 </div>
                 <div class="mb-3">
+                    <label class="form-label">@LoginCreate.PhoneNumber</label>
+                    <input type="text" class="form-control" asp-for="vmCreateUser.PhoneNumber" />
+                </div>
+                <div class="mb-3">
                     <button type="submit" class="btn btn-info">@LoginCreate.btnCreate</button>
                 </div>
             </form>

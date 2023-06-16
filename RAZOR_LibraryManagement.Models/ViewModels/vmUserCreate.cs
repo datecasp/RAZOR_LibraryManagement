@@ -6,17 +6,15 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 
-namespace RAZOR_LibraryManagement.Domain.ViewModels
+namespace RAZOR_LibraryManagement.Models.ViewModels
 {
-    public class vmAdminUserCreate
+    public class vmUserCreate
     {
         [Required]
         public string UserName { get; set; }
         [Required]
         public string Email { get; set; }
         [Required]
-        public string Password { get; set; }
-        [Required]
-        public IdentityRole Role { get; set; }
+        public string PhoneNumber { get; set; }
     }
 }

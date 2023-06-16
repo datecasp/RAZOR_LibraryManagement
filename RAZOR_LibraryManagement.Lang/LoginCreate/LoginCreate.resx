@@ -132,6 +132,9 @@
   <data name="pCreate" xml:space="preserve">
     <value>Create an admin user</value>
   </data>
+  <data name="PhoneNumber" xml:space="preserve">
+    <value>Phone number</value>
+  </data>
   <data name="pLogin" xml:space="preserve">
     <value>Please login to enter the manager</value>
   </data>

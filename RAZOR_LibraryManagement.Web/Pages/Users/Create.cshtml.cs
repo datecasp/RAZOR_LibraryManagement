@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RAZOR_LibraryManagement.Domain.Interfaces;
-using RAZOR_LibraryManagement.Domain.ViewModels;
+using RAZOR_LibraryManagement.Models.ViewModels;
 
 namespace RAZOR_LibraryManagement.Web.Pages.Users
 {
@@ -23,6 +23,7 @@ namespace RAZOR_LibraryManagement.Web.Pages.Users
 
         public async Task<IActionResult> OnPost(vmUserCreate vmCreateUser)
         {
+            
             var userResult = await _userService.CreateUserService(vmCreateUser);
            
             if (userResult != null)

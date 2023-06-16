@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -7,13 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CloudinaryDotNet" Version="1.21.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.16" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\RAZOR_LibraryManagement.Lang\RAZOR_LibraryManagement.Lang.csproj" />
-    <ProjectReference Include="..\RAZOR_LibraryManagement.Models\RAZOR_LibraryManagement.Models.csproj" />
   </ItemGroup>
 
 </Project>

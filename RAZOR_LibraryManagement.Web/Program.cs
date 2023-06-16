@@ -1,10 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using RAZOR_LibraryManagement.Domain.Interfaces;
-using RAZOR_LibraryManagement.Domain.Models;
-using RAZOR_LibraryManagement.Domain.Services;
 using RAZOR_LibraryManagement.Infra.DataContext;
-using RAZOR_LibraryManagement.Infra.Repositories;
+using RAZOR_LibraryManagement.Models.Entities;
 using RAZOR_LibraryManagement.Web.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);

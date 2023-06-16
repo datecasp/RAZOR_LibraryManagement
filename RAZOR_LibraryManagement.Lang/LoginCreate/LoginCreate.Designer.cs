@@ -106,6 +106,15 @@ namespace RAZOR_LibraryManagement.Lang.LoginCreate {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Phone number.
+        /// </summary>
+        public static string PhoneNumber {
+            get {
+                return ResourceManager.GetString("PhoneNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Please login to enter the manager.
         /// </summary>
         public static string pLogin {

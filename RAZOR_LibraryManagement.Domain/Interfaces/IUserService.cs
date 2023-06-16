@@ -1,5 +1,4 @@
-﻿using RAZOR_LibraryManagement.Domain.Models;
-using RAZOR_LibraryManagement.Domain.ViewModels;
+﻿using RAZOR_LibraryManagement.Models.ViewModels;
 
 namespace RAZOR_LibraryManagement.Domain.Interfaces
 {

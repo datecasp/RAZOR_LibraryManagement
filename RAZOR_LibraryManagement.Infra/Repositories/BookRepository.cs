@@ -1,12 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RAZOR_LibraryManagement.Domain.Interfaces;
-using RAZOR_LibraryManagement.Domain.Models;
 using RAZOR_LibraryManagement.Infra.DataContext;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using RAZOR_LibraryManagement.Models.Entities;
 
 namespace RAZOR_LibraryManagement.Infra.Repositories
 {
@@ -38,7 +33,8 @@ namespace RAZOR_LibraryManagement.Infra.Repositories
             var result = new Book();
             try
             {
-                var book = _lM_DbContext.Books.Include(b => b.Category).Where(b => b.BookId == id).FirstOrDefault();
+                //var book = _lM_DbContext.Books.Include(b => b.Category).Where(b => b.BookId == id).FirstOrDefault();
+                var book = _lM_DbContext.Books.Where(b => b.BookId == id).FirstOrDefault();
                 result = book;
             }
             catch (Exception ex)

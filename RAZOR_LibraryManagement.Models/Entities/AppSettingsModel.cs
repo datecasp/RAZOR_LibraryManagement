@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RAZOR_LibraryManagement.Domain.Models
+namespace RAZOR_LibraryManagement.Models.Entities
 {
     public class AppSettingsModel
     {

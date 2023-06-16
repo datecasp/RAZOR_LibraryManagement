@@ -17,6 +17,12 @@
                 <th>
                     @UsersList.UserEmail
                 </th>
+                <th>
+                    @UsersList.UserPhoneNumber
+                </th>
+                <th>
+                    @UsersList.IsActive
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -25,6 +31,17 @@
                 <tr>
                     <td>@user.UserName</td>
                     <td>@user.Email</td>
+                    <td>@user.PhoneNumber</td>
+                    <td>
+                        @if (user.IsActive)
+                        {
+                            <i class="bi bi-check-lg btn-outline-success mx-3"></i>
+                        }
+                        else
+                        {
+                            <i class="bi bi-x-lg btn-outline-danger mx-3"></i>
+                        }
+                    </td>
                 </tr>
             }
         </tbody>

@@ -1,11 +1,6 @@
 ﻿using RAZOR_LibraryManagement.Domain.Interfaces;
-using RAZOR_LibraryManagement.Domain.Models;
-using RAZOR_LibraryManagement.Domain.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using RAZOR_LibraryManagement.Models.ViewModels;
+using RAZOR_LibraryManagement.Models.Entities;
 
 namespace RAZOR_LibraryManagement.Domain.Services
 {
@@ -25,6 +20,7 @@ namespace RAZOR_LibraryManagement.Domain.Services
             {
                 UserName = vmCreateUser.UserName,
                 Email = vmCreateUser.Email,
+                PhoneNumber= vmCreateUser.PhoneNumber,
                 IsActive = true
             };
             try
@@ -32,6 +28,7 @@ namespace RAZOR_LibraryManagement.Domain.Services
                 var userResult = await _userRepository.CreateUser(createUser);
                 vmUserResult.UserName = userResult.UserName;
                 vmUserResult.Email = userResult.Email;
+                vmUserResult.PhoneNumber = userResult.PhoneNumber;
             }
             catch (Exception ex)
             {
@@ -52,6 +49,7 @@ namespace RAZOR_LibraryManagement.Domain.Services
                     {
                         UserName = user.UserName,
                         Email = user.Email,
+                        PhoneNumber = user.PhoneNumber,
                         IsActive = user.IsActive,
                     };
 

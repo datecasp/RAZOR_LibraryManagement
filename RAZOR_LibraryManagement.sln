@@ -23,6 +23,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RAZOR_LibraryManagement.Inf
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RAZOR_LibraryManagement.Lang", "RAZOR_LibraryManagement.Lang\RAZOR_LibraryManagement.Lang.csproj", "{09364C77-4941-49DD-AE14-011A835A9333}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RAZOR_LibraryManagement.Models", "RAZOR_LibraryManagement.Models\RAZOR_LibraryManagement.Models.csproj", "{C09380AE-01B0-4B21-8BAD-B70D0103D907}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{09364C77-4941-49DD-AE14-011A835A9333}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{09364C77-4941-49DD-AE14-011A835A9333}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{09364C77-4941-49DD-AE14-011A835A9333}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C09380AE-01B0-4B21-8BAD-B70D0103D907}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C09380AE-01B0-4B21-8BAD-B70D0103D907}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C09380AE-01B0-4B21-8BAD-B70D0103D907}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C09380AE-01B0-4B21-8BAD-B70D0103D907}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -23,7 +23,16 @@
             {
                 <tr>
                     <td>@category.Name</td>
-                    <td>@category.IsActive</td>
+                    <td>
+                        @if (category.IsActive)
+                        {
+                            <i class="bi bi-check-lg btn-outline-success mx-3"></i>
+                        }
+                        else
+                        {
+                            <i class="bi bi-x-lg btn-outline-danger mx-3"></i>
+                        }
+                    </td>
                 </tr>
             }
         </tbody>

@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using RAZOR_LibraryManagement.Domain.Models;
 
-namespace RAZOR_LibraryManagement.Domain.ViewModels
+namespace RAZOR_LibraryManagement.Models.ViewModels
 {
     public class vmBookCreate
     {

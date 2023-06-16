@@ -1,12 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RAZOR_LibraryManagement.Domain.Interfaces;
-using RAZOR_LibraryManagement.Domain.Models;
 using RAZOR_LibraryManagement.Infra.DataContext;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using RAZOR_LibraryManagement.Models.Entities;
 
 namespace RAZOR_LibraryManagement.Infra.Repositories
 {
@@ -38,7 +33,7 @@ namespace RAZOR_LibraryManagement.Infra.Repositories
             var result = new List<Category>();
             try
             {
-                result = await _lM_DbContext.Categories.ToListAsync();
+                result = await _lM_DbContext.Categories.Distinct().ToListAsync();
             }
             catch (Exception ex)
             {

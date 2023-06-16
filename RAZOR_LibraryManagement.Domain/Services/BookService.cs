@@ -1,8 +1,7 @@
 ﻿using System.Text.RegularExpressions;
-using System.Xml.Linq;
 using RAZOR_LibraryManagement.Domain.Interfaces;
-using RAZOR_LibraryManagement.Domain.Models;
-using RAZOR_LibraryManagement.Domain.ViewModels;
+using RAZOR_LibraryManagement.Models.ViewModels;
+using RAZOR_LibraryManagement.Models.Entities;
 
 namespace RAZOR_LibraryManagement.Domain.Services
 {
@@ -38,7 +37,7 @@ namespace RAZOR_LibraryManagement.Domain.Services
                 vmBookResult.Description= bookResult.Description;
                 vmBookResult.ImageUrl= bookResult.ImageUrl;
                 vmBookResult.IsBorrowable = bookResult.IsBorrowable;
-                vmBookResult.Category = bookResult.Category.Name;
+                vmBookResult.Category =  _categoryRepository.GetCategoryById(bookResult.CategoryId).Result.Name;
             }
             catch (Exception ex)
             {
@@ -79,7 +78,7 @@ namespace RAZOR_LibraryManagement.Domain.Services
             try
             {
                 var book = await _bookRepository.GetBookById(id);
-                var categoryName = _categoryRepository.GetCategoryById(book.Category.CategoryId).Result.Name;
+                var categoryName = _categoryRepository.GetCategoryById(book.CategoryId).Result.Name;
                 if(book != null)
                 {
                     vmBook.Title = book.Title;
@@ -104,7 +103,7 @@ namespace RAZOR_LibraryManagement.Domain.Services
         //Replace white spaces with dashes for readability in url 
         private static string FormatUrl(string url)
         {
-            var result = Regex.Replace(url, " ", "-");
+            var result = Regex.Replace(url, " ", "-").ToLower();
             return result;
         }
 

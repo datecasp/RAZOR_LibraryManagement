@@ -1,6 +1,7 @@
 ﻿using RAZOR_LibraryManagement.Domain.Interfaces;
 using RAZOR_LibraryManagement.Domain.Services;
 using RAZOR_LibraryManagement.Infra.Repositories;
+using RAZOR_LibraryManagement.Infra.UnitOfWork;
 
 namespace RAZOR_LibraryManagement.Web.Configuration
 {
@@ -9,6 +10,7 @@ namespace RAZOR_LibraryManagement.Web.Configuration
 
         public static IServiceCollection ResolveDependencies(this IServiceCollection services)
         {
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IBookRepository, BookRepository>();
             services.AddScoped<IBookService, BookService>(); 
             services.AddScoped<IUserRepository, UserRepository>();

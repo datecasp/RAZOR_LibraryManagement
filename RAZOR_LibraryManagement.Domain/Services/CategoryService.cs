@@ -1,21 +1,19 @@
 ﻿using RAZOR_LibraryManagement.Domain.Interfaces;
-using RAZOR_LibraryManagement.Domain.Models;
-using RAZOR_LibraryManagement.Domain.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using RAZOR_LibraryManagement.Models.ViewModels;
+using RAZOR_LibraryManagement.Models.Entities;
 
 namespace RAZOR_LibraryManagement.Domain.Services
 {
     public class CategoryService : ICategoryService
     {
         private readonly ICategoryRepository _categoryRepository;
+        private readonly IUnitOfWork _unitOfWork
+            ;
 
-        public CategoryService(ICategoryRepository categoryRepository)
+        public CategoryService(ICategoryRepository categoryRepository, IUnitOfWork unitOfWork)
         {
             _categoryRepository = categoryRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<vmCategoryIndex> CreateCategoryService(vmCategoryIndex vmCategoryIndex)
@@ -46,6 +44,7 @@ namespace RAZOR_LibraryManagement.Domain.Services
             try
             {
                 categorysList = (await _categoryRepository.GetAllCategories()).ToList();
+                
                 foreach (var category in categorysList)
                 {
                     var vwCategory = new vmCategoryIndex

@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RAZOR_LibraryManagement.Domain.Models;
+using RAZOR_LibraryManagement.Models.Entities;
 
 namespace RAZOR_LibraryManagement.Infra.DataContext
 {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RAZOR_LibraryManagement.Domain.ViewModels
+namespace RAZOR_LibraryManagement.Models.ViewModels
 {
     public class vmLogin
     {

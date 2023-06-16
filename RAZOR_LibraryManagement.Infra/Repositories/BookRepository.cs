@@ -49,7 +49,6 @@ namespace RAZOR_LibraryManagement.Infra.Repositories
             try
             {
                 _lM_DbContext.Books.Add(book);
-                await _lM_DbContext.SaveChangesAsync();
                 return book;
             }
             catch (Exception ex)

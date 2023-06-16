@@ -14,15 +14,15 @@
             <form method="post">
                 <div class="mb-3">
                     <label class="form-label">Title</label>
-                    <input type="text" class="form-control" asp-for="vmBookCreate.Title" />
+                    <input type="text" class="form-control" asp-for="vmBookCreate.Title" required />
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Author</label>
-                    <input type="text" class="form-control" asp-for="vmBookCreate.Author" />
+                    <input type="text" class="form-control" asp-for="vmBookCreate.Author" required/>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Description</label>
-                    <input type="text" class="form-control" asp-for="vmBookCreate.Description" />
+                    <input type="text" class="form-control" asp-for="vmBookCreate.Description" required />
                 </div>
 
                 <div class="mb-3">
@@ -31,7 +31,7 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label">ImageUrl</label>
-                    <input type="text" class="form-control" asp-for="vmBookCreate.ImageUrl" id="imageUrlCloudinary" />
+                    <input type="text" class="form-control" asp-for="vmBookCreate.ImageUrl" id="imageUrlCloudinary" required />
                 </div>
                 <fieldset class="row mb-3">
                     <legend class="col-form-label">
@@ -40,7 +40,7 @@
                     @foreach (var cat in Model.vmCategoryIndexList)
                     {
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" asp-for="vmBookCreate.CategoryId" value="@cat.CatId" name="radioCategory" id="@cat.Name">
+                            <input class="form-check-input" type="radio" asp-for="vmBookCreate.CategoryId" value="@cat.CatId" name="radioCategory" id="@cat.Name" required>
                             <label class="form-check-label" for="@cat.Name">
                                 @cat.Name
                             </label>
@@ -52,7 +52,7 @@
                         Is the book ready to borrow?
                     </label>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" asp-for="vmBookCreate.IsBorrowable" />
+                        <input class="form-check-input" type="checkbox" asp-for="vmBookCreate.IsBorrowable" required />
                         <label class="form-check-label" for="flexCheckDefault">
                             Yes!
                         </label>

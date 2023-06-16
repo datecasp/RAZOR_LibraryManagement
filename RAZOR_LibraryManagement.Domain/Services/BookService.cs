@@ -30,6 +30,7 @@ namespace RAZOR_LibraryManagement.Domain.Services
             try
             {
                 var bookResult = await _unitOfWork.BookRepository.CreateBook(createBook);
+                _unitOfWork.Save();
                 vmBookResult.Title= bookResult.Title;
                 vmBookResult.Author= bookResult.Author;
                 vmBookResult.Description= bookResult.Description;

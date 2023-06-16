@@ -26,6 +26,7 @@ namespace RAZOR_LibraryManagement.Domain.Services
             try
             {
                 var userResult = await _unitOfWork.UserRepository.CreateUser(createUser);
+                _unitOfWork.Save();
                 vmUserResult.UserName = userResult.UserName;
                 vmUserResult.Email = userResult.Email;
                 vmUserResult.PhoneNumber = userResult.PhoneNumber;

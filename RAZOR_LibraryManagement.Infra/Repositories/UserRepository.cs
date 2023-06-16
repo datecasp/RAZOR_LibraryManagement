@@ -34,7 +34,6 @@ namespace RAZOR_LibraryManagement.Infra.Repositories
             try
             {
                 _lM_DbContext.Users.Add(user);
-                await _lM_DbContext.SaveChangesAsync();
                 return user;
             }
             catch(Exception ex) 

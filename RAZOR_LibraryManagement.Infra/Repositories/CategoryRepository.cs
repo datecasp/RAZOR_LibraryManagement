@@ -5,11 +5,11 @@ using RAZOR_LibraryManagement.Models.Entities;
 
 namespace RAZOR_LibraryManagement.Infra.Repositories
 {
-    public class CategoryRepository : ICategoryRepository
+    public class CategoryRepository : GenericRepository<Category>, ICategoryRepository
     {
         private readonly LM_DbContext _lM_DbContext;
 
-        public CategoryRepository(LM_DbContext lM_DbContext)
+        public CategoryRepository(LM_DbContext lM_DbContext) : base(lM_DbContext)
         {
             _lM_DbContext = lM_DbContext;
         }
@@ -19,7 +19,6 @@ namespace RAZOR_LibraryManagement.Infra.Repositories
             try
             {
                 _lM_DbContext.Categories.Add(category);
-                await _lM_DbContext.SaveChangesAsync();
                 return category;
             }
             catch (Exception ex)

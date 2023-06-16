@@ -26,15 +26,18 @@ namespace RAZOR_LibraryManagement.Domain.Services
             };
             try
             {
-                var categoryResult = await _categoryRepository.CreateCategory(category);
-                vmCategory.Name = categoryResult.Name;
-                vmCategory.IsActive = (bool)categoryResult.IsActive;
-            }
+                var categoryResult = await _unitOfWork.CategoryRepository.CreateCategory(category);
+                _unitOfWork.Save();
+                if(categoryResult != null)
+                {
+                    return vmCategory;
+                }
+              }
             catch (Exception ex)
             {
 
             }
-            return vmCategory;
+            return null;
         }
 
         public async Task<IEnumerable<vmCategoryIndex>> GetAllCategoriesService()
@@ -43,7 +46,7 @@ namespace RAZOR_LibraryManagement.Domain.Services
             var categoryIndexList = new List<vmCategoryIndex>();
             try
             {
-                categorysList = (await _categoryRepository.GetAllCategories()).ToList();
+                categorysList = (await _unitOfWork.CategoryRepository.GetAllCategories()).ToList();
                 
                 foreach (var category in categorysList)
                 {
@@ -69,7 +72,7 @@ namespace RAZOR_LibraryManagement.Domain.Services
             var categoryIndexList = new List<vmCategoryIndex>();
             try
             {
-                categorysList = (await _categoryRepository.GetAllCategories())
+                categorysList = (await _unitOfWork.CategoryRepository.GetAllCategories())
                     .Where(c => c.IsActive)
                     .ToList();
                 foreach (var category in categorysList)

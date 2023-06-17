@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RAZOR_LibraryManagement.Infra.DataContext;
 
@@ -11,9 +12,10 @@ using RAZOR_LibraryManagement.Infra.DataContext;
 namespace RAZOR_LibraryManagement.Infra.Migrations
 {
     [DbContext(typeof(LM_DbContext))]
-    partial class LM_DbContextModelSnapshot : ModelSnapshot
+    [Migration("20230617213334_four layer")]
+    partial class fourlayer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,36 +32,15 @@ namespace RAZOR_LibraryManagement.Infra.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AppSettingsModelId"), 1L, 1);
 
-                    b.Property<string>("SettingParam")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("DaysToReturnDate")
+                        .HasColumnType("int");
 
-                    b.Property<int>("Value")
+                    b.Property<int>("DaysToWarningDate")
                         .HasColumnType("int");
 
                     b.HasKey("AppSettingsModelId");
 
                     b.ToTable("AppSettings");
-
-                    b.HasData(
-                        new
-                        {
-                            AppSettingsModelId = 1,
-                            SettingParam = "DefaultFilled",
-                            Value = 1
-                        },
-                        new
-                        {
-                            AppSettingsModelId = 2,
-                            SettingParam = "DaysToWarningDate",
-                            Value = 25
-                        },
-                        new
-                        {
-                            AppSettingsModelId = 3,
-                            SettingParam = "DaysToReturnDate",
-                            Value = 30
-                        });
                 });
 
             modelBuilder.Entity("RAZOR_LibraryManagement.Models.Entities.Book", b =>

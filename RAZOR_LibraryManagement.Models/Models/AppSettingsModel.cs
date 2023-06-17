@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace RAZOR_LibraryManagement.Models.Models
+﻿namespace RAZOR_LibraryManagement.Models.Models
 {
     public class AppSettingsModel
     {
-        public string WarningDate { get; set; }
-        public string CloseDate { get; set; }
+        public string SettingParam { get; set; }
+        public int Value { get; set; }
     }
 }

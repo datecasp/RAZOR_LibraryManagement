@@ -29,6 +29,18 @@ namespace RAZOR_LibraryManagement.Infra.Repositories
 
         }
 
+        /**
+         * Search for an user email 
+         * 
+         * params -> string email: The email to seek
+         * 
+         * returns the user if exists or null if not
+         */
+        public async Task<User> GetUserByEmail(string email) 
+        {
+            return await _lM_DbContext.Users.Where(u => u.Email == email).FirstOrDefaultAsync();
+        }
+
         public async Task<User> CreateUser(User user) 
         {
             try

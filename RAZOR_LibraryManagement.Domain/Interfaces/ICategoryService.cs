@@ -11,7 +11,7 @@ namespace RAZOR_LibraryManagement.Domain.Interfaces
     {
         Task<IEnumerable<vmCategoryIndex>> GetAllCategoriesService();
         Task<IEnumerable<vmCategoryIndex>> GetActiveCategoriesService();
-        Task<vmCategoryIndex> CreateCategoryService(vmCategoryIndex vmCategoryIndex);
+        Task<vmNotification> CreateCategoryService(vmCategoryIndex vmCategoryIndex);
 
     }
 }

@@ -14,9 +14,9 @@ namespace RAZOR_LibraryManagement.Domain.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<vmCategoryIndex> CreateCategoryService(vmCategoryIndex vmCategoryIndex)
+        public async Task<vmNotification> CreateCategoryService(vmCategoryIndex vmCategoryIndex)
         {
-            var vmCategory = new vmCategoryIndex();
+            var vmNotification = new vmNotification();
             var category = new Category
             { 
                 Name = vmCategoryIndex.Name,
@@ -28,14 +28,20 @@ namespace RAZOR_LibraryManagement.Domain.Services
                 _unitOfWork.Save();
                 if(categoryResult != null)
                 {
-                    return vmCategory;
+                    vmNotification.Type = Lang.Notification.NotificationType.Success;
+                    vmNotification.Message = "User created successfully";
+                    return vmNotification;
                 }
               }
             catch (Exception ex)
             {
-
+                vmNotification.Type = Lang.Notification.NotificationType.Error;
+                vmNotification.Message = "Exception thrown! " + ex.Message;
+                return vmNotification;
             }
-            return null;
+            vmNotification.Type = Lang.Notification.NotificationType.Error;
+            vmNotification.Message = "Hmmm something went wrong here....";
+            return vmNotification;
         }
 
         public async Task<IEnumerable<vmCategoryIndex>> GetAllCategoriesService()

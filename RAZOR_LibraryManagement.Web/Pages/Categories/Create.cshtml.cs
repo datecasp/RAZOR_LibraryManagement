@@ -19,30 +19,24 @@ namespace RAZOR_LibraryManagement.Web.Pages.Categories
         }
         public void OnGet()
         {
+            var notificationJson = (string)TempData["Notification"];
+            if (notificationJson != null)
+            {
+                ViewData["Notification"] = JsonSerializer.Deserialize<vmNotification>(notificationJson);
+            }
         }
 
         public async Task<IActionResult> OnPost(vmCategoryIndex vmCategoryIndex)
         {
-            var categoryResult = await _categoryService.CreateCategoryService(vmCategoryIndex);
+            var notification = await _categoryService.CreateCategoryService(vmCategoryIndex);
+            TempData["Notification"] = JsonSerializer.Serialize(notification);
 
-            if (categoryResult != null)
+            if (notification.Type == Lang.Notification.NotificationType.Success)
             {
-                var notification = new vmNotification
-                {
-                    Type = Lang.Notification.NotificationType.Success,
-                    Message = "Category created successfully"
-                };
-                TempData["Notification"] = JsonSerializer.Serialize(notification);
                 return RedirectToPage("/categories/list");
             }
 
-            ViewData["Notification"] = new vmNotification
-            {
-                Type = Lang.Notification.NotificationType.Error,
-                Message = "Something went wrong"
-            };
-
-            return Page();
+            return RedirectToPage("/categories/create");
         }
     }
 }

@@ -29,34 +29,26 @@ namespace RAZOR_LibraryManagement.Web.Pages.Books
         }
         public async void OnGet()
         {
+            var notificationJson = (string)TempData["Notification"];
+            if (notificationJson != null)
+            {
+                ViewData["Notification"] = JsonSerializer.Deserialize<vmNotification>(notificationJson);
+            }
+
             vmCategoryIndexList = (List<vmCategoryIndex>)_categoryService.GetActiveCategoriesService().Result;
         }
 
         public async Task<IActionResult> OnPost(int radioCategory)
         {
             vmBookCreate.CategoryId = radioCategory;
-            var bookResult = await _bookService.CreateBookService(vmBookCreate);
+            var notification = await _bookService.CreateBookService(vmBookCreate);
+            TempData["Notification"] = JsonSerializer.Serialize(notification);
 
-            if (bookResult != null)
+            if (notification.Type == Lang.Notification.NotificationType.Success)
             {
-                var notification = new vmNotification
-                {
-                    Type = Lang.Notification.NotificationType.Success,
-                    Message = "Book created successfully"
-                };
-                TempData["Notification"] = JsonSerializer.Serialize(notification);
-                return RedirectToPage("/books/list");
+                return RedirectToPage("/categories/list");
             }
-
-            ViewData["Notification"] = new vmNotification
-            {
-                Type = Lang.Notification.NotificationType.Error,
-                Message = "Something went wrong"
-            };
-
-            return Page();
-
-
+            return RedirectToPage("/categories/create");
         }
 
     }

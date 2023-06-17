@@ -5,6 +5,7 @@ namespace RAZOR_LibraryManagement.Domain.Interfaces
     public interface IUserRepository
     {
         Task<IEnumerable<User>> GetAllUsers();
+        Task<User> GetUserByEmail(string email);
         Task<User> CreateUser(User user);
     }
 }

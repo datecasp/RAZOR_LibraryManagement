@@ -14,9 +14,10 @@ namespace RAZOR_LibraryManagement.Domain.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<vmBookCreate> CreateBookService(vmBookCreate vmCreateBook)
+        public async Task<vmNotification> CreateBookService(vmBookCreate vmCreateBook)
         {
-            var vmBookResult = new vmBookCreate();
+            var vmNotification = new vmNotification();
+
             var createBook = new Book
             {
              Title = vmCreateBook.Title,
@@ -31,18 +32,22 @@ namespace RAZOR_LibraryManagement.Domain.Services
             {
                 var bookResult = await _unitOfWork.BookRepository.CreateBook(createBook);
                 _unitOfWork.Save();
-                vmBookResult.Title= bookResult.Title;
-                vmBookResult.Author= bookResult.Author;
-                vmBookResult.Description= bookResult.Description;
-                vmBookResult.ImageUrl= bookResult.ImageUrl;
-                vmBookResult.IsBorrowable = bookResult.IsBorrowable;
-                vmBookResult.CategoryId = bookResult.CategoryId;
+                if (bookResult != null)
+                {
+                    vmNotification.Type = Lang.Notification.NotificationType.Success;
+                    vmNotification.Message = "Book created successfully";
+                    return vmNotification;
+                }
             }
             catch (Exception ex)
             {
-
+                vmNotification.Type = Lang.Notification.NotificationType.Error;
+                vmNotification.Message = "Exception thrown! " + ex.Message;
+                return vmNotification;
             }
-            return vmBookResult;
+            vmNotification.Type = Lang.Notification.NotificationType.Error;
+            vmNotification.Message = "Hmmm something went wrong here....";
+            return vmNotification;
         }
 
         public async Task<IEnumerable<vmBookIndex>> GetAllBooksService()

@@ -13,29 +13,37 @@ namespace RAZOR_LibraryManagement.Domain.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<vmUserCreate> CreateUserService(vmUserCreate vmCreateUser)
+        public async Task<vmNotification> CreateUserService(vmUserCreate vmCreateUser)
         {
-            var vmUserResult = new vmUserCreate();
+            var vmNotification = new vmNotification();
             var createUser = new User
             {
                 UserName = vmCreateUser.UserName,
                 Email = vmCreateUser.Email,
-                PhoneNumber= vmCreateUser.PhoneNumber,
+                PhoneNumber = vmCreateUser.PhoneNumber,
                 IsActive = true
             };
+
             try
             {
-                var userResult = await _unitOfWork.UserRepository.CreateUser(createUser);
-                _unitOfWork.Save();
-                vmUserResult.UserName = userResult.UserName;
-                vmUserResult.Email = userResult.Email;
-                vmUserResult.PhoneNumber = userResult.PhoneNumber;
+                if (!CheckIfEmailExists(vmCreateUser.Email).Result)
+                {
+                    var userResult = await _unitOfWork.UserRepository.CreateUser(createUser);
+                    _unitOfWork.Save();
+                    vmNotification.Type = Lang.Notification.NotificationType.Success;
+                    vmNotification.Message = "User created successfully";
+                    return vmNotification;
+                }
+                vmNotification.Type = Lang.Notification.NotificationType.Error;
+                vmNotification.Message = "Email exits in database";
+                return vmNotification;
             }
             catch (Exception ex)
             {
-
+                vmNotification.Type = Lang.Notification.NotificationType.Error;
+                vmNotification.Message = "Exception thrown! " + ex.Message;
             }
-            return vmUserResult;
+            return vmNotification;
         }
 
         public async Task<IEnumerable<vmUserIndex>> GetAllUsersService()
@@ -62,6 +70,16 @@ namespace RAZOR_LibraryManagement.Domain.Services
 
             }
             return bookIndexList;
+        }
+
+        private async Task<bool> CheckIfEmailExists(string email)
+        {
+            var userIfExists = _unitOfWork.UserRepository.GetUserByEmail(email).Result;
+            if (userIfExists == null)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

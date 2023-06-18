@@ -13,24 +13,24 @@ namespace RAZOR_LibraryManagement.Infra.DataContext
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<BookUser> BookUsers { get; set; }
-        public virtual DbSet<AppSettingsModel> AppSettings { get; set; }
+        public virtual DbSet<AppSettingsEntity> AppSettings { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             
-                modelBuilder.Entity<AppSettingsModel>().HasData(new AppSettingsModel
+                modelBuilder.Entity<AppSettingsEntity>().HasData(new AppSettingsEntity
                 {
                     AppSettingsModelId = 1,
                     SettingParam = "DefaultFilled",
                     Value = 1
                 });
-                modelBuilder.Entity<AppSettingsModel>().HasData(new AppSettingsModel
+                modelBuilder.Entity<AppSettingsEntity>().HasData(new AppSettingsEntity
                 {
                     AppSettingsModelId = 2,
                     SettingParam = "DaysToWarningDate",
                     Value = 25
                 });
-                modelBuilder.Entity<AppSettingsModel>().HasData(new AppSettingsModel
+                modelBuilder.Entity<AppSettingsEntity>().HasData(new AppSettingsEntity
                 {
                     AppSettingsModelId = 3,
                     SettingParam = "DaysToReturnDate",

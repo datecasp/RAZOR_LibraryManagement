@@ -25,7 +25,8 @@ builder.Services.AddDbContext<AuthDbContext>(options =>
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<AuthDbContext>();
 
-builder.Services.Configure<AppSettingsModel>(builder.Configuration.GetSection("AppConfigs"));
+builder.Services.Configure<AppSettingsEntity>(builder.Configuration.GetSection("AppConfigs"));
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 //If not logged, redirects to Index, where login lives
 builder.Services.ConfigureApplicationCookie(options =>

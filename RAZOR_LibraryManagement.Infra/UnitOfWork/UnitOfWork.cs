@@ -11,6 +11,7 @@ namespace RAZOR_LibraryManagement.Infra.UnitOfWork
         public ICategoryRepository CategoryRepository { get; set; }
         public IBookRepository BookRepository { get; set; }
         public IUserRepository UserRepository { get; set; }
+        public IAppSettingsRepository AppSettingsRepository { get; set; }
 
         public UnitOfWork(LM_DbContext lM_DbContext)
         {
@@ -18,6 +19,7 @@ namespace RAZOR_LibraryManagement.Infra.UnitOfWork
             CategoryRepository = new CategoryRepository(_context);
             BookRepository = new BookRepository(_context);
             UserRepository = new UserRepository(_context);
+            AppSettingsRepository= new AppSettingsRepository(_context);
         }
 
         public void Save()

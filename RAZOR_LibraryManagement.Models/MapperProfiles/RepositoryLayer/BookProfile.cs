@@ -7,7 +7,7 @@ using AutoMapper;
 using RAZOR_LibraryManagement.Models.Entities;
 using RAZOR_LibraryManagement.Models.Models;
 
-namespace RAZOR_LibraryManagement.Domain.MapperProfiles
+namespace RAZOR_LibraryManagement.Models.MapperProfiles.RepositoryLayer
 {
     internal class BookProfile : Profile
     {

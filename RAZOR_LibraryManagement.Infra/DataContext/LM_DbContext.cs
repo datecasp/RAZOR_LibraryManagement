@@ -20,19 +20,19 @@ namespace RAZOR_LibraryManagement.Infra.DataContext
             
                 modelBuilder.Entity<AppSettingsEntity>().HasData(new AppSettingsEntity
                 {
-                    AppSettingsModelId = 1,
+                    AppSettingEntityId = 1,
                     SettingParam = "DefaultFilled",
                     Value = 1
                 });
                 modelBuilder.Entity<AppSettingsEntity>().HasData(new AppSettingsEntity
                 {
-                    AppSettingsModelId = 2,
+                    AppSettingEntityId = 2,
                     SettingParam = "DaysToWarningDate",
                     Value = 25
                 });
                 modelBuilder.Entity<AppSettingsEntity>().HasData(new AppSettingsEntity
                 {
-                    AppSettingsModelId = 3,
+                    AppSettingEntityId = 3,
                     SettingParam = "DaysToReturnDate",
                     Value = 30
                 });

@@ -1,30 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using RAZOR_LibraryManagement.Domain.Interfaces;
 using RAZOR_LibraryManagement.Infra.DataContext;
 using RAZOR_LibraryManagement.Models.Entities;
+using RAZOR_LibraryManagement.Models.Models;
 
 namespace RAZOR_LibraryManagement.Infra.Repositories
 {
     public class AppSettingsRepository : GenericRepository<AppSettingsEntity>, IAppSettingsRepository
     {
         private readonly LM_DbContext _lM_DbContext;
+        private readonly IMapper _mapper;
 
-        public AppSettingsRepository(LM_DbContext lM_DbContext) : base(lM_DbContext)
+        public AppSettingsRepository(LM_DbContext lM_DbContext, IMapper mapper) : base(lM_DbContext, mapper)
         {
             _lM_DbContext = lM_DbContext;
+            _mapper = mapper;
         }
 
-        public async Task<IEnumerable<AppSettingsEntity>> GetAllSettings()
+        public async Task<IEnumerable<AppSettingsModel>> GetAllSettings()
         {
-            var result = new List<AppSettingsEntity>();
+            var result = new List<AppSettingsModel>();
             try
             {
-                result = await _lM_DbContext.AppSettings.ToListAsync();
+                var entitiesList = await _lM_DbContext.AppSettings.ToListAsync();
+                result = _mapper.Map<List<AppSettingsModel>>(entitiesList);
             }
             catch (Exception ex)
             {

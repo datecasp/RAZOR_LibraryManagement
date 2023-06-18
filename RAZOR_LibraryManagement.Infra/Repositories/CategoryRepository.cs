@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using RAZOR_LibraryManagement.Domain.Interfaces;
 using RAZOR_LibraryManagement.Infra.DataContext;
 using RAZOR_LibraryManagement.Models.Entities;
@@ -8,10 +9,12 @@ namespace RAZOR_LibraryManagement.Infra.Repositories
     public class CategoryRepository : GenericRepository<Category>, ICategoryRepository
     {
         private readonly LM_DbContext _lM_DbContext;
+        private readonly IMapper _mapper;
 
-        public CategoryRepository(LM_DbContext lM_DbContext) : base(lM_DbContext)
+        public CategoryRepository(LM_DbContext lM_DbContext, IMapper mapper) : base(lM_DbContext, mapper)
         {
             _lM_DbContext = lM_DbContext;
+            _mapper = mapper;
         }
 
         public async Task<Category> CreateCategory(Category category)

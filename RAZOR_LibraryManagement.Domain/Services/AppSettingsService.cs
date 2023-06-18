@@ -18,8 +18,7 @@ namespace RAZOR_LibraryManagement.Domain.Services
 
         public async Task<IEnumerable<AppSettingsModel>> GetAllSettings()
         {
-            var appSettingsList = await _unitOfWork.AppSettingsRepository.GetAllSettings();
-            return _mapper.Map<IEnumerable<AppSettingsModel>>(appSettingsList);
+            return await _unitOfWork.AppSettingsRepository.GetAllSettings();
         }
     }
 }

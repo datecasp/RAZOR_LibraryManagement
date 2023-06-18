@@ -1,4 +1,5 @@
 ﻿using System;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using RAZOR_LibraryManagement.Domain.Interfaces;
 using RAZOR_LibraryManagement.Infra.DataContext;
@@ -9,10 +10,12 @@ namespace RAZOR_LibraryManagement.Infra.Repositories
     public class UserRepository : IUserRepository
     {
         private readonly LM_DbContext _lM_DbContext;
+        private readonly IMapper _mapper;
 
-        public UserRepository(LM_DbContext lM_DbContext)
+        public UserRepository(LM_DbContext lM_DbContext, IMapper mapper)
         {
             _lM_DbContext = lM_DbContext;
+            _mapper = mapper;
         }
         public async Task<IEnumerable<User>> GetAllUsers()
         {

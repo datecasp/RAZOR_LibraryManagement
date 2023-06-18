@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using System.Linq.Expressions;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using RAZOR_LibraryManagement.Domain.Interfaces;
 using RAZOR_LibraryManagement.Infra.DataContext;
@@ -10,11 +11,13 @@ namespace RAZOR_LibraryManagement.Infra.Repositories
     {
         private readonly LM_DbContext _context;
         private readonly DbSet<TEntity> _dbSet;
+        private readonly IMapper _mapper;
 
-        public GenericRepository(LM_DbContext context)
+        public GenericRepository(LM_DbContext context, IMapper mapper)
         {
             context = context;
             _dbSet = context.Set<TEntity>();
+            _mapper = mapper;
         }
 
         public virtual IEnumerable<TEntity> Get(

@@ -2,7 +2,7 @@
 {
     public class AppSettingsModel
     {
-        public int AppSettingModelId { get; set; }
+        public int Id { get; set; }
         public string SettingParam { get; set; }
         public int Value { get; set; }
     }

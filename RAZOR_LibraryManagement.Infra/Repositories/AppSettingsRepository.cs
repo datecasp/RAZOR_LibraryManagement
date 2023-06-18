@@ -7,12 +7,12 @@ using RAZOR_LibraryManagement.Models.Models;
 
 namespace RAZOR_LibraryManagement.Infra.Repositories
 {
-    public class AppSettingsRepository : GenericRepository<AppSettingsEntity>, IAppSettingsRepository
+    public class AppSettingsRepository : IAppSettingsRepository
     {
         private readonly LM_DbContext _lM_DbContext;
         private readonly IMapper _mapper;
 
-        public AppSettingsRepository(LM_DbContext lM_DbContext, IMapper mapper) : base(lM_DbContext, mapper)
+        public AppSettingsRepository(LM_DbContext lM_DbContext, IMapper mapper)
         {
             _lM_DbContext = lM_DbContext;
             _mapper = mapper;

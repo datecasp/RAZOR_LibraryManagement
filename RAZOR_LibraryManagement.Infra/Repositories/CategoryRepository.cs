@@ -7,12 +7,12 @@ using RAZOR_LibraryManagement.Models.Models;
 
 namespace RAZOR_LibraryManagement.Infra.Repositories
 {
-    public class CategoryRepository : GenericRepository<CategoryModel>, ICategoryRepository
+    public class CategoryRepository : ICategoryRepository
     {
         private readonly LM_DbContext _lM_DbContext;
         private readonly IMapper _mapper;
 
-        public CategoryRepository(LM_DbContext lM_DbContext, IMapper mapper) : base(lM_DbContext, mapper)
+        public CategoryRepository(LM_DbContext lM_DbContext, IMapper mapper)
         {
             _lM_DbContext = lM_DbContext;
             _mapper = mapper;
@@ -54,7 +54,7 @@ namespace RAZOR_LibraryManagement.Infra.Repositories
             var result = new CategoryModel();
             try
             {
-                var category = await _lM_DbContext.FindAsync<CategoryModel>(id);
+                var category = await _lM_DbContext.FindAsync<Category>(id);
                 result = _mapper.Map<CategoryModel>(category);
             }
             catch (Exception ex)

@@ -15,17 +15,12 @@ namespace RAZOR_LibraryManagement.Domain.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<vmNotification> CreateCategoryService(vmCategoryIndex vmCategoryIndex)
+        public async Task<vmNotification> CreateCategoryService(CategoryModel categoryModel)
         {
             var vmNotification = new vmNotification();
-            var category = new CategoryModel
-            { 
-                Name = vmCategoryIndex.Name,
-                IsActive = (bool)vmCategoryIndex.IsActive
-            };
             try
             {
-                var categoryResult = await _unitOfWork.CategoryRepository.CreateCategory(category);
+                var categoryResult = await _unitOfWork.CategoryRepository.CreateCategory(categoryModel);
                 _unitOfWork.Save();
                 if(categoryResult != null)
                 {
@@ -45,58 +40,48 @@ namespace RAZOR_LibraryManagement.Domain.Services
             return vmNotification;
         }
 
-        public async Task<IEnumerable<vmCategoryIndex>> GetAllCategoriesService()
+        public async Task<IEnumerable<CategoryModel>> GetAllCategoriesService()
         {
-            var categorysList = new List<CategoryModel>();
-            var categoryIndexList = new List<vmCategoryIndex>();
+            var categoriesList = new List<CategoryModel>();
             try
             {
-                categorysList = (await _unitOfWork.CategoryRepository.GetAllCategories()).ToList();
-                
-                foreach (var category in categorysList)
-                {
-                    var vwCategory = new vmCategoryIndex
-                    {
-                        Name = category.Name,
-                        IsActive = category.IsActive
-                    };
-
-                    categoryIndexList.Add(vwCategory);
-                }
+                categoriesList = (await _unitOfWork.CategoryRepository.GetAllCategories()).ToList();
             }
             catch (Exception ex)
             {
 
             }
-            return categoryIndexList;
+            return categoriesList;
         }
 
-        public async Task<IEnumerable<vmCategoryIndex>> GetActiveCategoriesService()
+        public async Task<IEnumerable<CategoryModel>> GetActiveCategoriesService()
         {
-            var categorysList = new List<CategoryModel>();
-            var categoryIndexList = new List<vmCategoryIndex>();
+            var categoriesList = new List<CategoryModel>();
             try
             {
-                categorysList = (await _unitOfWork.CategoryRepository.GetAllCategories())
+                categoriesList = (await _unitOfWork.CategoryRepository.GetAllCategories())
                     .Where(c => c.IsActive)
                     .ToList();
-                foreach (var category in categorysList)
-                {
-                    var vwCategory = new vmCategoryIndex
-                    {
-                        CatId = category.CategoryId,
-                        Name = category.Name,
-                        IsActive = category.IsActive
-                    };
-
-                    categoryIndexList.Add(vwCategory);
-                }
             }
             catch (Exception ex)
             {
 
             }
-            return categoryIndexList;
+            return categoriesList;
+        }
+
+        public async Task<CategoryModel> GetCategoryByIdService(int id)
+        {
+            var result = new CategoryModel();
+            try
+            {
+                result = await _unitOfWork.CategoryRepository.GetCategoryById(id);
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return result;
         }
     }
 }

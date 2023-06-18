@@ -9,6 +9,8 @@ namespace RAZOR_LibraryManagement.Models.ViewModels
 {
     public class vmUserIndex
     {
+        [Required] 
+        public int UserId { get; set; }
         [Required]
         public string UserName { get; set; }
         [Required]

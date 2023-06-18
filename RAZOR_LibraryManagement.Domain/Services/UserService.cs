@@ -14,22 +14,14 @@ namespace RAZOR_LibraryManagement.Domain.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<vmNotification> CreateUserService(vmUserCreate vmCreateUser)
+        public async Task<vmNotification> CreateUserService(UserModel userModel)
         {
             var vmNotification = new vmNotification();
-            var createUser = new UserModel
-            {
-                UserName = vmCreateUser.UserName,
-                Email = vmCreateUser.Email,
-                PhoneNumber = vmCreateUser.PhoneNumber,
-                IsActive = true
-            };
-
             try
             {
-                if (!CheckIfEmailExists(vmCreateUser.Email).Result)
+                if (!CheckIfEmailExists(userModel.Email).Result)
                 {
-                    var userResult = await _unitOfWork.UserRepository.CreateUser(createUser);
+                    var userResult = await _unitOfWork.UserRepository.CreateUser(userModel);
                     _unitOfWork.Save();
                     vmNotification.Type = Lang.Notification.NotificationType.Success;
                     vmNotification.Message = "User created successfully";
@@ -47,30 +39,18 @@ namespace RAZOR_LibraryManagement.Domain.Services
             return vmNotification;
         }
 
-        public async Task<IEnumerable<vmUserIndex>> GetAllUsersService()
+        public async Task<IEnumerable<UserModel>> GetAllUsersService()
         {
-            var bookIndexList = new List<vmUserIndex>();
+            var usersList = new List<UserModel>();
             try
             {
-                var usersList = (await _unitOfWork.UserRepository.GetAllUsers()).ToList();
-                foreach (var user in usersList)
-                {
-                    var vwUser = new vmUserIndex
-                    {
-                        UserName = user.UserName,
-                        Email = user.Email,
-                        PhoneNumber = user.PhoneNumber,
-                        IsActive = user.IsActive,
-                    };
-
-                    bookIndexList.Add(vwUser);
-                }
+                usersList = (await _unitOfWork.UserRepository.GetAllUsers()).ToList();
             }
             catch (Exception ex)
             {
 
             }
-            return bookIndexList;
+            return usersList;
         }
 
         private async Task<bool> CheckIfEmailExists(string email)

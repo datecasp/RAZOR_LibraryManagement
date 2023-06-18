@@ -1,4 +1,5 @@
 using System.Text.Json;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RAZOR_LibraryManagement.Domain.Interfaces;
@@ -10,11 +11,13 @@ namespace RAZOR_LibraryManagement.Web.Pages.Books
     public class ListModel : PageModel
     {
         private readonly IBookService _bookService;
+        private readonly IMapper _mapper;
         public List<vmBookIndex> vmBookIndexList;
 
-        public ListModel(IBookService bookService)
+        public ListModel(IBookService bookService, IMapper mapper)
         {
             _bookService = bookService;
+            _mapper = mapper;
         }
 
         public async Task OnGet()
@@ -24,7 +27,8 @@ namespace RAZOR_LibraryManagement.Web.Pages.Books
             {
                 ViewData["Notification"] = JsonSerializer.Deserialize<vmNotification>(notificationJson);
             }
-            vmBookIndexList = (await _bookService.GetAllBooksService()).ToList();
+            var booksList = (await _bookService.GetAllBooksService()).ToList();
+            vmBookIndexList = _mapper.Map<List<vmBookIndex>>(booksList);
         }
     }
 }

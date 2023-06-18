@@ -38,7 +38,6 @@ namespace RAZOR_LibraryManagement.Infra.Repositories
             var result = new BookModel();
             try
             {
-                //var book = _lM_DbContext.Books.Include(b => b.Category).Where(b => b.BookId == id).FirstOrDefault();
                 var book = _lM_DbContext.Books.Where(b => b.BookId == id).FirstOrDefault();
                 result = _mapper.Map<BookModel>(book);
             }

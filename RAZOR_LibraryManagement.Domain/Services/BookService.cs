@@ -15,23 +15,13 @@ namespace RAZOR_LibraryManagement.Domain.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<vmNotification> CreateBookService(vmBookCreate vmCreateBook)
+        public async Task<vmNotification> CreateBookService(BookModel bookModel)
         {
             var vmNotification = new vmNotification();
 
-            var createBook = new BookModel
-            {
-             Title = vmCreateBook.Title,
-             Author= vmCreateBook.Author,
-             Description= vmCreateBook.Description,
-             ImageUrl= vmCreateBook.ImageUrl,
-             IsBorrowable= vmCreateBook.IsBorrowable,
-             UrlHandle = FormatUrl(vmCreateBook.Title),
-             CategoryId = vmCreateBook.CategoryId 
-            };
             try
             {
-                var bookResult = await _unitOfWork.BookRepository.CreateBook(createBook);
+                var bookResult = await _unitOfWork.BookRepository.CreateBook(bookModel);
                 _unitOfWork.Save();
                 if (bookResult != null)
                 {
@@ -51,55 +41,32 @@ namespace RAZOR_LibraryManagement.Domain.Services
             return vmNotification;
         }
 
-        public async Task<IEnumerable<vmBookIndex>> GetAllBooksService()
+        public async Task<IEnumerable<BookModel>> GetAllBooksService()
         {
-            var booksList =new List<BookModel>();
-            var bookIndexList = new List<vmBookIndex>();
+            var booksList = new List<BookModel>();
             try
             {
                 booksList = (await _unitOfWork.BookRepository.GetAllBooks()).ToList();
-                foreach (var book in booksList)
-                {
-                    var vwBook = new vmBookIndex
-                    {
-                        Id = book.BookId,
-                        Title = book.Title,
-                        Author = book.Author,
-                        IsBorrowable= book.IsBorrowable
-                    };
-
-                    bookIndexList.Add(vwBook);
-                }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
             }
-            return bookIndexList;        }
+            return booksList;
+        }
 
-        public async Task<vmBookDetails> GetBookByIdService(int id)
+        public async Task<BookModel> GetBookByIdService(int id)
         {
-            var vmBook = new vmBookDetails();
+            var book = new BookModel();
             try
             {
-                var book = await _unitOfWork.BookRepository.GetBookById(id);
-                var categoryName = _unitOfWork.CategoryRepository.GetCategoryById(book.CategoryId).Result.Name;
-                if(book != null)
-                {
-                    vmBook.Title = book.Title;
-                    vmBook.Author = book.Author;
-                    vmBook.Description = book.Description;
-                    vmBook.isBorrowable = book.IsBorrowable;
-                    vmBook.Id = id;
-                    vmBook.ImageUrl = book.ImageUrl;
-                    vmBook.Category = categoryName;
-                }
+                book = await _unitOfWork.BookRepository.GetBookById(id);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
             }
-            return vmBook;
+            return book;
         }
 
 
@@ -112,38 +79,6 @@ namespace RAZOR_LibraryManagement.Domain.Services
             return result;
         }
 
-        private vmCategoryIndex CategoryToVmCategory(Category category)
-        {
-            var result = new vmCategoryIndex
-            {
-                Name= category.Name,
-                IsActive= category.IsActive
-            };
-
-            return result;
-        }
-
-        private Category VmCategoryToCategory(vmCategoryIndex vmCategory)
-        {
-            var result = new Category
-            {
-                Name = vmCategory.Name,
-                IsActive = vmCategory.IsActive
-            };
-
-            return result;
-        }
-
-        private Category VmCategoryStringToCategory(string vmCategory)
-        {
-            var result = new Category
-            {
-                Name = vmCategory,
-                IsActive = true
-            };
-
-            return result;
-        }
         #endregion
     }
 }

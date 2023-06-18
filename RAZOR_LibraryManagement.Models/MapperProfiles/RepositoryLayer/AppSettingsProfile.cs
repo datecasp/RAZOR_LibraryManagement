@@ -10,8 +10,8 @@ namespace RAZOR_LibraryManagement.Models.MapperProfiles.RepositoryLayer
         {
             //source mapping to destination
             CreateMap<AppSettingsEntity, AppSettingsModel>()
-                .ForMember(m => m.AppSettingModelId, opt => opt
-                .MapFrom(e => e.AppSettingEntityId)
+                .ForMember(m => m.Id, opt => opt
+                .MapFrom(e => e.Id)
                 ).ReverseMap();
         }
     }

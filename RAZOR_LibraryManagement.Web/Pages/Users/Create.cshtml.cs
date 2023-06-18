@@ -1,9 +1,9 @@
 using System.Text.Json;
-using Microsoft.AspNetCore.Identity;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using RAZOR_LibraryManagement.Domain.Interfaces;
+using RAZOR_LibraryManagement.Models.Models;
 using RAZOR_LibraryManagement.Models.ViewModels;
 
 namespace RAZOR_LibraryManagement.Web.Pages.Users
@@ -11,13 +11,15 @@ namespace RAZOR_LibraryManagement.Web.Pages.Users
     public class CreateModel : PageModel
     {
         private readonly IUserService _userService;
+        private readonly IMapper _mapper;
 
         [BindProperty]
         public vmUserCreate vmCreateUser { get; set; }
 
-        public CreateModel(IUserService userService)
+        public CreateModel(IUserService userService, IMapper mapper)
         {
             _userService = userService;
+            _mapper = mapper;
         }
         public void OnGet()
         {
@@ -28,14 +30,14 @@ namespace RAZOR_LibraryManagement.Web.Pages.Users
             }
         }
 
-        public async Task<IActionResult> OnPost(vmUserCreate vmCreateUser)
+        public async Task<IActionResult> OnPost(vmUserCreate userCreate)
         {
-            
-            var notification = await _userService.CreateUserService(vmCreateUser);
+            var userModel = _mapper.Map<UserModel>(userCreate);
+            var notificationJson = await _userService.CreateUserService(userModel);
 
-            TempData["Notification"] = JsonSerializer.Serialize(notification);
+            TempData["Notification"] = JsonSerializer.Serialize(notificationJson);
 
-            if (notification.Type == Lang.Notification.NotificationType.Success)
+            if (notificationJson.Type == Lang.Notification.NotificationType.Success)
             {
 
                 return RedirectToPage("/users/list");

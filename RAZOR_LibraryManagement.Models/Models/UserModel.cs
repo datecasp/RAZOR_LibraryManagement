@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RAZOR_LibraryManagement.Models.Models
 {
-    public class User
+    public class UserModel
     {
         public int UserId { get; set; }
         public string UserName { get; set; } 
@@ -19,6 +19,6 @@ namespace RAZOR_LibraryManagement.Models.Models
         public bool IsActive { get; set; }
 
         //Nav props
-        public ICollection<BookUser>? BookUsers { get; set; }    
+        public ICollection<BookUserModel>? BookUsers { get; set; }    
     }
 }

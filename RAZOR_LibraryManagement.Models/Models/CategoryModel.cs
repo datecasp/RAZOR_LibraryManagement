@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RAZOR_LibraryManagement.Models.Models
 {
-    public class Category
+    public class CategoryModel
 {
         public int CategoryId { get; set; }
         public string Name { get; set; }
@@ -14,6 +14,6 @@ namespace RAZOR_LibraryManagement.Models.Models
         public bool IsActive { get; set; }
 
         //Nav props
-        public ICollection<Book>? Books { get; set; }
+        public ICollection<BookModel>? Books { get; set; }
 }
 }

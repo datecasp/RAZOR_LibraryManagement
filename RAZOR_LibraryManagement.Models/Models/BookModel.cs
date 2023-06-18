@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace RAZOR_LibraryManagement.Models.Models
+﻿namespace RAZOR_LibraryManagement.Models.Models
 {
-    public class Book
+    public class BookModel
     {
         public int BookId { get; set; }
         public string Title { get; set; }
@@ -18,9 +12,10 @@ namespace RAZOR_LibraryManagement.Models.Models
         public string UrlHandle { get; set; }
         //Indicates if book is active or inactive in library funds
         public bool IsBorrowable { get; set; }
+        public int CategoryId { get; set; }
 
         //Nav props
-        public ICollection<BookUser>? BookUsers { get; set; }
-        public Category Category { get; set; }
+        public ICollection<BookUserModel>? BookUsers { get; set; }
+        public CategoryModel Category { get; set; }
     }
 }

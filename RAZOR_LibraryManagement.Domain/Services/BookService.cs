@@ -18,7 +18,7 @@ namespace RAZOR_LibraryManagement.Domain.Services
         public async Task<vmNotification> CreateBookService(BookModel bookModel)
         {
             var vmNotification = new vmNotification();
-
+            bookModel.UrlHandle = FormatUrl(bookModel.Title);
             try
             {
                 var bookResult = await _unitOfWork.BookRepository.CreateBook(bookModel);

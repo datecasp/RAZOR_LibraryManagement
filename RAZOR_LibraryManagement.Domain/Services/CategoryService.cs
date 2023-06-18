@@ -25,7 +25,7 @@ namespace RAZOR_LibraryManagement.Domain.Services
                 if(categoryResult != null)
                 {
                     vmNotification.Type = Lang.Notification.NotificationType.Success;
-                    vmNotification.Message = "User created successfully";
+                    vmNotification.Message = "Category created successfully";
                     return vmNotification;
                 }
               }

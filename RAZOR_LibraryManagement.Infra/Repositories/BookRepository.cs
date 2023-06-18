@@ -53,8 +53,8 @@ namespace RAZOR_LibraryManagement.Infra.Repositories
             var book = _mapper.Map<Book>(bookModel);
             try
             {
-                _lM_DbContext.Books.Add(book);
-                return _mapper.Map<BookModel>(book);
+                var result = _lM_DbContext.Books.Add(book);
+                return _mapper.Map<BookModel>(result.Entity);
             }
             catch (Exception ex)
             {

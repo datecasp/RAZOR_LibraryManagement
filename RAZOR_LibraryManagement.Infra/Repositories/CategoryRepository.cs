@@ -24,17 +24,20 @@ namespace RAZOR_LibraryManagement.Infra.Repositories
             try
             {
                 var result = _lM_DbContext.Categories.Add(category);
-                return _mapper.Map<CategoryModel>(result);
+                if (result != null)
+                {
+                    return _mapper.Map<CategoryModel>(result.Entity);
+                }
             }
             catch (Exception ex)
             {
-                return null;
             }
+            return null;
         }
 
         public async Task<IEnumerable<CategoryModel>> GetAllCategories()
         {
-            
+
             var result = new List<CategoryModel>();
             try
             {

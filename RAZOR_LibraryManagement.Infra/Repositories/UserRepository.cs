@@ -52,8 +52,8 @@ namespace RAZOR_LibraryManagement.Infra.Repositories
             var user = _mapper.Map<User>(userModel);
             try
             {
-                _lM_DbContext.Users.Add(user);
-                return _mapper.Map<UserModel>(user);
+                var result = _lM_DbContext.Users.Add(user);
+                return _mapper.Map<UserModel>(result.Entity);
             }
             catch(Exception ex) 
             {

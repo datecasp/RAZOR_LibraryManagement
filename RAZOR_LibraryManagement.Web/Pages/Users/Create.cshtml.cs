@@ -30,9 +30,9 @@ namespace RAZOR_LibraryManagement.Web.Pages.Users
             }
         }
 
-        public async Task<IActionResult> OnPost(vmUserCreate userCreate)
+        public async Task<IActionResult> OnPost()
         {
-            var userModel = _mapper.Map<UserModel>(userCreate);
+            var userModel = _mapper.Map<UserModel>(vmCreateUser);
             var notificationJson = await _userService.CreateUserService(userModel);
 
             TempData["Notification"] = JsonSerializer.Serialize(notificationJson);

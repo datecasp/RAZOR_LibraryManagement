@@ -59,7 +59,7 @@ namespace RAZOR_LibraryManagement.Web.Pages.Admins
                 Message = "Something went wrong"
             };
 
-            return Page();
+            return RedirectToPage("/admins/create");
         }
     }
 }

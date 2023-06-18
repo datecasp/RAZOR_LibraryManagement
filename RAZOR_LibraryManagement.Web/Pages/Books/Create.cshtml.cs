@@ -39,7 +39,8 @@ namespace RAZOR_LibraryManagement.Web.Pages.Books
                 ViewData["Notification"] = JsonSerializer.Deserialize<vmNotification>(notificationJson);
             }
 
-            vmCategoryIndexList = (List<vmCategoryIndex>)_categoryService.GetActiveCategoriesService().Result;
+            var catList = (List<CategoryModel>)_categoryService.GetActiveCategoriesService().Result;
+            vmCategoryIndexList = _mapper.Map<List<vmCategoryIndex>>(catList);
         }
 
         public async Task<IActionResult> OnPost(int radioCategory)
@@ -51,9 +52,9 @@ namespace RAZOR_LibraryManagement.Web.Pages.Books
 
             if (notification.Type == Lang.Notification.NotificationType.Success)
             {
-                return RedirectToPage("/categories/list");
+                return RedirectToPage("/books/list");
             }
-            return RedirectToPage("/categories/create");
+            return RedirectToPage("/books/create");
         }
 
     }

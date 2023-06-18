@@ -1,6 +1,7 @@
 ﻿using RAZOR_LibraryManagement.Domain.Interfaces;
-using RAZOR_LibraryManagement.Models.ViewModels;
 using RAZOR_LibraryManagement.Models.Entities;
+using RAZOR_LibraryManagement.Models.Models;
+using RAZOR_LibraryManagement.Models.ViewModels;
 
 namespace RAZOR_LibraryManagement.Domain.Services
 {
@@ -17,7 +18,7 @@ namespace RAZOR_LibraryManagement.Domain.Services
         public async Task<vmNotification> CreateCategoryService(vmCategoryIndex vmCategoryIndex)
         {
             var vmNotification = new vmNotification();
-            var category = new Category
+            var category = new CategoryModel
             { 
                 Name = vmCategoryIndex.Name,
                 IsActive = (bool)vmCategoryIndex.IsActive
@@ -46,7 +47,7 @@ namespace RAZOR_LibraryManagement.Domain.Services
 
         public async Task<IEnumerable<vmCategoryIndex>> GetAllCategoriesService()
         {
-            var categorysList = new List<Category>();
+            var categorysList = new List<CategoryModel>();
             var categoryIndexList = new List<vmCategoryIndex>();
             try
             {
@@ -72,7 +73,7 @@ namespace RAZOR_LibraryManagement.Domain.Services
 
         public async Task<IEnumerable<vmCategoryIndex>> GetActiveCategoriesService()
         {
-            var categorysList = new List<Category>();
+            var categorysList = new List<CategoryModel>();
             var categoryIndexList = new List<vmCategoryIndex>();
             try
             {

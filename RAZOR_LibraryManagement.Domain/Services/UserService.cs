@@ -1,6 +1,7 @@
 ﻿using RAZOR_LibraryManagement.Domain.Interfaces;
 using RAZOR_LibraryManagement.Models.ViewModels;
 using RAZOR_LibraryManagement.Models.Entities;
+using RAZOR_LibraryManagement.Models.Models;
 
 namespace RAZOR_LibraryManagement.Domain.Services
 {
@@ -16,7 +17,7 @@ namespace RAZOR_LibraryManagement.Domain.Services
         public async Task<vmNotification> CreateUserService(vmUserCreate vmCreateUser)
         {
             var vmNotification = new vmNotification();
-            var createUser = new User
+            var createUser = new UserModel
             {
                 UserName = vmCreateUser.UserName,
                 Email = vmCreateUser.Email,

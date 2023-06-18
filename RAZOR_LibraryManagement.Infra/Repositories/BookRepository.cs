@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using RAZOR_LibraryManagement.Domain.Interfaces;
 using RAZOR_LibraryManagement.Infra.DataContext;
 using RAZOR_LibraryManagement.Models.Entities;
+using RAZOR_LibraryManagement.Models.Models;
 
 namespace RAZOR_LibraryManagement.Infra.Repositories
 {
@@ -16,12 +17,13 @@ namespace RAZOR_LibraryManagement.Infra.Repositories
             _lM_DbContext = lM_DbContext;
             _mapper = mapper;
         }
-        public async Task<IEnumerable<Book>> GetAllBooks()
+        public async Task<IEnumerable<BookModel>> GetAllBooks()
         {
-            var result = new List<Book>();
+            var result = new List<BookModel>();
             try
             {
-                result = await _lM_DbContext.Books.ToListAsync();
+                var bookList = await _lM_DbContext.Books.ToListAsync();
+                result = _mapper.Map<List<BookModel>>(bookList);
             }
             catch (Exception ex)
             {
@@ -31,14 +33,14 @@ namespace RAZOR_LibraryManagement.Infra.Repositories
 
         }
 
-        public async Task<Book> GetBookById(int id)
+        public async Task<BookModel> GetBookById(int id)
         {
-            var result = new Book();
+            var result = new BookModel();
             try
             {
                 //var book = _lM_DbContext.Books.Include(b => b.Category).Where(b => b.BookId == id).FirstOrDefault();
                 var book = _lM_DbContext.Books.Where(b => b.BookId == id).FirstOrDefault();
-                result = book;
+                result = _mapper.Map<BookModel>(book);
             }
             catch (Exception ex)
             {
@@ -47,12 +49,13 @@ namespace RAZOR_LibraryManagement.Infra.Repositories
             return result;
         }
 
-        public async Task<Book> CreateBook(Book book)
+        public async Task<BookModel> CreateBook(BookModel bookModel)
         {
+            var book = _mapper.Map<Book>(bookModel);
             try
             {
                 _lM_DbContext.Books.Add(book);
-                return book;
+                return _mapper.Map<BookModel>(book);
             }
             catch (Exception ex)
             {

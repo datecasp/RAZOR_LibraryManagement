@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using RAZOR_LibraryManagement.Domain.Interfaces;
 using RAZOR_LibraryManagement.Infra.DataContext;
 using RAZOR_LibraryManagement.Models.Entities;
+using RAZOR_LibraryManagement.Models.Models;
 
 namespace RAZOR_LibraryManagement.Infra.Repositories
 {
@@ -17,12 +18,13 @@ namespace RAZOR_LibraryManagement.Infra.Repositories
             _lM_DbContext = lM_DbContext;
             _mapper = mapper;
         }
-        public async Task<IEnumerable<User>> GetAllUsers()
+        public async Task<IEnumerable<UserModel>> GetAllUsers()
         {
-            var result = new List<User>();
+            var result = new List<UserModel>();
             try
             {
-                result = await _lM_DbContext.Users.ToListAsync();
+                var usersList = await _lM_DbContext.Users.ToListAsync();
+                result = _mapper.Map<List<UserModel>>(usersList);
             }
             catch (Exception ex)
             {
@@ -39,17 +41,19 @@ namespace RAZOR_LibraryManagement.Infra.Repositories
          * 
          * returns the user if exists or null if not
          */
-        public async Task<User> GetUserByEmail(string email) 
+        public async Task<UserModel> GetUserByEmail(string email) 
         {
-            return await _lM_DbContext.Users.Where(u => u.Email == email).FirstOrDefaultAsync();
+            var user = await _lM_DbContext.Users.Where(u => u.Email == email).FirstOrDefaultAsync();
+            return _mapper.Map<UserModel>(user);
         }
 
-        public async Task<User> CreateUser(User user) 
+        public async Task<UserModel> CreateUser(UserModel userModel) 
         {
+            var user = _mapper.Map<User>(userModel);
             try
             {
                 _lM_DbContext.Users.Add(user);
-                return user;
+                return _mapper.Map<UserModel>(user);
             }
             catch(Exception ex) 
             {

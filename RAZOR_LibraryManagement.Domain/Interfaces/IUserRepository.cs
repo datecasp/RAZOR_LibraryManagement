@@ -1,11 +1,11 @@
-﻿using RAZOR_LibraryManagement.Models.Entities;
+﻿using RAZOR_LibraryManagement.Models.Models;
 
 namespace RAZOR_LibraryManagement.Domain.Interfaces
 {
     public interface IUserRepository
     {
-        Task<IEnumerable<User>> GetAllUsers();
-        Task<User> GetUserByEmail(string email);
-        Task<User> CreateUser(User user);
+        Task<IEnumerable<UserModel>> GetAllUsers();
+        Task<UserModel> GetUserByEmail(string email);
+        Task<UserModel> CreateUser(UserModel userModel);
     }
 }

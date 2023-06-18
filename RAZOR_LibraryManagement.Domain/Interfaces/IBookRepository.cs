@@ -1,11 +1,11 @@
-﻿using RAZOR_LibraryManagement.Models.Entities;
+﻿using RAZOR_LibraryManagement.Models.Models;
 
 namespace RAZOR_LibraryManagement.Domain.Interfaces
 {
     public interface IBookRepository
     {
-        Task<IEnumerable<Book>> GetAllBooks();
-        Task<Book> GetBookById(int id);
-        Task<Book> CreateBook(Book book);
+        Task<IEnumerable<BookModel>> GetAllBooks();
+        Task<BookModel> GetBookById(int id);
+        Task<BookModel> CreateBook(BookModel bookModel);
     }
 }

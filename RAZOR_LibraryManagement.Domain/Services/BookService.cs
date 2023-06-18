@@ -2,6 +2,7 @@
 using RAZOR_LibraryManagement.Domain.Interfaces;
 using RAZOR_LibraryManagement.Models.ViewModels;
 using RAZOR_LibraryManagement.Models.Entities;
+using RAZOR_LibraryManagement.Models.Models;
 
 namespace RAZOR_LibraryManagement.Domain.Services
 {
@@ -18,7 +19,7 @@ namespace RAZOR_LibraryManagement.Domain.Services
         {
             var vmNotification = new vmNotification();
 
-            var createBook = new Book
+            var createBook = new BookModel
             {
              Title = vmCreateBook.Title,
              Author= vmCreateBook.Author,
@@ -52,7 +53,7 @@ namespace RAZOR_LibraryManagement.Domain.Services
 
         public async Task<IEnumerable<vmBookIndex>> GetAllBooksService()
         {
-            var booksList =new List<Book>();
+            var booksList =new List<BookModel>();
             var bookIndexList = new List<vmBookIndex>();
             try
             {

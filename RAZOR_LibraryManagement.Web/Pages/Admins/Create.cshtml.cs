@@ -53,12 +53,12 @@ namespace RAZOR_LibraryManagement.Web.Pages.Admins
                 }
             }
 
-            ViewData["Notification"] = new vmNotification
+            var errorNotification = new vmNotification
             {
                 Type = Lang.Notification.NotificationType.Error,
                 Message = "Something went wrong"
             };
-
+            TempData["Notification"] = JsonSerializer.Serialize(errorNotification);
             return RedirectToPage("/admins/create");
         }
     }

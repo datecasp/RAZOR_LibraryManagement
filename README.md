@@ -28,7 +28,7 @@ and all the aspects needed to make their work.
     - The repository works with database using `Entities`. When the repo gets the data, transfoms it into `Models` and send it to Domain layer
 	- The service layer recives the data, make the bussynes logic necesary and pass it to the web layer.
 	- The web layer recives the data, transform it into `ViewModels` and render it in the UI
-	- For all these transformations it´s used `Automap` with Profiles defined in the Models project.
+	- For all these transformations I used `Automap` with Profiles defined in the Models project.
 
 - ## Autentication and Authorization
     - Microsoft Identity with Roles

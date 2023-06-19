@@ -1,5 +1,7 @@
 # RAZOR_LibraryManagement
 
+## WIP state
+
 ASP.NET 6 Core application to manage a library  developed using C# and Visual Studio 2022.   
 Represents the back office of a library where the users of the app can manage the state of the books, the users of the library
 and all the aspects needed to make their work.

@@ -16,8 +16,12 @@ namespace RAZOR_LibraryManagement.Web.Pages.Admins
         public AppSettingsModel DaysToWarn { get; set; }
         [BindProperty]
         public AppSettingsModel DaysToReturn { get; set; }
+        [BindProperty]
+        public AppSettingsModel MaxNumOfBooks { get; set; }
         private static int DaysToWarnOriginal;
-        public static int DaysToReturnOriginal;
+        private static int DaysToReturnOriginal;
+        private static int MaxNumOfBooksOriginal;
+
 
         public ConfigurationsModel(IAppSettingsService appSettingsService)
         {
@@ -33,30 +37,16 @@ namespace RAZOR_LibraryManagement.Web.Pages.Admins
             appSettingsParamsList = _appSettingsService.GetAllSettings().Result.ToList();
             DaysToWarn = appSettingsParamsList[1];
             DaysToReturn = appSettingsParamsList[2];
+            MaxNumOfBooks = appSettingsParamsList[3];
             DaysToWarnOriginal = DaysToWarn.Value;
             DaysToReturnOriginal = DaysToReturn.Value;
+            MaxNumOfBooksOriginal = MaxNumOfBooks.Value;
         }
 
         public async Task<IActionResult> OnPost()
         {
-            if (DaysToWarnOriginal != DaysToWarn.Value && DaysToReturnOriginal != DaysToReturn.Value)
-            {
-                var warnSetting = new AppSettingsModel
-                {
-                    Id = 2,
-                    SettingParam = "DaysToWarningDate",
-                    Value = DaysToWarn.Value
-                };
-                var returnSetting = new AppSettingsModel
-                {
-                    Id = 3,
-                    SettingParam = "DaysToReturnDate",
-                    Value = DaysToReturn.Value
-                };
-                var result = await _appSettingsService.UpdateSettingService(warnSetting, returnSetting);
-                TempData["Notification"] = JsonSerializer.Serialize(result);
-                return RedirectToPage("/admins/configurations");
-            }else if (DaysToReturnOriginal != DaysToReturn.Value)
+            var result = new vmNotification();
+            if (DaysToReturnOriginal != DaysToReturn.Value)
             {
                 var returnSetting = new AppSettingsModel
                 {
@@ -64,11 +54,10 @@ namespace RAZOR_LibraryManagement.Web.Pages.Admins
                     SettingParam = "DaysToReturnDate",
                     Value = DaysToReturn.Value
                 };
-                var result = await _appSettingsService.UpdateSettingService(returnSetting);
-                TempData["Notification"] = JsonSerializer.Serialize(result);
-                return RedirectToPage("/admins/configurations");
+                result = await _appSettingsService.UpdateSettingService(returnSetting);
+              
             }
-            else if (DaysToWarnOriginal != DaysToWarn.Value)
+            if (DaysToWarnOriginal != DaysToWarn.Value)
             {
                 var warnSetting = new AppSettingsModel
                 {
@@ -76,17 +65,22 @@ namespace RAZOR_LibraryManagement.Web.Pages.Admins
                     SettingParam = "DaysToWarningDate",
                     Value = DaysToWarn.Value
                 };
-                var result = await _appSettingsService.UpdateSettingService(warnSetting);
-                TempData["Notification"] = JsonSerializer.Serialize(result);
-                return RedirectToPage("/admins/configurations");
+                result = await _appSettingsService.UpdateSettingService(warnSetting);
+                
+            }
+            if (MaxNumOfBooksOriginal != MaxNumOfBooks.Value)
+            {
+                var numBooksSetting = new AppSettingsModel
+                {
+                    Id = 4,
+                    SettingParam = "MaxNumberOfBooks",
+                    Value = MaxNumOfBooks.Value
+                };
+                result = await _appSettingsService.UpdateSettingService(numBooksSetting);
+               
             }
 
-            var eNotifications = new vmNotification
-            {
-                Type = Lang.Notification.NotificationType.Error,
-                Message = "Values are equal"
-            };
-            TempData["Notification"] = JsonSerializer.Serialize(eNotifications);
+            TempData["Notification"] = JsonSerializer.Serialize(result);
             return RedirectToPage("/admins/configurations");
         }
     }

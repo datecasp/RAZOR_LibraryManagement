@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using RAZOR_LibraryManagement.Domain.Interfaces;
 using RAZOR_LibraryManagement.Infra.DataContext;
 using RAZOR_LibraryManagement.Infra.Repositories;
@@ -14,6 +13,7 @@ namespace RAZOR_LibraryManagement.Infra.UnitOfWork
         public ICategoryRepository CategoryRepository { get; set; }
         public IBookRepository BookRepository { get; set; }
         public IUserRepository UserRepository { get; set; }
+        public IBookUserRepository BookUserRepository { get; set; }
         public IAppSettingsRepository AppSettingsRepository { get; set; }
 
         public UnitOfWork(LM_DbContext lM_DbContext, IMapper mapper)
@@ -23,6 +23,7 @@ namespace RAZOR_LibraryManagement.Infra.UnitOfWork
             CategoryRepository = new CategoryRepository(_context, _mapper);
             BookRepository = new BookRepository(_context, _mapper);
             UserRepository = new UserRepository(_context, _mapper);
+            BookUserRepository = new BookUserRepository(_context, _mapper);
             AppSettingsRepository= new AppSettingsRepository(_context, _mapper);
         }
 

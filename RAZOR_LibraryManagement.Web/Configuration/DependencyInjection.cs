@@ -17,6 +17,8 @@ namespace RAZOR_LibraryManagement.Web.Configuration
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IBookUserRepository, BookUserRepository>();
+            services.AddScoped<IBookUserService, BookUserService>();
             services.AddScoped<IImageRepository, ImageRepositoryCloudinary>();
             services.AddScoped<IImageService, ImageService>();
             services.AddScoped<IAppSettingsService, AppSettingsService>();

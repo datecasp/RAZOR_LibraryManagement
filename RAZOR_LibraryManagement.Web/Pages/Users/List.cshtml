@@ -21,7 +21,7 @@
                     @UsersList.UserPhoneNumber
                 </th>
                 <th>
-                    @UsersList.IsActive
+                    @UsersList.Actions
                 </th>
             </tr>
         </thead>
@@ -41,6 +41,7 @@
                         {
                             <i class="bi bi-x-lg btn-outline-danger mx-3"></i>
                         }
+                        <a href="/users/details/@user.UserId"><i class="bi bi-person-circle"></i></a>
                     </td>
                 </tr>
             }

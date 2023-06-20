@@ -43,6 +43,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>UserCreate.resx</DependentUpon>
     </Compile>
+    <Compile Update="User\UserDetails.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>UserDetails.resx</DependentUpon>
+    </Compile>
     <Compile Update="User\UsersList.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -74,6 +79,10 @@
     <EmbeddedResource Update="User\UserCreate.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>UserCreate.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="User\UserDetails.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UserDetails.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="User\UsersList.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

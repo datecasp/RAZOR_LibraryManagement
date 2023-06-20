@@ -22,14 +22,14 @@ namespace RAZOR_LibraryManagement.Lang.User {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class UsersList {
+    public class UserDetails {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal UsersList() {
+        internal UserDetails() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace RAZOR_LibraryManagement.Lang.User {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("RAZOR_LibraryManagement.Lang.User.UsersList", typeof(UsersList).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("RAZOR_LibraryManagement.Lang.User.UserDetails", typeof(UserDetails).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,16 +61,43 @@ namespace RAZOR_LibraryManagement.Lang.User {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Actions.
+        ///   Busca una cadena traducida similar a Actual books: .
         /// </summary>
-        public static string Actions {
+        public static string ActualBooks {
             get {
-                return ResourceManager.GetString("Actions", resourceCulture);
+                return ResourceManager.GetString("ActualBooks", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Is user active?.
+        ///   Busca una cadena traducida similar a Contact email: .
+        /// </summary>
+        public static string Email {
+            get {
+                return ResourceManager.GetString("Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Historic of books: .
+        /// </summary>
+        public static string HistoricBooks {
+            get {
+                return ResourceManager.GetString("HistoricBooks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Info about .
+        /// </summary>
+        public static string Info {
+            get {
+                return ResourceManager.GetString("Info", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Is actually an active user?.
         /// </summary>
         public static string IsActive {
             get {
@@ -79,38 +106,11 @@ namespace RAZOR_LibraryManagement.Lang.User {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a List of users.
+        ///   Busca una cadena traducida similar a Phone number: .
         /// </summary>
-        public static string Title {
+        public static string Phone {
             get {
-                return ResourceManager.GetString("Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Email.
-        /// </summary>
-        public static string UserEmail {
-            get {
-                return ResourceManager.GetString("UserEmail", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Name of user.
-        /// </summary>
-        public static string UserName {
-            get {
-                return ResourceManager.GetString("UserName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Phone number.
-        /// </summary>
-        public static string UserPhoneNumber {
-            get {
-                return ResourceManager.GetString("UserPhoneNumber", resourceCulture);
+                return ResourceManager.GetString("Phone", resourceCulture);
             }
         }
     }

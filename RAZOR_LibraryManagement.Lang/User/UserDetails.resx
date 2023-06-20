@@ -117,22 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Actions" xml:space="preserve">
-    <value>Actions</value>
+  <data name="ActualBooks" xml:space="preserve">
+    <value>Actual books: </value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Contact email: </value>
+  </data>
+  <data name="HistoricBooks" xml:space="preserve">
+    <value>Historic of books: </value>
+  </data>
+  <data name="Info" xml:space="preserve">
+    <value>Info about </value>
   </data>
   <data name="IsActive" xml:space="preserve">
-    <value>Is user active?</value>
+    <value>Is actually an active user?</value>
   </data>
-  <data name="Title" xml:space="preserve">
-    <value>List of users</value>
-  </data>
-  <data name="UserEmail" xml:space="preserve">
-    <value>Email</value>
-  </data>
-  <data name="UserName" xml:space="preserve">
-    <value>Name of user</value>
-  </data>
-  <data name="UserPhoneNumber" xml:space="preserve">
-    <value>Phone number</value>
+  <data name="Phone" xml:space="preserve">
+    <value>Phone number: </value>
   </data>
 </root>

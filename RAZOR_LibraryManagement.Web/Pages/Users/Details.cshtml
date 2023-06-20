@@ -1,0 +1,41 @@
+﻿@page "{id:int}"
+@model RAZOR_LibraryManagement.Web.Pages.Users.DetailsModel
+@using RAZOR_LibraryManagement.Lang.User
+@{
+    ViewData["Title"] = "User details";
+}
+<div class="container">
+    <h1 class="text-dark mb-3">@UserDetails.Info &nbsp; @Model.vmUserDetails.UserName </h1>
+    <div class="card mb-3">
+        <div class="row">
+            <div class="col-md-10">
+                <row class="d-flex list-group-horizontal align-content-around">
+                    <div class="card-body col-md-6">
+                        <h4 class="card-title mb-2">@Model.vmUserDetails.UserName</h4>
+                        <h5 class="card-text mb-2">@UserDetails.Email</h5>
+                        <h6 class="card-subtitle mb-4">@Model.vmUserDetails.Email</h6>
+                        <h5 class="card-text mb-2">@UserDetails.Phone</h5>
+                        <h6 class="card-text">@Model.vmUserDetails.PhoneNumber</h6>
+                    </div>
+                    <row class="d-flex list-group-horizontal col-md-6">
+                        <div class="card-body col-md-3">
+                            <h5 class="card-title mb-2">@UserDetails.ActualBooks</h5>
+                            @foreach (var ab in Model.vmUserDetails.ActualBooks)
+                            {
+                                <h6>@ab</h6>
+                            }
+                        </div>
+                        <div class="card-body col-md-3">
+                            <h5 class="card-title mb-2"> @UserDetails.HistoricBooks</h5>
+                            @foreach (var ab in Model.vmUserDetails.HistoricBooks)
+                            {
+                                <h6>@ab</h6>
+                            }
+                        </div>
+                    </row>
+                </row>
+            </div>
+        </div>
+        <p class="card-footer mb-0">@UserDetails.IsActive &emsp; @Model.vmUserDetails.IsActive</p>
+    </div>
+</div>

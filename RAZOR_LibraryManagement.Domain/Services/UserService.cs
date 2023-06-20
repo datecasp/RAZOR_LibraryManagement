@@ -53,6 +53,7 @@ namespace RAZOR_LibraryManagement.Domain.Services
             return usersList;
         }
 
+        #region private methods
         private async Task<bool> CheckIfEmailExists(string email)
         {
             var userIfExists = _unitOfWork.UserRepository.GetUserByEmail(email).Result;
@@ -62,5 +63,6 @@ namespace RAZOR_LibraryManagement.Domain.Services
             }
             return true;
         }
+        #endregion
     }
 }

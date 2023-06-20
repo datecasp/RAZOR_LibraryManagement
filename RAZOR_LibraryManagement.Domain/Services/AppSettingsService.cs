@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
-using RAZOR_LibraryManagement.Domain.Interfaces;
+﻿using RAZOR_LibraryManagement.Domain.Interfaces;
 using RAZOR_LibraryManagement.Models.Models;
 using RAZOR_LibraryManagement.Models.ViewModels;
 
@@ -9,12 +7,10 @@ namespace RAZOR_LibraryManagement.Domain.Services
     public class AppSettingsService : IAppSettingsService
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IMapper _mapper;
 
-        public AppSettingsService(IUnitOfWork unitOfWork, IMapper mapper)
+        public AppSettingsService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            _mapper = mapper;
         }
 
         public async Task<IEnumerable<AppSettingsModel>> GetAllSettings()
@@ -39,9 +35,9 @@ namespace RAZOR_LibraryManagement.Domain.Services
 
         #region Private mehthods
 
-        private vmNotification _NotificationFactory(AppSettingsModel result, AppSettingsModel resultTwo)
+        private vmNotification _NotificationFactory(AppSettingsModel result, AppSettingsModel optionalResult)
         {
-            if (result != null && resultTwo != null)
+            if (result != null && optionalResult != null)
             {
                 var sNotification = new vmNotification
                 {
@@ -50,7 +46,7 @@ namespace RAZOR_LibraryManagement.Domain.Services
                 };
                 return sNotification;
             }
-            else if (result != null || resultTwo != null)
+            else if (result != null || optionalResult != null)
             {
                 var sNotification = new vmNotification
                 {
@@ -69,8 +65,8 @@ namespace RAZOR_LibraryManagement.Domain.Services
                 return sNotification;
             }
         }
+        #endregion
     }
 
-    #endregion
 }
 

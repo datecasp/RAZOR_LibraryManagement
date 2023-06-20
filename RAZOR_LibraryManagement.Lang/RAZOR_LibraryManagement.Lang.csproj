@@ -13,6 +13,11 @@
 	</ItemGroup>
 
   <ItemGroup>
+    <Compile Update="AppSettings\AppSettings.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AppSettings.resx</DependentUpon>
+    </Compile>
     <Compile Update="Book\BookDetails.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -46,6 +51,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="AppSettings\AppSettings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppSettings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Book\BookDetails.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>BookDetails.Designer.cs</LastGenOutput>

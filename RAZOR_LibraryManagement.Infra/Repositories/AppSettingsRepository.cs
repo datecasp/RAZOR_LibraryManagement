@@ -33,5 +33,22 @@ namespace RAZOR_LibraryManagement.Infra.Repositories
             return result;
 
         }
+
+        public async Task<AppSettingsModel> UpdateSetting(AppSettingsModel setting)
+        {
+            var result = new AppSettingsModel();
+            try
+            {
+                var settingEntity = _mapper.Map<AppSettingsEntity>(setting);
+                result = _mapper.Map<AppSettingsModel>(
+                    _lM_DbContext.Update(settingEntity).Entity
+                    );
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return result;
+        }
     }
 }

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using RAZOR_LibraryManagement.Domain.Interfaces;
+using RAZOR_LibraryManagement.Models.Entities;
+using RAZOR_LibraryManagement.Models.Models;
 using RAZOR_LibraryManagement.Models.ViewModels;
 
 namespace RAZOR_LibraryManagement.Domain.Services
@@ -55,5 +57,57 @@ namespace RAZOR_LibraryManagement.Domain.Services
             }
             return vmUser;
         }
+
+        public async Task<AllBooksAndUsersModel> GetAllBooksAndUsersService()
+        {
+            var users = (await _unitOfWork.UserRepository.GetAllUsers()).ToList();
+            var books = (await _unitOfWork.BookRepository.GetAllBooks()).Where(b => b.IsBorrowable).ToList();
+            var borrowedBooksIds = (await _unitOfWork.BookUserRepository.GetBorrowedBooks()).ToList();
+            var avaliableBooks = new List<BookModel>();
+            foreach (var book in books)
+            {
+                if (!borrowedBooksIds.Contains(book.BookId))
+                {
+                    avaliableBooks.Add(books.Where(b => b.BookId == book.BookId).FirstOrDefault());
+                }
+            }
+            var result = new AllBooksAndUsersModel
+            {
+                Books = avaliableBooks,
+                Users = users
+            };
+            return result;
+        }
+
+        public async Task<vmNotification> AddBookToUserService(int userId, int bookId)
+        {
+            var vmNotification = new vmNotification();
+
+            var setting = _unitOfWork.AppSettingsRepository
+                .GetAllSettings().Result
+                .First(b => b.SettingParam.Equals("MaxNumberOfBooks")
+                );
+            var bookUser = new BookUserModel
+            {
+                BookId = bookId,
+                UserId = userId,
+                IsActualUser = true,
+                BorrowDate = DateTime.Now
+            };
+            var resultUser = _unitOfWork.BookUserRepository.AddBookToUser(bookUser, setting.Value).Result;
+            if (resultUser != null)
+            {
+                _unitOfWork.Save();
+                vmNotification.Type = Lang.Notification.NotificationType.Success;
+                vmNotification.Message = "Book created successfully";
+            }
+            else
+            {
+                vmNotification.Type = Lang.Notification.NotificationType.Error;
+                vmNotification.Message = "Hmmm something went wrong here....";
+            }
+            return vmNotification;
+        }
+
     }
 }

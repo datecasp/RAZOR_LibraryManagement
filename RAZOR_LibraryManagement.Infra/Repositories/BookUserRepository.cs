@@ -48,6 +48,11 @@ namespace RAZOR_LibraryManagement.Infra.Repositories
             return result;
         }
 
+        public async Task<IEnumerable<int>> GetBorrowerUsers()
+        {
+            return _lM_DbContext.BookUsers.Where(bu => bu.IsActualUser).Select(bu => bu.UserId);
+        }
+
         public async Task<IEnumerable<int>> GetBorrowedBooks()
         {
             return _lM_DbContext.BookUsers.Where(bu => bu.IsActualUser).Select(bu => bu.BookId);

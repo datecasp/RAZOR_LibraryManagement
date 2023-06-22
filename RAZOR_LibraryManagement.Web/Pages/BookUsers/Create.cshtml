@@ -3,36 +3,44 @@
 @model RAZOR_LibraryManagement.Web.Pages.BookUsers.CreateModel
 @{
 }
-<partial name="_Notification" />
+<div class="container mx-auto">
+    <div class="row justify-content-center">
+        <fieldset class="clo-12 col-lg-6">
+            <div class="text-center">
+                <h1 class="display-4">Create a new book</h1>
+                <partial name="_Notification" />
+            </div>
+            <form method="post">
+                <row class="d-flex list-group-horizontal-md">
+                    <div class="form-group">
+                        @if (Model.AllBooksAndUsers.Books != null)
+                        {
+                            <label for="booksSelect">Select book:</label>
+                            <select class="form-control" id="booksSelect" name="bookId">
+                                @foreach (var book in Model.AllBooksAndUsers.Books)
+                                {
+                                    <option class="dropdown-item" value="@book.BookId">@book.Title</option>
+                                }
+                            </select>
+                        }
+                    </div>
+                    &emsp;
+                    <div class="form-group">
+                        @if (Model.AllBooksAndUsers.Users != null)
+                        {
+                            <label for="usersSelect">Select user:</label>
+                            <select class="form-control" id="usersSelect" name="userId">
+                                @foreach (var user in Model.AllBooksAndUsers.Users)
+                                {
+                                    <option class="dropdown-item" value="@user.UserId">@user.UserName</option>
+                                }
+                            </select>
+                        }
+                    </div>
 
-<form method="post">
-    <row class="d-flex list-group-horizontal-md">
-        <div class="form-group">
-            @if(Model.AllBooksAndUsers.Books != null)
-            {
-                <label for="booksSelect">Select book:</label>
-                <select class="form-control" id="booksSelect" name="bookId">
-                    @foreach (var book in Model.AllBooksAndUsers.Books)
-                    {
-                        <option class="dropdown-item" value="@book.BookId">@book.Title</option>
-                    }
-                </select>
-            }
-        </div>
-        &emsp;
-        <div class="form-group">
-            @if (Model.AllBooksAndUsers.Users != null)
-            {
-                <label for="usersSelect">Select user:</label>
-                <select class="form-control" id="usersSelect" name="userId">
-                    @foreach (var user in Model.AllBooksAndUsers.Users)
-                    {
-                        <option class="dropdown-item" value="@user.UserId">@user.UserName</option>
-                    }
-                </select>
-            }
-        </div>
-
-    </row>
-    <button class="btn btn-primary" type="submit">Assign</button>
-</form>
+                </row>
+                <button class="btn btn-primary" type="submit">Assign</button>
+            </form>
+        </fieldset>
+    </div>
+</div>

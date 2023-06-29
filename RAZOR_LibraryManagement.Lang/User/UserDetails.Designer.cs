@@ -113,5 +113,14 @@ namespace RAZOR_LibraryManagement.Lang.User {
                 return ResourceManager.GetString("Phone", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Change IsActive with toggle slide.
+        /// </summary>
+        public static string togIsActive {
+            get {
+                return ResourceManager.GetString("togIsActive", resourceCulture);
+            }
+        }
     }
 }

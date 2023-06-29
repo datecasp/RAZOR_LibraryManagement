@@ -3,6 +3,7 @@
 @using RAZOR_LibraryManagement.Lang.User
 @{
     ViewData["Title"] = "User details";
+    var tog = "Change user isActive with toggle slider";
 }
 <div class="container">
     <h1 class="text-dark mb-3">@UserDetails.Info &nbsp; @Model.vmUserDetails.UserName </h1>
@@ -36,6 +37,29 @@
                 </row>
             </div>
         </div>
-        <p class="card-footer mb-0">@UserDetails.IsActive &emsp; @Model.vmUserDetails.IsActive</p>
+        <div class="card-footer mb-0  d-flex list-group-horizontal">
+            <div data-bs-toggle="tooltip" data-bs-title="@tog">
+                @UserDetails.IsActive
+                &emsp;
+            </div>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="togUserActive" checked="@Model.vmUserDetails.IsActive">
+                <label class="form-check-label" for="togUserActive">@Model.vmUserDetails.IsActive</label>
+            </div>
+        </div>
     </div>
 </div>
+
+@section Scripts{
+    <script>
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+        const tog = document.getElementById('togUserActive')
+
+        function ToogleIsActive(e) {
+        @Model.vmUserDetails.IsActive = !e;
+        }
+
+        tog.addEventListener('change', ToogleIsActive);
+    </script>
+}

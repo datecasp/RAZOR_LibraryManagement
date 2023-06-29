@@ -135,4 +135,7 @@
   <data name="Phone" xml:space="preserve">
     <value>Phone number: </value>
   </data>
+  <data name="togIsActive" xml:space="preserve">
+    <value>Change IsActive with toggle slide</value>
+  </data>
 </root>

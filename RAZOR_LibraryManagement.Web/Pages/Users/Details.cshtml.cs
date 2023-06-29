@@ -8,7 +8,8 @@ namespace RAZOR_LibraryManagement.Web.Pages.Users
     public class DetailsModel : PageModel
     {
         private readonly IBookUserService _bookUserService;
-        public vmUserDetails vmUserDetails;
+        [BindProperty]
+        public vmUserDetails vmUserDetails { get; set; }
         public DetailsModel(IBookUserService bookUserService)
         {
             _bookUserService = bookUserService;

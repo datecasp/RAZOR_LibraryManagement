@@ -13,6 +13,11 @@
 	</ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Admins\AdminsList.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AdminsList.resx</DependentUpon>
+    </Compile>
     <Compile Update="AppSettings\AppSettings.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -71,6 +76,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Admins\AdminsList.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AdminsList.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="AppSettings\AppSettings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AppSettings.Designer.cs</LastGenOutput>

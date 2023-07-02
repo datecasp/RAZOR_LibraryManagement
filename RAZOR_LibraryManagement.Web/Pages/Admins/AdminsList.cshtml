@@ -1,10 +1,11 @@
 ﻿@page
 @model RAZOR_LibraryManagement.Web.Pages.Admins.AdminsListModel
+@using RAZOR_LibraryManagement.Lang.Admins
 @{
     ViewData["Title"] = "Admins list";
 }
 
-<h1 class="text-dark mb-3">Admisn list</h1>
+<h1 class="text-dark mb-3">@AdminsList.Title</h1>
 
 <div class="container">
     <partial name="_Notification" />
@@ -12,7 +13,13 @@
         <thead>
             <tr>
                 <th>
-                    Admin user
+                    @AdminsList.UserName
+                </th>
+                <th>
+                    @AdminsList.Email
+                </th>
+                <th>
+                    @AdminsList.Role
                 </th>
             </tr>
         </thead>
@@ -21,6 +28,8 @@
             {
                 <tr>
                     <td>@admin.UserName</td>
+                    <td>@admin.Email</td>
+                    <td>@admin.Role</td>
                 </tr>
             }
         </tbody>

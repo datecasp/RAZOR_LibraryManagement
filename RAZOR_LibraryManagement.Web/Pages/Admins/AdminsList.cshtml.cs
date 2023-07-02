@@ -14,14 +14,16 @@ namespace RAZOR_LibraryManagement.Web.Pages.Admins
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IMapper _mapper;
+        private readonly IAdminService _adminService;
 
         [BindProperty]
-        public List<IdentityUser> vmAdminUserList { get; set; }
+        public List<vmAdminUserList> vmAdminUserList { get; set; }
 
-        public AdminsListModel(UserManager<IdentityUser> userManager, IMapper mapper)
+        public AdminsListModel(UserManager<IdentityUser> userManager, IMapper mapper, IAdminService adminService)
         {
             _userManager = userManager;
             _mapper = mapper;
+            _adminService = adminService;
         }
 
         public async Task OnGet()
@@ -31,8 +33,7 @@ namespace RAZOR_LibraryManagement.Web.Pages.Admins
             {
                 ViewData["Notification"] = JsonSerializer.Deserialize<vmNotification>(notificationJson);
             }
-            var adminsList = (await _userManager.GetUsersInRoleAsync("admin")).ToList();
-            vmAdminUserList = adminsList; // _mapper.Map<List<vmAdminUserCreate>>(adminsList);
+            vmAdminUserList = await _adminService.GetAdminsListService(); // _mapper.Map<List<vmAdminUserCreate>>(adminsList);
         }
     }
 }

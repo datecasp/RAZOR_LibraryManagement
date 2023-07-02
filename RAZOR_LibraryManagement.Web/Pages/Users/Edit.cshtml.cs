@@ -19,7 +19,7 @@ namespace RAZOR_LibraryManagement.Web.Pages.Users
         public bool hasBooks { get; set; }
         private static bool isActive = true;
 
-        public EditModel(IUserService userService,IBookUserService bookUserService, IMapper mapper)
+        public EditModel(IUserService userService, IBookUserService bookUserService, IMapper mapper)
         {
             _userService = userService;
             _bookUserService = bookUserService;
@@ -41,16 +41,16 @@ namespace RAZOR_LibraryManagement.Web.Pages.Users
         public async Task<IActionResult> OnPost(int id)
         {
             var user = _mapper.Map<UserModel>(vmUserEdit);
-            user.UserId = id;
-            if (isActive)
-            {
-                user.IsActive = true;
-            }
             if (user != null)
             {
+                user.UserId = id;
+                if (isActive)
+                {
+                    user.IsActive = true;
+                }
                 var notification = await _userService.UpdateUserService(user);
                 TempData["Notification"] = JsonSerializer.Serialize(notification);
-                return RedirectToPage($"/users/list");
+                return RedirectToPage("/users/list");
             }
             var notificationError = new vmNotification
             {
@@ -58,7 +58,7 @@ namespace RAZOR_LibraryManagement.Web.Pages.Users
                 Message = "User not found"
             };
             TempData["Notification"] = JsonSerializer.Serialize(notificationError);
-            return RedirectToPage($"/users/list");
+            return RedirectToPage("/users/list");
 
         }
     }

@@ -8,14 +8,14 @@ using RAZOR_LibraryManagement.Models.ViewModels;
 namespace RAZOR_LibraryManagement.Web.Pages.Admins
 {
     [Authorize(Roles = "SuperAdmin")]
-    public class CreateModel : PageModel
+    public class AdminsCreateModel : PageModel
     {
         private readonly UserManager<IdentityUser> _userManager;
 
         [BindProperty]
         public vmAdminUserCreate vmAdminUser { get; set; }
 
-        public CreateModel(UserManager<IdentityUser> userManager)
+        public AdminsCreateModel(UserManager<IdentityUser> userManager)
         {
             _userManager = userManager;
         }
@@ -49,7 +49,7 @@ namespace RAZOR_LibraryManagement.Web.Pages.Admins
                         Message = "Admin created successfully"
                     };
                     TempData["Notification"] = JsonSerializer.Serialize(notification);
-                    return RedirectToPage("/books/list");
+                    return RedirectToPage("/admins/adminslist");
                 }
             }
 
@@ -59,7 +59,7 @@ namespace RAZOR_LibraryManagement.Web.Pages.Admins
                 Message = "Something went wrong"
             };
             TempData["Notification"] = JsonSerializer.Serialize(errorNotification);
-            return RedirectToPage("/admins/create");
+            return RedirectToPage("/admins/adminscreate");
         }
     }
 }

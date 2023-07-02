@@ -3,6 +3,8 @@
 @using RAZOR_LibraryManagement.Lang.Book
 @{
     ViewData["Title"] = "Books list";
+    var bookInfo = "Book info";
+    var IsActive = "Is available?";
 }
 
 <div class="container">
@@ -29,15 +31,15 @@
                     <td>@book.Title</td>
                     <td>@book.Author</td>
                     <td class="d-flex">
-                        <a href="/Books/Details/@book.Id"><i class="bi bi-book btn-outline-success"></i></a>
+                        <a href="/Books/Details/@book.Id"><i class="bi bi-book btn-outline-success" data-bs-toggle="tooltip" data-bs-title="@bookInfo"></i></a>
                         <div>
                             @if (book.IsBorrowable)
                             {
-                                <i class="bi bi-check-lg btn-outline-success mx-3"></i>
+                                <i class="bi bi-check-lg btn-outline-success mx-3" data-bs-toggle="tooltip" data-bs-title="@IsActive"></i>
                             }
                             else
                             {
-                                <i class="bi bi-x-lg btn-outline-danger mx-3"></i>
+                        <i class="bi bi-x-lg btn-outline-danger mx-3" data-bs-toggle="tooltip" data-bs-title="@IsActive"></i>
                             }
                         </div>
                     </td>
@@ -46,3 +48,11 @@
         </tbody>
     </table>
 </div>
+
+@section Scripts{
+    <script>
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+
+    </script>
+}

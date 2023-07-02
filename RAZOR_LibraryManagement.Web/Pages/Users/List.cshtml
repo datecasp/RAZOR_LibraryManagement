@@ -3,6 +3,9 @@
 @using RAZOR_LibraryManagement.Lang.User
 @{
     ViewData["Title"] = "Users list";
+    var userInfo = "User details";
+    var userIsActive = "Is user active?";
+    var edit = "Edit user info";
 }
 
 <h1 class="text-dark mb-3">@UsersList.Title</h1>
@@ -35,16 +38,25 @@
                     <td>
                         @if (user.IsActive)
                         {
-                            <i class="bi bi-check-lg btn-outline-success mx-3"></i>
+                            <i class="bi bi-check-lg btn-outline-success mx-3" data-bs-toggle="tooltip" data-bs-title="@userIsActive"></i>
                         }
                         else
                         {
-                            <i class="bi bi-x-lg btn-outline-danger mx-3"></i>
+                            <i class="bi bi-x-lg btn-outline-danger mx-3" data-bs-toggle="tooltip" data-bs-title="@userIsActive"></i>
                         }
-                        <a href="/users/details/@user.UserId"><i class="bi bi-person-circle"></i></a>
+                        <a href="/users/details/@user.UserId"><i class="bi bi-person-circle mx-3" data-bs-toggle="tooltip" data-bs-title="@userInfo"></i></a>
+                        <a href="/users/edit/@user.UserId"><i class="bi bi-person-lines-fill mx-3 btn-outline-info" data-bs-toggle="tooltip" data-bs-title="@edit"></i></a>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
 </div>
+
+@section Scripts{
+    <script>
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+       
+    </script>
+}

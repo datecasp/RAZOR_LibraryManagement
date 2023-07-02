@@ -85,7 +85,7 @@ namespace RAZOR_LibraryManagement.Domain.Services
 
             var setting = _unitOfWork.AppSettingsRepository
                 .GetAllSettings().Result
-                .First(b => b.SettingParam.Equals("MaxNumberOfBooks")
+                .First(b => b.SettingParam.Equals("MaxNumOfBooks")
                 );
             var borrowedBooksByUser = _unitOfWork.BookUserRepository
                 .GetBooksOfUser(userId).Result

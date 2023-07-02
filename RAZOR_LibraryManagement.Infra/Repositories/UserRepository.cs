@@ -50,12 +50,27 @@ namespace RAZOR_LibraryManagement.Infra.Repositories
         public async Task<UserModel> CreateUser(UserModel userModel) 
         {
             var user = _mapper.Map<User>(userModel);
+            user.IsActive = true;
             try
             {
                 var result = _lM_DbContext.Users.Add(user);
                 return _mapper.Map<UserModel>(result.Entity);
             }
             catch(Exception ex) 
+            {
+                return null;
+            }
+        }
+
+        public async Task<UserModel> UpdateUser(UserModel userModel) 
+        {
+            var user = _mapper.Map<User>(userModel);
+            try
+            {
+                var result = _lM_DbContext.Users.Update(user);
+                return _mapper.Map<UserModel>(result.Entity);
+            }
+            catch (Exception ex)
             {
                 return null;
             }

@@ -51,6 +51,48 @@ namespace RAZOR_LibraryManagement.Domain.Services
             }
             return usersList;
         }
+        public async Task<UserModel> GetUserByIdService(int userId)
+        {
+            var user = new UserModel();
+            try
+            {
+                user = (await _unitOfWork.UserRepository.GetAllUsers())
+                    .FirstOrDefault(u => u.UserId == userId);
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return user;
+        }
+
+        public async Task<vmNotification> UpdateUserService(UserModel userModel)
+        {
+            var vmNotification = new vmNotification();
+            try
+            {
+                var userResult = await _unitOfWork.UserRepository.UpdateUser(userModel);
+                if(userResult != null)
+                {
+                    _unitOfWork.Save();
+                    vmNotification.Type = Lang.Notification.NotificationType.Success;
+                    vmNotification.Message = "User updated successfully";
+                    return vmNotification;
+                }
+                else
+                {
+                    vmNotification.Type = Lang.Notification.NotificationType.Error;
+                    vmNotification.Message = "Something went wrong updating user.";
+                    return vmNotification;
+                }
+            }
+            catch (Exception ex)
+            {
+                vmNotification.Type = Lang.Notification.NotificationType.Error;
+                vmNotification.Message = "Exception thrown! " + ex.Message;
+            }
+            return vmNotification;
+        }
 
         #region private methods
         private async Task<bool> CheckIfEmailExists(string email)

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RAZOR_LibraryManagement.Infra.DataContext;
 
@@ -11,9 +12,10 @@ using RAZOR_LibraryManagement.Infra.DataContext;
 namespace RAZOR_LibraryManagement.Infra.Migrations
 {
     [DbContext(typeof(LM_DbContext))]
-    partial class LM_DbContextModelSnapshot : ModelSnapshot
+    [Migration("20230701225250_initial")]
+    partial class initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,12 +61,6 @@ namespace RAZOR_LibraryManagement.Infra.Migrations
                             Id = 3,
                             SettingParam = "DaysToReturnDate",
                             Value = 30
-                        },
-                        new
-                        {
-                            Id = 4,
-                            SettingParam = "MaxNumOfBooks",
-                            Value = 2
                         });
                 });
 

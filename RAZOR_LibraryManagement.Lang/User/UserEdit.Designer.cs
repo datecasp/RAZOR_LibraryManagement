@@ -22,14 +22,14 @@ namespace RAZOR_LibraryManagement.Lang.User {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class UsersList {
+    public class UserEdit {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal UsersList() {
+        internal UserEdit() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace RAZOR_LibraryManagement.Lang.User {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("RAZOR_LibraryManagement.Lang.User.UsersList", typeof(UsersList).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("RAZOR_LibraryManagement.Lang.User.UserEdit", typeof(UserEdit).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,20 +61,11 @@ namespace RAZOR_LibraryManagement.Lang.User {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Actions.
+        ///   Busca una cadena traducida similar a Edit user.
         /// </summary>
-        public static string Actions {
+        public static string btnEdit {
             get {
-                return ResourceManager.GetString("Actions", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a User info.
-        /// </summary>
-        public static string Details {
-            get {
-                return ResourceManager.GetString("Details", resourceCulture);
+                return ResourceManager.GetString("btnEdit", resourceCulture);
             }
         }
         
@@ -88,11 +79,11 @@ namespace RAZOR_LibraryManagement.Lang.User {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a List of users.
+        ///   Busca una cadena traducida similar a Edit user .
         /// </summary>
-        public static string Title {
+        public static string pEdit {
             get {
-                return ResourceManager.GetString("Title", resourceCulture);
+                return ResourceManager.GetString("pEdit", resourceCulture);
             }
         }
         
@@ -106,7 +97,7 @@ namespace RAZOR_LibraryManagement.Lang.User {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Name of user.
+        ///   Busca una cadena traducida similar a User name.
         /// </summary>
         public static string UserName {
             get {
@@ -115,11 +106,20 @@ namespace RAZOR_LibraryManagement.Lang.User {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Phone number.
+        ///   Busca una cadena traducida similar a Phone numner.
         /// </summary>
-        public static string UserPhoneNumber {
+        public static string UserPhone {
             get {
-                return ResourceManager.GetString("UserPhoneNumber", resourceCulture);
+                return ResourceManager.GetString("UserPhone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Yes.
+        /// </summary>
+        public static string Yes {
+            get {
+                return ResourceManager.GetString("Yes", resourceCulture);
             }
         }
     }

@@ -7,5 +7,6 @@ namespace RAZOR_LibraryManagement.Domain.Interfaces
         Task<IEnumerable<UserModel>> GetAllUsers();
         Task<UserModel> GetUserByEmail(string email);
         Task<UserModel> CreateUser(UserModel userModel);
+        Task<UserModel> UpdateUser(UserModel userModel);
     }
 }

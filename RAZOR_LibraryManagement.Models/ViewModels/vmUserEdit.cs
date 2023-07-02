@@ -2,7 +2,7 @@
 
 namespace RAZOR_LibraryManagement.Models.ViewModels
 {
-    public class vmUserCreate
+    public class vmUserEdit
     {
         [Required]
         public int UserId { get; set; }
@@ -12,5 +12,7 @@ namespace RAZOR_LibraryManagement.Models.ViewModels
         public string Email { get; set; }
         [Required]
         public string PhoneNumber { get; set; }
+        [Required]
+        public bool IsActive { get; set; }
     }
 }

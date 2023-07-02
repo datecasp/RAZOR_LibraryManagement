@@ -41,10 +41,7 @@
             <div data-bs-toggle="tooltip" data-bs-title="@tog">
                 @UserDetails.IsActive
                 &emsp;
-            </div>
-            <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" role="switch" id="togUserActive" checked="@Model.vmUserDetails.IsActive">
-                <label class="form-check-label" for="togUserActive">@Model.vmUserDetails.IsActive</label>
+                @Model.vmUserDetails.IsActive
             </div>
         </div>
     </div>
@@ -54,12 +51,6 @@
     <script>
         const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
         const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
-        const tog = document.getElementById('togUserActive')
-
-        function ToogleIsActive(e) {
-        @Model.vmUserDetails.IsActive = !e;
-        }
-
-        tog.addEventListener('change', ToogleIsActive);
+        
     </script>
 }

@@ -17,26 +17,32 @@ namespace RAZOR_LibraryManagement.Infra.DataContext
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
-                modelBuilder.Entity<AppSettingsEntity>().HasData(new AppSettingsEntity
-                {
-                    Id = 1,
-                    SettingParam = "DefaultFilled",
-                    Value = 1
-                });
-                modelBuilder.Entity<AppSettingsEntity>().HasData(new AppSettingsEntity
-                {
-                    Id = 2,
-                    SettingParam = "DaysToWarningDate",
-                    Value = 25
-                });
-                modelBuilder.Entity<AppSettingsEntity>().HasData(new AppSettingsEntity
-                {
-                    Id = 3,
-                    SettingParam = "DaysToReturnDate",
-                    Value = 30
-                });
-            
+
+            modelBuilder.Entity<AppSettingsEntity>().HasData(new AppSettingsEntity
+            {
+                Id = 1,
+                SettingParam = "DefaultFilled",
+                Value = 1
+            });
+            modelBuilder.Entity<AppSettingsEntity>().HasData(new AppSettingsEntity
+            {
+                Id = 2,
+                SettingParam = "DaysToWarningDate",
+                Value = 25
+            });
+            modelBuilder.Entity<AppSettingsEntity>().HasData(new AppSettingsEntity
+            {
+                Id = 3,
+                SettingParam = "DaysToReturnDate",
+                Value = 30
+            });
+            modelBuilder.Entity<AppSettingsEntity>().HasData(new AppSettingsEntity
+            {
+                Id = 4,
+                SettingParam = "MaxNumOfBooks",
+                Value = 2
+            });
+
         }
     }
 }

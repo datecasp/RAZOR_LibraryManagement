@@ -4,11 +4,11 @@ using RAZOR_LibraryManagement.Models.ViewModels;
 
 namespace RAZOR_LibraryManagement.Models.MapperProfiles.WebLayer.User
 {
-    public class vmUserCreateProfile : Profile
+    public class vmUserEditProfile : Profile
     {
-        public vmUserCreateProfile()
+        public vmUserEditProfile()
         {
-            CreateMap<vmUserCreate, UserModel>()
+            CreateMap<vmUserEdit, UserModel>()
                   .ForMember(m => m.UserId, opt => opt
                   .MapFrom(e => e.UserId)
                   ).ReverseMap();

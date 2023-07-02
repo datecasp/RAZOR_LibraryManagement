@@ -22,14 +22,14 @@ namespace RAZOR_LibraryManagement.Lang.Admins {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class AdminsList {
+    public class AdminCreate {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal AdminsList() {
+        internal AdminCreate() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace RAZOR_LibraryManagement.Lang.Admins {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("RAZOR_LibraryManagement.Lang.Admins.AdminsList", typeof(AdminsList).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("RAZOR_LibraryManagement.Lang.Admins.AdminCreate", typeof(AdminCreate).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,6 +61,15 @@ namespace RAZOR_LibraryManagement.Lang.Admins {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Create.
+        /// </summary>
+        public static string btnCreate {
+            get {
+                return ResourceManager.GetString("btnCreate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Email.
         /// </summary>
         public static string Email {
@@ -70,25 +79,25 @@ namespace RAZOR_LibraryManagement.Lang.Admins {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Role.
+        ///   Busca una cadena traducida similar a Password.
         /// </summary>
-        public static string Role {
+        public static string Password {
             get {
-                return ResourceManager.GetString("Role", resourceCulture);
+                return ResourceManager.GetString("Password", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Manager admins list.
+        ///   Busca una cadena traducida similar a Create an admin user.
         /// </summary>
-        public static string Title {
+        public static string pCreate {
             get {
-                return ResourceManager.GetString("Title", resourceCulture);
+                return ResourceManager.GetString("pCreate", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a User name.
+        ///   Busca una cadena traducida similar a UserName.
         /// </summary>
         public static string UserName {
             get {

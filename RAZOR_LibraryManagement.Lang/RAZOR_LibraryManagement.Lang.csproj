@@ -13,10 +13,20 @@
 	</ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Admins\AdminsList.Designer.cs">
+    <Compile Update="Admins\AdminCreate.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>AdminsList.resx</DependentUpon>
+      <DependentUpon>AdminCreate.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Admins\AdminList.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AdminList.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Admins\AdminLogin.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AdminLogin.resx</DependentUpon>
     </Compile>
     <Compile Update="AppSettings\AppSettings.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -48,11 +58,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>CategoriesList.resx</DependentUpon>
     </Compile>
-    <Compile Update="LoginCreate\LoginCreate.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>LoginCreate.resx</DependentUpon>
-    </Compile>
     <Compile Update="User\UserCreate.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -76,9 +81,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Admins\AdminsList.resx">
+    <EmbeddedResource Update="Admins\AdminCreate.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>AdminsList.Designer.cs</LastGenOutput>
+      <LastGenOutput>AdminCreate.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Admins\AdminList.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AdminList.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Admins\AdminLogin.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AdminLogin.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="AppSettings\AppSettings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -103,10 +116,6 @@
     <EmbeddedResource Update="Category\CategoriesList.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>CategoriesList.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="LoginCreate\LoginCreate.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>LoginCreate.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="User\UserCreate.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

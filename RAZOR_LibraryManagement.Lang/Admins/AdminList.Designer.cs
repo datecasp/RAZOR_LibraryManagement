@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace RAZOR_LibraryManagement.Lang.LoginCreate {
+namespace RAZOR_LibraryManagement.Lang.Admins {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace RAZOR_LibraryManagement.Lang.LoginCreate {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class LoginCreate {
+    public class AdminList {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal LoginCreate() {
+        internal AdminList() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace RAZOR_LibraryManagement.Lang.LoginCreate {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("RAZOR_LibraryManagement.Lang.LoginCreate.LoginCreate", typeof(LoginCreate).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("RAZOR_LibraryManagement.Lang.Admins.AdminList", typeof(AdminList).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,24 +61,6 @@ namespace RAZOR_LibraryManagement.Lang.LoginCreate {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Create.
-        /// </summary>
-        public static string btnCreate {
-            get {
-                return ResourceManager.GetString("btnCreate", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Login.
-        /// </summary>
-        public static string btnLogin {
-            get {
-                return ResourceManager.GetString("btnLogin", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Busca una cadena traducida similar a Email.
         /// </summary>
         public static string Email {
@@ -88,56 +70,29 @@ namespace RAZOR_LibraryManagement.Lang.LoginCreate {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Password.
+        ///   Busca una cadena traducida similar a Role.
         /// </summary>
-        public static string Password {
+        public static string Role {
             get {
-                return ResourceManager.GetString("Password", resourceCulture);
+                return ResourceManager.GetString("Role", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Create an admin user.
+        ///   Busca una cadena traducida similar a Manager admins list.
         /// </summary>
-        public static string pCreate {
+        public static string Title {
             get {
-                return ResourceManager.GetString("pCreate", resourceCulture);
+                return ResourceManager.GetString("Title", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Phone number.
-        /// </summary>
-        public static string PhoneNumber {
-            get {
-                return ResourceManager.GetString("PhoneNumber", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Please login to enter the manager.
-        /// </summary>
-        public static string pLogin {
-            get {
-                return ResourceManager.GetString("pLogin", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a UserName.
+        ///   Busca una cadena traducida similar a User name.
         /// </summary>
         public static string UserName {
             get {
                 return ResourceManager.GetString("UserName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Welcome.
-        /// </summary>
-        public static string Welcome {
-            get {
-                return ResourceManager.GetString("Welcome", resourceCulture);
             }
         }
     }

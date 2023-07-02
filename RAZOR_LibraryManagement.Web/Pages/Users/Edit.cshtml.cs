@@ -1,25 +1,28 @@
-using System.Text.Json;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RAZOR_LibraryManagement.Domain.Interfaces;
-using RAZOR_LibraryManagement.Domain.Services;
 using RAZOR_LibraryManagement.Models.Models;
 using RAZOR_LibraryManagement.Models.ViewModels;
+using System.Text.Json;
 
 namespace RAZOR_LibraryManagement.Web.Pages.Users
 {
     public class EditModel : PageModel
     {
         private readonly IUserService _userService;
+        private readonly IBookUserService _bookUserService;
         private readonly IMapper _mapper;
 
         [BindProperty]
         public vmUserEdit vmUserEdit { get; set; }
+        public bool hasBooks { get; set; }
+        private static bool isActive = true;
 
-        public EditModel(IUserService userService, IMapper mapper)
+        public EditModel(IUserService userService,IBookUserService bookUserService, IMapper mapper)
         {
             _userService = userService;
+            _bookUserService = bookUserService;
             _mapper = mapper;
         }
         public async Task OnGet(int id)
@@ -29,7 +32,8 @@ namespace RAZOR_LibraryManagement.Web.Pages.Users
             {
                 ViewData["Notification"] = JsonSerializer.Deserialize<vmNotification>(notificationJson);
             }
-
+            hasBooks = _bookUserService.GetBooksOfUser(id).Result.Any();
+            isActive = hasBooks;
             var user = await _userService.GetUserByIdService(id);
             vmUserEdit = _mapper.Map<vmUserEdit>(user);
         }
@@ -38,6 +42,10 @@ namespace RAZOR_LibraryManagement.Web.Pages.Users
         {
             var user = _mapper.Map<UserModel>(vmUserEdit);
             user.UserId = id;
+            if (isActive)
+            {
+                user.IsActive = true;
+            }
             if (user != null)
             {
                 var notification = await _userService.UpdateUserService(user);

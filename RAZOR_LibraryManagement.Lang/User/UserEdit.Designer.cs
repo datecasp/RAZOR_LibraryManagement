@@ -106,7 +106,7 @@ namespace RAZOR_LibraryManagement.Lang.User {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Phone numner.
+        ///   Busca una cadena traducida similar a Phone number.
         /// </summary>
         public static string UserPhone {
             get {

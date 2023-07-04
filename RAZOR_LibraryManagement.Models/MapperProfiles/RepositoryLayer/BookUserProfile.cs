@@ -11,8 +11,7 @@ namespace RAZOR_LibraryManagement.Models.MapperProfiles.RepositoryLayer
             //source mapping to destination
             CreateMap<BookUser, BookUserModel>()
                 .ForMember(m => m.BookUserId, opt => opt
-                .MapFrom(e => e.BookUserId)
-                ).ReverseMap();
+                .MapFrom(e => e.BookUserId)).ReverseMap();
         }
     }
 }

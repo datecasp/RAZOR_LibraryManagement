@@ -1,0 +1,61 @@
+﻿@page
+@model RAZOR_LibraryManagement.Web.Pages.BookUsers.ListModel
+@{
+    ViewData["Title"] = "Books and users list";
+    string returnBook = "Return book from user";
+}
+<div class="container">
+    <partial name="_Notification" />
+    <h1 class="text-dark mb-3">List of books with actual user</h1>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>
+                    BookTitle
+                </th>
+                <th>
+                    UserName
+                </th>
+                <th>
+                    BorrowDate
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var bu in Model.buList)
+            {
+                <tr>
+                    <td>@bu.Title</td>
+                    <td>@bu.UserName</td>
+                    @if (DateTime.Now >= bu.BorrowDate.AddDays(Model.DaysToReturnOriginal))
+                    {
+                        <td class="bg-danger text-light">@bu.BorrowDate.ToShortDateString()</td>
+                    }
+                    else if (DateTime.Now >= bu.BorrowDate.AddDays(Model.DaysToWarnOriginal))
+                    {
+                        <td class="bg-warning">@bu.BorrowDate.ToShortDateString()</td>
+                    }
+                    else
+                    {
+                        <td>@bu.BorrowDate.ToShortDateString()</td>
+                    }
+                    <td class="d-flex">
+                        <a href="/bookusers/edit/@bu.BookUserId"><i class="bi bi-book btn-outline-success" data-bs-toggle="tooltip" data-bs-title="@returnBook"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts{
+    <script>
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+
+    </script>
+}
+

@@ -33,7 +33,7 @@ namespace RAZOR_LibraryManagement.Web.Pages.BookUsers
             {
                 ViewData["Notification"] = JsonSerializer.Deserialize<vmNotification>(notificationJson);
             }
-            AllBooksAndUsers = await _bookUserService.GetAllBooksAndUsersService();
+            AllBooksAndUsers = await _bookUserService.GetBorrowableBooksAndUsersService();
         }
 
         public async Task<IActionResult> OnPost(int bookId, int userId)

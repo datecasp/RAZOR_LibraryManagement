@@ -1,6 +1,6 @@
-﻿namespace RAZOR_LibraryManagement.Models.Models
+﻿namespace RAZOR_LibraryManagement.Models.ViewModels
 {
-    public class BookUserModel
+    public class vmBookUser
     {
         public int BookUserId { get; set; }
         public int BookId { get; set; }

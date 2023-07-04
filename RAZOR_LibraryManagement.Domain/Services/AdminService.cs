@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace RAZOR_LibraryManagement.Domain.Services
@@ -37,6 +38,42 @@ namespace RAZOR_LibraryManagement.Domain.Services
                 });
             }
             return vmAdminsList;
+        }
+
+        public async Task<vmNotification> CreateAdminService(vmAdminUserCreate admin)
+        {
+            //Seed admin
+            var adminIU = new IdentityUser
+            {
+                UserName = admin.UserName,
+                NormalizedUserName = admin.UserName.ToUpper(),
+                Email = admin.Email,                NormalizedEmail = admin.Email.ToLower()
+            };
+
+            var identityResult = await _userManager.CreateAsync(adminIU, admin.Password);
+
+            if (identityResult.Succeeded)
+            {
+                //Add Admin Role to just created admin
+                var addRolesResult = await _userManager.AddToRoleAsync(adminIU, "Admin");
+
+                if (addRolesResult.Succeeded)
+                {
+                    var notification = new vmNotification
+                    {
+                        Type = Lang.Notification.NotificationType.Success,
+                        Message = "Admin created successfully"
+                    };
+                    return notification;
+                }
+            }
+            var errorNotification = new vmNotification
+            {
+                Type = Lang.Notification.NotificationType.Error,
+                Message = "Something went wrong"
+            };
+                
+            return errorNotification;
         }
     }
 }

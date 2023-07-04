@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using RAZOR_LibraryManagement.Domain.Interfaces;
 using RAZOR_LibraryManagement.Models.Entities;
 using RAZOR_LibraryManagement.Models.Models;
@@ -13,10 +14,20 @@ namespace RAZOR_LibraryManagement.Domain.Services
     public class BookUserService : IBookUserService
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
-        public BookUserService(IUnitOfWork unitOfWork)
+        public BookUserService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
+        }
+
+        public async Task<BookUserModel> GetBookUserByIdService(int id)
+        {
+            var bu = await _unitOfWork.BookUserRepository.GetBookUserById(id);
+            bu.Title = _unitOfWork.BookRepository.GetBookById(bu.BookId).Result.Title;
+            bu.UserName = _unitOfWork.UserRepository.GetAllUsers().Result.Where(u => u.UserId == bu.UserId).Select(u => u.UserName).FirstOrDefault();
+            return bu;
         }
 
         public async Task<IEnumerable<string>> GetBooksOfUser(int userId)
@@ -58,7 +69,7 @@ namespace RAZOR_LibraryManagement.Domain.Services
             return vmUser;
         }
 
-        public async Task<AllBooksAndUsersModel> GetAllBooksAndUsersService()
+        public async Task<AllBooksAndUsersModel> GetBorrowableBooksAndUsersService()
         {
             var users = (await _unitOfWork.UserRepository.GetAllUsers()).Where(u => u.IsActive).ToList();
             var books = (await _unitOfWork.BookRepository.GetAllBooks()).Where(b => b.IsBorrowable).ToList();
@@ -79,6 +90,19 @@ namespace RAZOR_LibraryManagement.Domain.Services
             return result;
         }
 
+        public async Task<IEnumerable<BookUserModel>> GetBookUserListService()
+        {
+            var res = _unitOfWork.BookUserRepository.GetAll().Result.Where(bu => bu.IsActualUser);
+            var books = await _unitOfWork.BookRepository.GetAllBooks();
+            var users = await _unitOfWork.UserRepository.GetAllUsers();
+            foreach (var bu in res)
+            {
+                bu.Title = books.Where(b => b.BookId == bu.BookId).Select(b => b.Title).FirstOrDefault();
+                bu.UserName = users.Where(u => u.UserId == bu.UserId).Select(u => u.UserName).FirstOrDefault();
+            }
+            return res;
+        }
+
         public async Task<vmNotification> AddBookToUserService(int userId, int bookId)
         {
             var vmNotification = new vmNotification();
@@ -91,7 +115,7 @@ namespace RAZOR_LibraryManagement.Domain.Services
                 .GetBooksOfUser(userId).Result
                 .Where(bu => bu.IsActualUser)
                 .Count();
-            if(borrowedBooksByUser < setting.Value)
+            if (borrowedBooksByUser < setting.Value)
             {
                 var bookUser = new BookUserModel
                 {
@@ -109,7 +133,7 @@ namespace RAZOR_LibraryManagement.Domain.Services
                 }
                 else
                 {
-                    vmNotification.Type = Lang.Notification.NotificationType.Info;
+                    vmNotification.Type = Lang.Notification.NotificationType.Error;
                     vmNotification.Message = "Hmmm something went wrong here....";
                 }
             }
@@ -119,6 +143,35 @@ namespace RAZOR_LibraryManagement.Domain.Services
                 vmNotification.Message = "User has maximun number of books borrowed.";
             }
 
+            return vmNotification;
+        }
+
+        public async Task<vmNotification> ToggleBookUserIsActualUser(BookUserModel bu)
+        {
+            var vmNotification = new vmNotification();
+            try
+            {
+                //var bu = await GetBookUserByIdService(id);
+                //bu.IsActualUser = !bu.IsActualUser;
+                
+                var res = await _unitOfWork.BookUserRepository.UpdateBookUser(bu);
+                if(bu != null)
+                {
+                    _unitOfWork.Save();
+                    vmNotification.Type = Lang.Notification.NotificationType.Success;
+                    vmNotification.Message = "Operation success";
+                }
+                else
+                {
+                    vmNotification.Type = Lang.Notification.NotificationType.Error;
+                    vmNotification.Message = "Hmmm something went wrong here....";
+                }
+            }
+            catch (Exception e)
+            {
+                vmNotification.Type = Lang.Notification.NotificationType.Error;
+                vmNotification.Message = "Big problem with database";
+            }
             return vmNotification;
         }
 

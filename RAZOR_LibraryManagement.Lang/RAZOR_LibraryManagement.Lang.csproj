@@ -38,6 +38,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>BookUserCreate.resx</DependentUpon>
     </Compile>
+    <Compile Update="BookUser\BookUserEdit.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>BookUserEdit.resx</DependentUpon>
+    </Compile>
     <Compile Update="Book\BookCreate.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -100,6 +105,10 @@
     <EmbeddedResource Update="BookUser\BookUserCreate.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>BookUserCreate.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="BookUser\BookUserEdit.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>BookUserEdit.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Book\BookCreate.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using RAZOR_LibraryManagement.Domain.Interfaces;
+using RAZOR_LibraryManagement.Models.Models;
 using RAZOR_LibraryManagement.Models.ViewModels;
 
 namespace RAZOR_LibraryManagement.Web.Pages.Admins
@@ -10,55 +12,36 @@ namespace RAZOR_LibraryManagement.Web.Pages.Admins
     [Authorize(Roles = "SuperAdmin")]
     public class AdminsCreateModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly IAdminService _adminService;
 
         [BindProperty]
         public vmAdminUserCreate vmAdminUser { get; set; }
 
-        public AdminsCreateModel(UserManager<IdentityUser> userManager)
+        public AdminsCreateModel(IAdminService adminService)
         {
-            _userManager = userManager;
+            _adminService = adminService;
         }
         public void OnGet()
         {
+            var notificationJson = (string)TempData["Notification"];
+            if (notificationJson != null)
+            {
+                ViewData["Notification"] = JsonSerializer.Deserialize<vmNotification>(notificationJson);
+            }
         }
 
         public async Task<IActionResult> OnPost()
         {
-            //Seed admin
-            var admin = new IdentityUser
-            {
-                UserName = vmAdminUser.UserName,
-                NormalizedUserName = vmAdminUser.UserName.ToUpper(),
-                Email = vmAdminUser.Email,
-                NormalizedEmail = vmAdminUser.Email.ToLower()
-            };
-                      
-            var identityResult = await _userManager.CreateAsync(admin, vmAdminUser.Password);
+            var notificationJson = await _adminService.CreateAdminService(vmAdminUser);
 
-            if (identityResult.Succeeded)
-            {
-                //Add Admin Role to just created admin
-                var addRolesResult = await _userManager.AddToRoleAsync(admin, "Admin");
+            TempData["Notification"] = JsonSerializer.Serialize(notificationJson);
 
-                if(addRolesResult.Succeeded)
-                {
-                    var notification = new vmNotification
-                    {
-                        Type = Lang.Notification.NotificationType.Success,
-                        Message = "Admin created successfully"
-                    };
-                    TempData["Notification"] = JsonSerializer.Serialize(notification);
-                    return RedirectToPage("/admins/adminslist");
-                }
+            if (notificationJson.Type == Lang.Notification.NotificationType.Success)
+            {
+
+                return RedirectToPage("/admins/adminslist");
             }
 
-            var errorNotification = new vmNotification
-            {
-                Type = Lang.Notification.NotificationType.Error,
-                Message = "Something went wrong"
-            };
-            TempData["Notification"] = JsonSerializer.Serialize(errorNotification);
             return RedirectToPage("/admins/adminscreate");
         }
     }

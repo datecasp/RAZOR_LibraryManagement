@@ -27,8 +27,8 @@
                             @if (sigInManager.IsSignedIn(User) && User.IsInRole("SuperAdmin"))
                             {
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle text-dark" href="#" data-bs-toggle="dropdown" role="button" 
-                                        aria-expanded="false" id="navBarSAMenu">SA Menu</a>
+                                    <a class="nav-link dropdown-toggle text-dark" href="#" data-bs-toggle="dropdown" role="button"
+                               aria-expanded="false" id="navBarSAMenu">SA Menu</a>
                                     <ul class="dropdown-menu" aria-labelledBy="navBarSAMenu">
                                         <li>
                                             <a class="dropdown-item" href="/admins/adminscreate">Create Admin</a>
@@ -49,8 +49,12 @@
                                     <li>
                                         <a class="dropdown-item" href="/books/list">List books</a>
                                     </li>
+
                                     <li>
-                                        <a class="dropdown-item" href="/books/create">Create book</a> @* TODO: Add the link qhen page is done*@
+                                        <a class="dropdown-item" href="/bookusers/list">Books with actual user</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="/books/create">Create book</a>
                                     </li>
                                 </ul>
                             </li>
@@ -78,8 +82,17 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li class="nav-item">
-                                <a class=" nav-link text-dark" href="/bookusers/create">Assign book</a>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-dark" href="#" data-bs-toggle="dropdown" role="button"
+                               aria-expanded="false" id="navBarManageOps">Manage ops</a>
+                                <ul class="dropdown-menu" aria-labelledBy="navBarManageOps">
+                                    <li class="nav-item">
+                                        <a class="dropdown-item" href="/bookusers/create">Assign book</a>
+                                    </li>
+                                   @* <li>
+                                        <a class="dropdown-item" href="/bookusers/edit">Return book</a>
+                                    </li>*@
+                                </ul>
                             </li>
                         </ul>
                         <div class="d-flex align-items-center">

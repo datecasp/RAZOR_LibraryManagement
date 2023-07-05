@@ -1,5 +1,5 @@
-﻿@page
-@model RAZOR_LibraryManagement.Web.Pages.Books.CreateModel
+﻿@page "{id:int}"
+@model RAZOR_LibraryManagement.Web.Pages.Books.EditModel
 @using RAZOR_LibraryManagement.Lang.Book
 @{
 }
@@ -8,34 +8,35 @@
     <div class="row justify-content-center">
         <fieldset class="clo-12 col-lg-6">
             <div class="text-center">
-                <h1 class="display-4">@BookCreate.tCreate</h1>
+                <h1 class="display-4">@BookEdit.tEdit</h1>
                 <partial name="_Notification" />
             </div>
             <form method="post">
+                <div hidden><input type="text" class="form-control" asp-for="vmBookCreate.BookId"/></div>
                 <div class="mb-3">
-                    <label class="form-label">@BookCreate.Title</label>
+                    <label class="form-label">@BookEdit.Title</label>
                     <input type="text" class="form-control" asp-for="vmBookCreate.Title" required />
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">@BookCreate.Author</label>
+                    <label class="form-label">@BookEdit.Author</label>
                     <input type="text" class="form-control" asp-for="vmBookCreate.Author" required />
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">@BookCreate.Description</label>
+                    <label class="form-label">@BookEdit.Description</label>
                     <input type="text" class="form-control" asp-for="vmBookCreate.Description" required />
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label">@BookCreate.Image</label>
+                    <label class="form-label">@BookEdit.Image</label>
                     <input type="file" asp-for="FeaturedImage" id="featuredImageId" />
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">@BookCreate.ImageUrl</label>
+                    <label class="form-label">@BookEdit.ImageUrl</label>
                     <input type="text" class="form-control" asp-for="vmBookCreate.ImageUrl" id="imageUrlCloudinary" required />
                 </div>
                 <fieldset class="row mb-3">
                     <legend class="col-form-label">
-                        @BookCreate.sCategory
+                        @BookEdit.sCategory
                     </legend>
                     @foreach (var cat in Model.vmCategoryIndexList)
                     {
@@ -49,17 +50,17 @@
                 </fieldset>
                 <div class="mb-3">
                     <label class="form-check-label" for="flexRadioDefault">
-                        @BookCreate.pBorrow
+                        @BookEdit.pBorrow
                     </label>
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" asp-for="vmBookCreate.IsBorrowable" />
                         <label class="form-check-label" for="flexCheckDefault">
-                            @BookCreate.Yes
+                            @BookEdit.Yes
                         </label>
                     </div>
                 </div>
                 <div class="mb-3">
-                    <button type="submit" class="btn btn-info">@BookCreate.btnCreate</button>
+                    <button type="submit" class="btn btn-info">@BookEdit.btnEdit</button>
                 </div>
             </form>
         </fieldset>

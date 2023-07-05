@@ -43,6 +43,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>BookUserEdit.resx</DependentUpon>
     </Compile>
+    <Compile Update="Book\BookEdit.Designer.cs">
+      <DependentUpon>BookEdit.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Update="Book\BookCreate.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -110,6 +115,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>BookUserEdit.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Update="Book\BookEdit.resx">
+      <LastGenOutput>BookCreate - Copia.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Book\BookCreate.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>BookCreate.Designer.cs</LastGenOutput>
@@ -117,6 +126,10 @@
     <EmbeddedResource Update="Book\BookDetails.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>BookDetails.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Book\BookEdit.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>BookEdit.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Book\BooksList.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

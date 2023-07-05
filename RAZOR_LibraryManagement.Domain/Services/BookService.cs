@@ -14,13 +14,21 @@ namespace RAZOR_LibraryManagement.Domain.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<vmNotification> CreateBookService(BookModel bookModel)
+        public async Task<vmNotification> CreateUpdateBookService(BookModel bookModel, bool isUpdate)
         {
             var vmNotification = new vmNotification();
             bookModel.UrlHandle = FormatUrl(bookModel.Title);
             try
             {
-                var bookResult = await _unitOfWork.BookRepository.CreateBook(bookModel);
+                var bookResult = new BookModel();
+                if (isUpdate)
+                {
+                    bookResult = await _unitOfWork.BookRepository.UpdateBook(bookModel);
+                }
+                else
+                {
+                    bookResult = await _unitOfWork.BookRepository.CreateBook(bookModel);
+                }
                 _unitOfWork.Save();
                 if (bookResult != null)
                 {

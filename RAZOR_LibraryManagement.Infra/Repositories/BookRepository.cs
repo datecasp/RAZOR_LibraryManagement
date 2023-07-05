@@ -61,5 +61,19 @@ namespace RAZOR_LibraryManagement.Infra.Repositories
                 return null;
             }
         }
+
+        public async Task<BookModel> UpdateBook(BookModel bookModel)
+        {
+            var book = _mapper.Map<Book>(bookModel);
+            try
+            {
+                var result = _lM_DbContext.Books.Update(book);
+                return _mapper.Map<BookModel>(result.Entity);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
     }
 }

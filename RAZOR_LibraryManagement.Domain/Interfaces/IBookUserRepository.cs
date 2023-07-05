@@ -11,7 +11,7 @@ namespace RAZOR_LibraryManagement.Domain.Interfaces
     {
         Task<IEnumerable<BookUserModel>> GetAll();
         Task<BookUserModel> GetBookUserById(int id);
-        Task<IEnumerable<BookUserModel>> GetBooksOfUser(int userId);
+        Task<IEnumerable<BookUserModel>> GetBooksOfUser(int userId, bool? actualUser = null);
         Task<BookUserModel> AddBookToUser(BookUserModel bookUserModel, int maxBooks);
         Task<IEnumerable<int>> GetBorrowerUsers();
         Task<IEnumerable<int>> GetBorrowedBooks();

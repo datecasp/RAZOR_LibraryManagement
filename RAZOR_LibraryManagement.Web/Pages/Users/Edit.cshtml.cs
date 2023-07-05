@@ -32,7 +32,7 @@ namespace RAZOR_LibraryManagement.Web.Pages.Users
             {
                 ViewData["Notification"] = JsonSerializer.Deserialize<vmNotification>(notificationJson);
             }
-            hasBooks = _bookUserService.GetBooksOfUser(id).Result.Any();
+            hasBooks = _bookUserService.UserHasBooks(id).Result;
             isActive = hasBooks;
             var user = await _userService.GetUserByIdService(id);
             vmUserEdit = _mapper.Map<vmUserEdit>(user);

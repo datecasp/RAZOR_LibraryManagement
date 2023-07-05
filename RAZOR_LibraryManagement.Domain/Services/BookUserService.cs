@@ -30,7 +30,7 @@ namespace RAZOR_LibraryManagement.Domain.Services
             return bu;
         }
 
-        public async Task<IEnumerable<string>> GetBooksOfUser(int userId)
+        public async Task<IEnumerable<string>> GetBooksOfUser(int userId, bool? actualUser = null)
         {
             var booksIdList = _unitOfWork.BookUserRepository.GetBooksOfUser(userId).Result.ToList();
             var booksTitleList = new List<string>();
@@ -88,6 +88,11 @@ namespace RAZOR_LibraryManagement.Domain.Services
                 Users = users
             };
             return result;
+        }
+
+        public async Task<bool> UserHasBooks(int userId)
+        {
+            return _unitOfWork.BookUserRepository.GetBooksOfUser(userId, true).Result.Any();
         }
 
         public async Task<IEnumerable<BookUserModel>> GetBookUserListService()

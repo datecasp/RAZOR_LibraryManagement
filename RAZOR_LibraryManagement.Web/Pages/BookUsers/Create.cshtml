@@ -8,42 +8,49 @@
     <div class="row justify-content-center">
         <fieldset class="clo-12 col-lg-6">
             <div class="text-center">
-                <h1 class="display-4">@BookUserCreate.h1Assign</h1>
+                <h1 class="display-4 mb-3">@BookUserCreate.h1Assign</h1>
                 <partial name="_Notification" />
             </div>
-            <form method="post">
-                <row class="d-flex list-group-horizontal-md mb-3 float-none">
-                    <div class="form-group">
-                        @if (Model.AllBooksAndUsers.Books != null)
-                        {
+            @if (Model.AllBooksAndUsers.Books != null
+            && Model.AllBooksAndUsers.Books.Count() > 0
+            && Model.AllBooksAndUsers.Users != null
+            && Model.AllBooksAndUsers.Users.Count() > 0)
+            {
+
+                <form method="post">
+                    <row class="d-flex list-group-horizontal-md mb-3 float-none">
+                        <div class="form-group">
                             <label for="booksSelect">@BookUserCreate.Book</label>
-                            <select class="form-control w-150" id="booksSelect" name="bookId">
+                            <select class="form-control w-150" id="booksSelect" name="bookId" required>
                                 @foreach (var book in Model.AllBooksAndUsers.Books)
                                 {
                                     <option class="dropdown-item" value="@book.BookId">@book.Title</option>
                                 }
                             </select>
-                        }
-                    </div>
-                    &emsp;
-                    &emsp;
-                    &emsp;
-                    <div class="form-group">
-                        @if (Model.AllBooksAndUsers.Users != null)
-                        {
+                        </div>
+                        &emsp;
+                        &emsp;
+                        &emsp;
+                        <div class="form-group">
                             <label for="usersSelect">@BookUserCreate.User</label>
-                            <select class="form-control w-150" id="usersSelect" name="userId">
+                            <select class="form-control w-150" id="usersSelect" name="userId" required>
                                 @foreach (var user in Model.AllBooksAndUsers.Users)
                                 {
                                     <option class="dropdown-item" value="@user.UserId">@user.UserName</option>
                                 }
                             </select>
-                        }
-                    </div>
+                        </div>
 
-                </row>
-                <button class="btn btn-info" type="submit">@BookUserCreate.btnAssign</button>
-            </form>
+                    </row>
+                    <button class="btn btn-info" type="submit">@BookUserCreate.btnAssign</button>
+                </form>
+            }
+            else
+            {
+                <div class="text-center">
+                    <h3 class="mb-3">There are no Books or Users to work with</h3>
+                </div>
+            }
         </fieldset>
     </div>
 </div>

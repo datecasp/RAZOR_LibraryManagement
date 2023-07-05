@@ -34,11 +34,21 @@ namespace RAZOR_LibraryManagement.Infra.Repositories
             return result;
         }
 
-        public async Task<IEnumerable<BookUserModel>> GetBooksOfUser(int userId)
+        public async Task<IEnumerable<BookUserModel>> GetBooksOfUser(int userId, bool? actualUser = null)
         {
-            var booksList = await _lM_DbContext.BookUsers
-                .Where(bu => bu.UserId == userId)
-                .ToListAsync();
+            var booksList = new List<BookUser>();
+            if (actualUser == null)
+            {
+                booksList = await _lM_DbContext.BookUsers
+                    .Where(bu => bu.UserId == userId)
+                    .ToListAsync();
+            }
+            else
+            {
+                booksList = await _lM_DbContext.BookUsers
+                    .Where(bu => (bu.UserId == userId && bu.IsActualUser == actualUser))
+                    .ToListAsync();
+            }
             var result = _mapper.Map<List<BookUserModel>>(booksList);
             return result;
         }

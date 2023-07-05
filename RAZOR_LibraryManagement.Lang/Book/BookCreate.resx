@@ -120,6 +120,9 @@
   <data name="Author" xml:space="preserve">
     <value>Author</value>
   </data>
+  <data name="btnCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
   <data name="btnCreate" xml:space="preserve">
     <value>Create</value>
   </data>

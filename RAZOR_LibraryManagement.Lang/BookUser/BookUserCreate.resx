@@ -123,6 +123,9 @@
   <data name="btnAssign" xml:space="preserve">
     <value>Assignr</value>
   </data>
+  <data name="btnCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
   <data name="h1Assign" xml:space="preserve">
     <value>Assignr book to user:</value>
   </data>

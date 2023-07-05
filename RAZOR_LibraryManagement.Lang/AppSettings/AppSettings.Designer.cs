@@ -61,6 +61,15 @@ namespace RAZOR_LibraryManagement.Lang.AppSettings {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Cancel.
+        /// </summary>
+        public static string btnCancel {
+            get {
+                return ResourceManager.GetString("btnCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a You can edit the values of the parameters and save it to database persistance..
         /// </summary>
         public static string Info {

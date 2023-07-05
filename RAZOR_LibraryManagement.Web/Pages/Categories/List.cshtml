@@ -5,38 +5,41 @@
     ViewData["Title"] = "Categories list";
 }
 
-<h1 class="text-dark mb-3">@CategoriesList.Title</h1> 
-
-<div class="container">
-    <partial name="_Notification" />
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th>
-                    @CategoriesList.Category
-                </th>
-                <th>
-                    @CategoriesList.IsActive
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var category in Model.vmCategoryIndexList)
-            {
-                <tr>
-                    <td>@category.Name</td>
-                    <td>
-                        @if (category.IsActive)
-                        {
-                            <i class="bi bi-check-lg btn-outline-success mx-3"></i>
-                        }
-                        else
-                        {
-                            <i class="bi bi-x-lg btn-outline-danger mx-3"></i>
-                        }
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+<div class="container mx-auto">
+    <div class="row justify-content-center">
+        <div class="text-center">
+            <h1 class="display-4">@CategoriesList.Title</h1>
+            <partial name="_Notification" />
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            @CategoriesList.Category
+                        </th>
+                        <th>
+                            @CategoriesList.IsActive
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var category in Model.vmCategoryIndexList)
+                    {
+                        <tr>
+                            <td>@category.Name</td>
+                            <td>
+                                @if (category.IsActive)
+                                {
+                                    <i class="bi bi-check-lg btn-outline-success mx-3"></i>
+                                }
+                                else
+                                {
+                                    <i class="bi bi-x-lg btn-outline-danger mx-3"></i>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>

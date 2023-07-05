@@ -7,56 +7,58 @@
     var userIsActive = "Is user active?";
     var edit = "Edit user info";
 }
-
-<h1 class="text-dark mb-3">@UsersList.Title</h1>
-<div class="container">
-    <partial name="_Notification" />
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th>
-                    @UsersList.UserName
-                </th>
-                <th>
-                    @UsersList.UserEmail
-                </th>
-                <th>
-                    @UsersList.UserPhoneNumber
-                </th>
-                <th>
-                    @UsersList.Actions
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var user in Model.vmUserIndexList)
-            {
-                <tr>
-                    <td>@user.UserName</td>
-                    <td>@user.Email</td>
-                    <td>@user.PhoneNumber</td>
-                    <td>
-                        @if (user.IsActive)
-                        {
-                            <i class="bi bi-check-lg btn-outline-success mx-3" data-bs-toggle="tooltip" data-bs-title="@userIsActive"></i>
-                        }
-                        else
-                        {
-                            <i class="bi bi-x-lg btn-outline-danger mx-3" data-bs-toggle="tooltip" data-bs-title="@userIsActive"></i>
-                        }
-                        <a href="/users/details/@user.UserId"><i class="bi bi-person-circle mx-3" data-bs-toggle="tooltip" data-bs-title="@userInfo"></i></a>
-                        <a href="/users/edit/@user.UserId"><i class="bi bi-person-lines-fill mx-3 btn-outline-info" data-bs-toggle="tooltip" data-bs-title="@edit"></i></a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+<div class="container mx-auto">
+    <div class="row justify-content-center">
+        <div class="text-center">
+            <h1 class="display-4">@UsersList.Title</h1>
+            <partial name="_Notification" />
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            @UsersList.UserName
+                        </th>
+                        <th>
+                            @UsersList.UserEmail
+                        </th>
+                        <th>
+                            @UsersList.UserPhoneNumber
+                        </th>
+                        <th>
+                            @UsersList.Actions
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model.vmUserIndexList)
+                    {
+                        <tr>
+                            <td>@user.UserName</td>
+                            <td>@user.Email</td>
+                            <td>@user.PhoneNumber</td>
+                            <td>
+                                @if (user.IsActive)
+                                {
+                                    <i class="bi bi-check-lg btn-outline-success mx-3" data-bs-toggle="tooltip" data-bs-title="@userIsActive"></i>
+                                }
+                                else
+                                {
+                                    <i class="bi bi-x-lg btn-outline-danger mx-3" data-bs-toggle="tooltip" data-bs-title="@userIsActive"></i>
+                                }
+                                <a href="/users/details/@user.UserId"><i class="bi bi-person-circle mx-3" data-bs-toggle="tooltip" data-bs-title="@userInfo"></i></a>
+                                <a href="/users/edit/@user.UserId"><i class="bi bi-person-lines-fill mx-3 btn-outline-info" data-bs-toggle="tooltip" data-bs-title="@edit"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
-
 @section Scripts{
     <script>
         const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
         const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
-       
+
     </script>
-}
+            }

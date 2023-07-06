@@ -9,15 +9,26 @@
 <div class="container mx-auto">
     <div class="row justify-content-center">
         <div class="clo-12 col-lg-6">
+            <div class="text-center mb-3">
+                <h1 class="display-4 mb-3">@BookUserEdit.pTitle</h1>
+                <partial name="_Notification" />
+            </div>
             <form method="post">
-                <div class="text-center mb-3">
-                    <h1 class="display-4 mb-3">@BookUserEdit.pTitle</h1>
-                    <partial name="_Notification" />
-                    <p>@BookUserEdit.p1 TITLE</p>
-                    <p>@BookUserEdit.p2 USERNAME @BookUserEdit.p3</p>
+                <div hidden>
+                    <input type="text" asp-for="vmBookUser.BookUserId" />
+                    <input type="text" asp-for="vmBookUser.BookId" />
+                    <input type="text" asp-for="vmBookUser.Title" />
+                    <input type="text" asp-for="vmBookUser.UserId" />
+                    <input type="text" asp-for="vmBookUser.UserName" />
+                    <input type="text" asp-for="vmBookUser.IsActualUser" />
+                    <input type="text" asp-for="vmBookUser.BorrowDate" />
+                </div>
+                <div>
+                    <p>@BookUserEdit.p1 @Model.vmBookUser.Title</p>
+                    <p>@BookUserEdit.p2 @Model.vmBookUser.UserName @BookUserEdit.p3</p>
                     <p>@BookUserEdit.p4</p>
                 </div>
-                <div class="d-flex list-group-horizontal align-content-around">
+                <div class="mb-3">
                     <button class="btn btn-success" type="submit">@BookUserEdit.btnReturn</button>
                     <a class="btn btn-info" href="/bookusers/list">@BookUserEdit.btnCancel</a>
                 </div>

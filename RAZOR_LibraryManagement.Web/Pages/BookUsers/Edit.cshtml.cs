@@ -13,7 +13,6 @@ namespace RAZOR_LibraryManagement.Web.Pages.BookUsers
         private readonly IBookUserService _bookUserService;
         private readonly IMapper _mapper;
 
-        //Quitar este static y poner el vm en el html como hidden para devolverlo en el post
         [BindProperty]
         public vmBookUser vmBookUser { get; set; }
 

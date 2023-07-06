@@ -1,101 +1,79 @@
 ﻿using System.Text.RegularExpressions;
-using System.Xml.Linq;
 using RAZOR_LibraryManagement.Domain.Interfaces;
-using RAZOR_LibraryManagement.Domain.Models;
-using RAZOR_LibraryManagement.Domain.ViewModels;
+using RAZOR_LibraryManagement.Models.Models;
+using RAZOR_LibraryManagement.Models.ViewModels;
 
 namespace RAZOR_LibraryManagement.Domain.Services
 {
     public class BookService : IBookService
     {
-        private readonly IBookRepository _bookRepository;
-        private readonly ICategoryRepository _categoryRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public BookService(IBookRepository bookRepository, ICategoryRepository categoryRepository)
+        public BookService(IUnitOfWork unitOfWork)
         {
-           _bookRepository = bookRepository;
-            _categoryRepository = categoryRepository;
+            _unitOfWork = unitOfWork;
         }
 
-        public async Task<vmBookCreate> CreateBookService(vmBookCreate vmCreateBook)
+        public async Task<vmNotification> CreateUpdateBookService(BookModel bookModel, bool isUpdate)
         {
-            var vmBookResult = new vmBookCreate();
-            var createBook = new Book
-            {
-             Title = vmCreateBook.Title,
-             Author= vmCreateBook.Author,
-             Description= vmCreateBook.Description,
-             ImageUrl= vmCreateBook.ImageUrl,
-             IsBorrowable= vmCreateBook.IsBorrowable,
-             UrlHandle = FormatUrl(vmCreateBook.Title),
-             Category = VmCategoryStringToCategory(vmCreateBook.Category)
-            };
+            var vmNotification = new vmNotification();
+            bookModel.UrlHandle = FormatUrl(bookModel.Title);
             try
             {
-                var bookResult = await _bookRepository.CreateBook(createBook);
-                vmBookResult.Title= bookResult.Title;
-                vmBookResult.Author= bookResult.Author;
-                vmBookResult.Description= bookResult.Description;
-                vmBookResult.ImageUrl= bookResult.ImageUrl;
-                vmBookResult.IsBorrowable = bookResult.IsBorrowable;
-                vmBookResult.Category = bookResult.Category.Name;
+                var bookResult = new BookModel();
+                if (isUpdate)
+                {
+                    bookResult = await _unitOfWork.BookRepository.UpdateBook(bookModel);
+                }
+                else
+                {
+                    bookResult = await _unitOfWork.BookRepository.CreateBook(bookModel);
+                }
+                _unitOfWork.Save();
+                if (bookResult != null)
+                {
+                    vmNotification.Type = Lang.Notification.NotificationType.Success;
+                    vmNotification.Message = "Book created successfully";
+                    return vmNotification;
+                }
+            }
+            catch (Exception ex)
+            {
+                vmNotification.Type = Lang.Notification.NotificationType.Error;
+                vmNotification.Message = "Exception thrown! " + ex.Message;
+                return vmNotification;
+            }
+            vmNotification.Type = Lang.Notification.NotificationType.Error;
+            vmNotification.Message = "Hmmm something went wrong here....";
+            return vmNotification;
+        }
+
+        public async Task<IEnumerable<BookModel>> GetAllBooksService()
+        {
+            var booksList = new List<BookModel>();
+            try
+            {
+                booksList = (await _unitOfWork.BookRepository.GetAllBooks()).ToList();
             }
             catch (Exception ex)
             {
 
             }
-            return vmBookResult;
+            return booksList;
         }
 
-        public async Task<IEnumerable<vmBookIndex>> GetAllBooksService()
+        public async Task<BookModel> GetBookByIdService(int id)
         {
-            var booksList =new List<Book>();
-            var bookIndexList = new List<vmBookIndex>();
+            var book = new BookModel();
             try
             {
-                booksList = (await _bookRepository.GetAllBooks()).ToList();
-                foreach (var book in booksList)
-                {
-                    var vwBook = new vmBookIndex
-                    {
-                        Id = book.BookId,
-                        Title = book.Title,
-                        Author = book.Author,
-                        IsBorrowable= book.IsBorrowable
-                    };
-
-                    bookIndexList.Add(vwBook);
-                }
+                book = await _unitOfWork.BookRepository.GetBookById(id);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
             }
-            return bookIndexList;        }
-
-        public async Task<vmBookDetails> GetBookByIdService(int id)
-        {
-            var vmBook = new vmBookDetails();
-            try
-            {
-                var book = await _bookRepository.GetBookById(id);
-                var categoryName = _categoryRepository.GetCategoryById(book.Category.CategoryId).Result.Name;
-                if(book != null)
-                {
-                    vmBook.Title = book.Title;
-                    vmBook.Author = book.Author;
-                    vmBook.Description = book.Description;
-                    vmBook.isBorrowable = book.IsBorrowable;
-                    vmBook.Id = id;
-                    vmBook.ImageUrl = book.ImageUrl;
-                    vmBook.Category = categoryName;
-                }
-            }
-            catch(Exception ex)
-            {
-
-            }
-            return vmBook;
+            return book;
         }
 
 
@@ -104,42 +82,10 @@ namespace RAZOR_LibraryManagement.Domain.Services
         //Replace white spaces with dashes for readability in url 
         private static string FormatUrl(string url)
         {
-            var result = Regex.Replace(url, " ", "-");
+            var result = Regex.Replace(url, " ", "-").ToLower();
             return result;
         }
 
-        private vmCategoryIndex CategoryToVmCategory(Category category)
-        {
-            var result = new vmCategoryIndex
-            {
-                Name= category.Name,
-                IsActive= category.IsActive
-            };
-
-            return result;
-        }
-
-        private Category VmCategoryToCategory(vmCategoryIndex vmCategory)
-        {
-            var result = new Category
-            {
-                Name = vmCategory.Name,
-                IsActive = vmCategory.IsActive
-            };
-
-            return result;
-        }
-
-        private Category VmCategoryStringToCategory(string vmCategory)
-        {
-            var result = new Category
-            {
-                Name = vmCategory,
-                IsActive = true
-            };
-
-            return result;
-        }
         #endregion
     }
 }

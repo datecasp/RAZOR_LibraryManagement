@@ -1,0 +1,55 @@
+﻿@page "{id:int}"
+@model RAZOR_LibraryManagement.Web.Pages.Users.EditModel
+@using RAZOR_LibraryManagement.Lang.User
+@{
+    ViewData["Title"] = "Edit user info";
+    var disabled = "Button disabled if user has books";
+}
+
+<div class="container mx-auto">
+    <div class="row justify-content-center">
+        <div class="clo-12 col-lg-6">
+            <div class="text-center">
+                <h1 class="display-4">@UserEdit.pEdit  @Model.vmUserEdit.UserName</h1>
+                <partial name="_Notification" />
+            </div>
+            <form method="post">
+                <div class="mb-3">
+                    <label class="form-label">@UserEdit.UserName</label>
+                    <input type="text" class="form-control" asp-for="vmUserEdit.UserName" value="@Model.vmUserEdit.UserName" required />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">@UserEdit.UserEmail</label>
+                    <input type="email" class="form-control" asp-for="vmUserEdit.Email" required />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">@UserEdit.UserPhone</label>
+                    <input type="text" class="form-control" asp-for="vmUserEdit.PhoneNumber" required />
+                </div>
+                <div class="mb-3">
+                    <label class="form-check-label" for="flexRadioDefault">
+                        @UserEdit.IsActive
+                    </label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" asp-for="vmUserEdit.IsActive" disabled="@Model.hasBooks" />
+                        <label class="form-check-label" for="flexCheckDefault" data-bs-toggle="tooltip" data-bs-title="@disabled">
+                            @UserEdit.Yes
+                        </label>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-success">@UserEdit.btnEdit</button>
+                    <a class="btn btn-info" href="/users/list">@UserEdit.btnCancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+
+    </script>
+}

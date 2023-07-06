@@ -13,6 +13,46 @@
 	</ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Admins\AdminCreate.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AdminCreate.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Admins\AdminList.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AdminList.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Admins\AdminLogin.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AdminLogin.resx</DependentUpon>
+    </Compile>
+    <Compile Update="AppSettings\AppSettings.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AppSettings.resx</DependentUpon>
+    </Compile>
+    <Compile Update="BookUser\BookUserCreate.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>BookUserCreate.resx</DependentUpon>
+    </Compile>
+    <Compile Update="BookUser\BookUserEdit.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>BookUserEdit.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Book\BookEdit.Designer.cs">
+      <DependentUpon>BookEdit.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Book\BookCreate.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>BookCreate.resx</DependentUpon>
+    </Compile>
     <Compile Update="Book\BookDetails.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -28,10 +68,20 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>CategoriesList.resx</DependentUpon>
     </Compile>
-    <Compile Update="LoginCreate\LoginCreate.Designer.cs">
+    <Compile Update="User\UserCreate.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>LoginCreate.resx</DependentUpon>
+      <DependentUpon>UserCreate.resx</DependentUpon>
+    </Compile>
+    <Compile Update="User\UserDetails.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>UserDetails.resx</DependentUpon>
+    </Compile>
+    <Compile Update="User\UserEdit.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>UserEdit.resx</DependentUpon>
     </Compile>
     <Compile Update="User\UsersList.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -41,9 +91,45 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Admins\AdminCreate.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AdminCreate.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Admins\AdminList.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AdminList.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Admins\AdminLogin.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AdminLogin.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="AppSettings\AppSettings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppSettings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="BookUser\BookUserCreate.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>BookUserCreate.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="BookUser\BookUserEdit.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>BookUserEdit.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Book\BookEdit.resx">
+      <LastGenOutput>BookCreate - Copia.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Book\BookCreate.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>BookCreate.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Book\BookDetails.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>BookDetails.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Book\BookEdit.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>BookEdit.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Book\BooksList.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -53,9 +139,17 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>CategoriesList.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="LoginCreate\LoginCreate.resx">
+    <EmbeddedResource Update="User\UserCreate.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>LoginCreate.Designer.cs</LastGenOutput>
+      <LastGenOutput>UserCreate.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="User\UserDetails.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UserDetails.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="User\UserEdit.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UserEdit.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="User\UsersList.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

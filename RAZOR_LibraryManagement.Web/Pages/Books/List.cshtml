@@ -3,46 +3,58 @@
 @using RAZOR_LibraryManagement.Lang.Book
 @{
     ViewData["Title"] = "Books list";
+    var bookInfo = "Book info";
+    var IsActive = "Is available?";
+    var edit = "Edit book info";
 }
-
-<div class="container">
-    <partial name="_Notification" />
-    <h1 class="text-dark mb-3">@BooksList.Title</h1>
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th>
-                    @BooksList.BookTitle
-                </th>
-                <th>
-                    @BooksList.BookAuthor
-                </th>
-                <th>
-                    @BooksList.Actions
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var book in Model.vmBookIndexList)
-            {
-                <tr>
-                    <td>@book.Title</td>
-                    <td>@book.Author</td>
-                    <td class="d-flex">
-                        <a href="/Books/Details/@book.Id"><i class="bi bi-book btn-outline-success"></i></a>
-                        <div>
-                            @if (book.IsBorrowable)
-                            {
-                                <i class="bi bi-check-lg btn-outline-success mx-3"></i>
-                            }
-                            else
-                            {
-                                <i class="bi bi-x-lg btn-outline-danger mx-3"></i>
-                            }
-                        </div>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+<div class="container mx-auto">
+    <div class="row justify-content-center">
+        <div class="text-center">
+            <h1 class="display-4">@BooksList.Title</h1>
+            <partial name="_Notification" />
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            @BooksList.BookTitle
+                        </th>
+                        <th>
+                            @BooksList.BookAuthor
+                        </th>
+                        <th>
+                            @BooksList.Actions
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var book in Model.vmBookIndexList)
+                    {
+                        <tr>
+                            <td>@book.Title</td>
+                            <td>@book.Author</td>
+                            <td>
+                                @if (book.IsBorrowable)
+                                {
+                                    <i class="bi bi-check-lg mx-3 btn-outline-success" data-bs-toggle="tooltip" data-bs-title="@IsActive"></i>
+                                }
+                                else
+                                {
+                                    <i class="bi bi-x-lg mx-3 btn-outline-danger" data-bs-toggle="tooltip" data-bs-title="@IsActive"></i>
+                                }
+                                <a href="/books/details/@book.Id"><i class="bi bi-book-half mx-3 btn-outline-info" data-bs-toggle="tooltip" data-bs-title="@bookInfo"></i></a>
+                                <a href="/books/edit/@book.Id"><i class="bi bi-book mx-3 btn-outline-success" data-bs-toggle="tooltip" data-bs-title="@edit"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
+@section Scripts{
+    <script>
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+
+    </script>
+            }

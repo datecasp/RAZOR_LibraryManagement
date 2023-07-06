@@ -1,27 +1,33 @@
 ﻿@page
 @model RAZOR_LibraryManagement.Web.Pages.Users.CreateModel
-@using RAZOR_LibraryManagement.Lang.LoginCreate
+@using RAZOR_LibraryManagement.Lang.User
 @{
+    ViewData["Title"] = "Create user";
 }
 
 <div class="container mx-auto">
     <div class="row justify-content-center">
         <div class="clo-12 col-lg-6">
             <div class="text-center">
-                <h1 class="display-4">@LoginCreate.pCreate</h1>
+                <h1 class="display-4">@UserCreate.pCreate</h1>
                 <partial name="_Notification" />
             </div>
             <form method="post">
                 <div class="mb-3">
-                    <label class="form-label">@LoginCreate.UserName</label>
-                    <input type="text" class="form-control" asp-for="vmCreateUser.UserName" />
+                    <label class="form-label">@UserCreate.UserName</label>
+                    <input type="text" class="form-control" asp-for="vmCreateUser.UserName" required/>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">@LoginCreate.Email</label>
-                    <input type="email" class="form-control" asp-for="vmCreateUser.Email" />
+                    <label class="form-label">@UserCreate.UserEmail</label>
+                    <input type="email" class="form-control" asp-for="vmCreateUser.Email" required/>
                 </div>
                 <div class="mb-3">
-                    <button type="submit" class="btn btn-info">@LoginCreate.btnCreate</button>
+                    <label class="form-label">@UserCreate.UserPhone</label>
+                    <input type="text" class="form-control" asp-for="vmCreateUser.PhoneNumber" required/>
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-success">@UserCreate.btnCreate</button>
+                    <a class="btn btn-info" href="/users/list">@UserCreate.btnCancel</a>
                 </div>
             </form>
         </div>

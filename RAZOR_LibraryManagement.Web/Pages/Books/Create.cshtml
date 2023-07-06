@@ -1,46 +1,48 @@
 ﻿@page
 @model RAZOR_LibraryManagement.Web.Pages.Books.CreateModel
-@using RAZOR_LibraryManagement.Domain.ViewModels
+@using RAZOR_LibraryManagement.Lang.Book
 @{
+    ViewData["Title"] = "Create book";
+
 }
 
 <div class="container mx-auto">
     <div class="row justify-content-center">
         <fieldset class="clo-12 col-lg-6">
             <div class="text-center">
-                <h1 class="display-4">Create a new book</h1>
+                <h1 class="display-4">@BookCreate.tCreate</h1>
                 <partial name="_Notification" />
             </div>
             <form method="post">
                 <div class="mb-3">
-                    <label class="form-label">Title</label>
-                    <input type="text" class="form-control" asp-for="vmBookCreate.Title" />
+                    <label class="form-label">@BookCreate.Title</label>
+                    <input type="text" class="form-control" asp-for="vmBookCreate.Title" required />
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">Author</label>
-                    <input type="text" class="form-control" asp-for="vmBookCreate.Author" />
+                    <label class="form-label">@BookCreate.Author</label>
+                    <input type="text" class="form-control" asp-for="vmBookCreate.Author" required />
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">Description</label>
-                    <input type="text" class="form-control" asp-for="vmBookCreate.Description" />
+                    <label class="form-label">@BookCreate.Description</label>
+                    <input type="text" class="form-control" asp-for="vmBookCreate.Description" required />
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label">Featured image upload</label>
+                    <label class="form-label">@BookCreate.Image</label>
                     <input type="file" asp-for="FeaturedImage" id="featuredImageId" />
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">ImageUrl</label>
-                    <input type="text" class="form-control" asp-for="vmBookCreate.ImageUrl" id="imageUrlCloudinary" />
+                    <label class="form-label">@BookCreate.ImageUrl</label>
+                    <input type="text" class="form-control" asp-for="vmBookCreate.ImageUrl" id="imageUrlCloudinary" required />
                 </div>
                 <fieldset class="row mb-3">
                     <legend class="col-form-label">
-                        Select category:
+                        @BookCreate.sCategory
                     </legend>
                     @foreach (var cat in Model.vmCategoryIndexList)
                     {
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" asp-for="vmBookCreate.Category" value="@cat.Name" name="radioCategory" id="@cat.Name">
+                            <input class="form-check-input" type="radio" asp-for="vmBookCreate.CategoryId" value="@cat.CatId" name="radioCategory" id="@cat.Name" required>
                             <label class="form-check-label" for="@cat.Name">
                                 @cat.Name
                             </label>
@@ -49,21 +51,22 @@
                 </fieldset>
                 <div class="mb-3">
                     <label class="form-check-label" for="flexRadioDefault">
-                        Is the book ready to borrow?
+                        @BookCreate.pBorrow
                     </label>
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" asp-for="vmBookCreate.IsBorrowable" />
                         <label class="form-check-label" for="flexCheckDefault">
-                            Yes!
+                            @BookCreate.Yes
                         </label>
                     </div>
                 </div>
                 <div class="mb-3">
-                    <button type="submit" class="btn btn-info">Create</button>
+                    <button type="submit" class="btn btn-success">@BookCreate.btnCreate</button>
+                    <a class="btn btn-info" href="/books/list">@BookCreate.btnCancel</a>
                 </div>
             </form>
+        </fieldset>
     </div>
-</div>
 </div>
 
 @section Scripts{

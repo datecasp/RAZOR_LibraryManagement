@@ -1,29 +1,29 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using RAZOR_LibraryManagement.Domain.Interfaces;
-using RAZOR_LibraryManagement.Domain.Models;
 using RAZOR_LibraryManagement.Infra.DataContext;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using RAZOR_LibraryManagement.Models.Entities;
+using RAZOR_LibraryManagement.Models.Models;
 
 namespace RAZOR_LibraryManagement.Infra.Repositories
 {
     public class BookRepository : IBookRepository
     {
         private readonly LM_DbContext _lM_DbContext;
+        private readonly IMapper _mapper;
 
-        public BookRepository(LM_DbContext lM_DbContext)
+        public BookRepository(LM_DbContext lM_DbContext, IMapper mapper)
         {
             _lM_DbContext = lM_DbContext;
+            _mapper = mapper;
         }
-        public async Task<IEnumerable<Book>> GetAllBooks()
+        public async Task<IEnumerable<BookModel>> GetAllBooks()
         {
-            var result = new List<Book>();
+            var result = new List<BookModel>();
             try
             {
-                result = await _lM_DbContext.Books.ToListAsync();
+                var bookList = await _lM_DbContext.Books.ToListAsync();
+                result = _mapper.Map<List<BookModel>>(bookList);
             }
             catch (Exception ex)
             {
@@ -33,13 +33,13 @@ namespace RAZOR_LibraryManagement.Infra.Repositories
 
         }
 
-        public async Task<Book> GetBookById(int id)
+        public async Task<BookModel> GetBookById(int id)
         {
-            var result = new Book();
+            var result = new BookModel();
             try
             {
-                var book = _lM_DbContext.Books.Include(b => b.Category).Where(b => b.BookId == id).FirstOrDefault();
-                result = book;
+                var book = _lM_DbContext.Books.Where(b => b.BookId == id).FirstOrDefault();
+                result = _mapper.Map<BookModel>(book);
             }
             catch (Exception ex)
             {
@@ -48,13 +48,27 @@ namespace RAZOR_LibraryManagement.Infra.Repositories
             return result;
         }
 
-        public async Task<Book> CreateBook(Book book)
+        public async Task<BookModel> CreateBook(BookModel bookModel)
         {
+            var book = _mapper.Map<Book>(bookModel);
             try
             {
-                _lM_DbContext.Books.Add(book);
-                await _lM_DbContext.SaveChangesAsync();
-                return book;
+                var result = _lM_DbContext.Books.Add(book);
+                return _mapper.Map<BookModel>(result.Entity);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public async Task<BookModel> UpdateBook(BookModel bookModel)
+        {
+            var book = _mapper.Map<Book>(bookModel);
+            try
+            {
+                var result = _lM_DbContext.Books.Update(book);
+                return _mapper.Map<BookModel>(result.Entity);
             }
             catch (Exception ex)
             {

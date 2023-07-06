@@ -61,6 +61,33 @@ namespace RAZOR_LibraryManagement.Lang.User {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Actions.
+        /// </summary>
+        public static string Actions {
+            get {
+                return ResourceManager.GetString("Actions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a User info.
+        /// </summary>
+        public static string Details {
+            get {
+                return ResourceManager.GetString("Details", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Is user active?.
+        /// </summary>
+        public static string IsActive {
+            get {
+                return ResourceManager.GetString("IsActive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a List of users.
         /// </summary>
         public static string Title {
@@ -84,6 +111,15 @@ namespace RAZOR_LibraryManagement.Lang.User {
         public static string UserName {
             get {
                 return ResourceManager.GetString("UserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Phone number.
+        /// </summary>
+        public static string UserPhoneNumber {
+            get {
+                return ResourceManager.GetString("UserPhoneNumber", resourceCulture);
             }
         }
     }

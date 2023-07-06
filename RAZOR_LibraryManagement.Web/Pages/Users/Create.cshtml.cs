@@ -1,48 +1,49 @@
-using Microsoft.AspNetCore.Identity;
+using System.Text.Json;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RAZOR_LibraryManagement.Domain.Interfaces;
-using RAZOR_LibraryManagement.Domain.ViewModels;
+using RAZOR_LibraryManagement.Models.Models;
+using RAZOR_LibraryManagement.Models.ViewModels;
 
 namespace RAZOR_LibraryManagement.Web.Pages.Users
 {
     public class CreateModel : PageModel
     {
         private readonly IUserService _userService;
+        private readonly IMapper _mapper;
 
         [BindProperty]
         public vmUserCreate vmCreateUser { get; set; }
 
-        public CreateModel(IUserService userService)
+        public CreateModel(IUserService userService, IMapper mapper)
         {
             _userService = userService;
+            _mapper = mapper;
         }
         public void OnGet()
         {
+            var notificationJson = (string)TempData["Notification"];
+            if (notificationJson != null)
+            {
+                ViewData["Notification"] = JsonSerializer.Deserialize<vmNotification>(notificationJson);
+            }
         }
 
-        public async Task<IActionResult> OnPost(vmUserCreate vmCreateUser)
+        public async Task<IActionResult> OnPost()
         {
-            var userResult = await _userService.CreateUserService(vmCreateUser);
-           
-            if (userResult != null)
-            {
-                ViewData["Notification"] = new vmNotification
-                {
-                    Type = Lang.Notification.NotificationType.Success,
-                    Message = "User created successfully"
-                };
+            var userModel = _mapper.Map<UserModel>(vmCreateUser);
+            var notificationJson = await _userService.CreateUserService(userModel);
 
-                return Page();
+            TempData["Notification"] = JsonSerializer.Serialize(notificationJson);
+
+            if (notificationJson.Type == Lang.Notification.NotificationType.Success)
+            {
+
+                return RedirectToPage("/users/list");
             }
-
-            ViewData["Notification"] = new vmNotification
-            {
-                Type = Lang.Notification.NotificationType.Error,
-                Message = "Something went wrong"
-            };
-
-            return Page();
+          
+            return RedirectToPage("/users/create");
         }
     }
 }

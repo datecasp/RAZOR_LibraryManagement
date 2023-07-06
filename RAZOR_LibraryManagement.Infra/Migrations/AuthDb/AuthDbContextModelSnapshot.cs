@@ -54,14 +54,14 @@ namespace RAZOR_LibraryManagement.Infra.Migrations.AuthDb
                             Id = "SuPeRaDMiN",
                             ConcurrencyStamp = "SuPeRaDMiN",
                             Name = "SuperAdmin",
-                            NormalizedName = "SuperAdmin"
+                            NormalizedName = "SUPERADMIN"
                         },
                         new
                         {
                             Id = "aDMiN",
                             ConcurrencyStamp = "aDMiN",
                             Name = "Admin",
-                            NormalizedName = "Admin"
+                            NormalizedName = "ADMIN"
                         });
                 });
 
@@ -159,13 +159,15 @@ namespace RAZOR_LibraryManagement.Infra.Migrations.AuthDb
                         {
                             Id = "SuPeRaDMiNiD",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7b457db8-3f7d-4a81-a798-55fa087f38a4",
-                            Email = "superAdminId@mail.com",
+                            ConcurrencyStamp = "3c9314ec-2786-4622-b084-b4b234b43b5c",
+                            Email = "superAdmin@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEBJPrNvVaUkQrbQUhFqO9xE5K5GV8TcxKnm2ugUSnis9gzqYqgMBxpWSj6VVdWnFxQ==",
+                            NormalizedEmail = "SUPERADMIN@MAIL.COM",
+                            NormalizedUserName = "SUPERADMIN",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHaTd2zTi88UNKdLuex27G8w/Msc4F/94/ZPKAxO+VwwsF1pr8JHI1GGVxR3r3+0/Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d4453d70-3ca4-4f83-ad2c-95cebb25aa67",
+                            SecurityStamp = "4dd606bf-f1a3-4bdc-8d33-e6fb02aaa7c7",
                             TwoFactorEnabled = false,
                             UserName = "superadmin"
                         });

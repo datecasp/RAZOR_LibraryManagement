@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RAZOR_LibraryManagement.Domain\RAZOR_LibraryManagement.Domain.csproj" />
+    <ProjectReference Include="..\RAZOR_LibraryManagement.Models\RAZOR_LibraryManagement.Models.csproj" />
   </ItemGroup>
 
 </Project>

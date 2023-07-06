@@ -1,8 +1,8 @@
 ﻿@page
 @model RAZOR_LibraryManagement.Web.Pages.Categories.CreateModel
 @using RAZOR_LibraryManagement.Lang.Category
-
 @{
+    ViewData["Title"] = "Create category";
 }
 
 <div class="container mx-auto">
@@ -15,7 +15,7 @@
             <form method="post">
                 <div class="mb-3">
                     <label class="form-label">@CategoriesList.Category</label>
-                    <input type="text" class="form-control" asp-for="vmCategoryIndex.Name" />
+                    <input type="text" class="form-control" asp-for="vmCategoryIndex.Name" required />
                 </div>
                 <div class="mb-3">
                     <div class="form-check">
@@ -26,7 +26,8 @@
                     </div>
                 </div>
                 <div class="mb-3">
-                    <button type="submit" class="btn btn-info">@CategoriesList.btnCreate</button>
+                    <button type="submit" class="btn btn-success">@CategoriesList.btnCreate</button>
+                    <a class="btn btn-info" href="/categories/list">@CategoriesList.btnCancel</a>
                 </div>
             </form>
         </div>

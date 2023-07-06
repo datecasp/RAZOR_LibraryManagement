@@ -1,0 +1,36 @@
+﻿@page
+@model RAZOR_LibraryManagement.Web.Pages.Admins.AdminsCreateModel
+@using RAZOR_LibraryManagement.Lang.Admins
+@{
+    ViewData["Title"] = "Create admin users";
+
+}
+
+<div class="container mx-auto">
+    <div class="row justify-content-center">
+        <div class="clo-12 col-lg-6">
+            <div class="text-center">
+                <h1 class="display-4">@AdminCreate.pCreate</h1>
+                <partial name="_Notification" />
+            </div>
+            <form method="post">
+                <div class="mb-3">
+                    <label class="form-label">@AdminCreate.UserName</label>
+                    <input type="text" class="form-control" asp-for="vmAdminUser.UserName" required />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">@AdminCreate.Email</label>
+                    <input type="email" class="form-control" asp-for="vmAdminUser.Email" required />
+                </div>
+                <div class="mb-5">
+                    <label class="form-label">@AdminCreate.Password</label>
+                    <input type="text" class="form-control" asp-for="vmAdminUser.Password" required />
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-success">@AdminCreate.btnCreate</button>
+                    <a class="btn btn-info" href="/books/list">@AdminCreate.btnCancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,9 +1,10 @@
-using System.Security.Cryptography.X509Certificates;
+using System.Text.Json;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RAZOR_LibraryManagement.Domain.Interfaces;
-using RAZOR_LibraryManagement.Domain.Models;
-using RAZOR_LibraryManagement.Domain.ViewModels;
+using RAZOR_LibraryManagement.Models.Models;
+using RAZOR_LibraryManagement.Models.ViewModels;
 
 namespace RAZOR_LibraryManagement.Web.Pages.Books
 {
@@ -11,6 +12,7 @@ namespace RAZOR_LibraryManagement.Web.Pages.Books
     {
         private readonly IBookService _bookService;
         private readonly IImageService _imageService;
+        private readonly IMapper _mapper;
         private readonly ICategoryService _categoryService;
 
         [BindProperty]
@@ -22,42 +24,37 @@ namespace RAZOR_LibraryManagement.Web.Pages.Books
         [BindProperty]
         public IFormFile FeaturedImage { get; set; }
 
-        public CreateModel(IBookService bookService, ICategoryService categoryService, IImageService imageService)
+        public CreateModel(IBookService bookService, ICategoryService categoryService, IImageService imageService, IMapper mapper)
         {
             _bookService = bookService;
             _categoryService = categoryService;
             _imageService = imageService;
+            _mapper = mapper;
         }
         public async void OnGet()
         {
-            vmCategoryIndexList = (List<vmCategoryIndex>)_categoryService.GetActiveCategoriesService().Result;
-        }
-
-        public async Task<IActionResult> OnPost(string radioCategory)
-        {
-            vmBookCreate.Category = radioCategory;
-            var bookResult = await _bookService.CreateBookService(vmBookCreate);
-
-            if (bookResult != null)
+            var notificationJson = (string)TempData["Notification"];
+            if (notificationJson != null)
             {
-                ViewData["Notification"] = new vmNotification
-                {
-                    Type = Lang.Notification.NotificationType.Success,
-                    Message = "Book created successfully"
-                };
-
-                return Page();
+                ViewData["Notification"] = JsonSerializer.Deserialize<vmNotification>(notificationJson);
             }
 
-            ViewData["Notification"] = new vmNotification
+            var catList = (List<CategoryModel>)_categoryService.GetActiveCategoriesService().Result;
+            vmCategoryIndexList = _mapper.Map<List<vmCategoryIndex>>(catList);
+        }
+
+        public async Task<IActionResult> OnPost(int radioCategory)
+        {
+            vmBookCreate.CategoryId = radioCategory;
+            var bookModel = _mapper.Map<BookModel>(vmBookCreate);
+            var notification = await _bookService.CreateUpdateBookService(bookModel, false);
+            TempData["Notification"] = JsonSerializer.Serialize(notification);
+
+            if (notification.Type == Lang.Notification.NotificationType.Success)
             {
-                Type = Lang.Notification.NotificationType.Error,
-                Message = "Something went wrong"
-            };
-
-            return Page();
-
-
+                return RedirectToPage("/books/list");
+            }
+            return RedirectToPage("/books/create");
         }
 
     }

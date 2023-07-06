@@ -1,68 +1,109 @@
 ﻿using RAZOR_LibraryManagement.Domain.Interfaces;
-using RAZOR_LibraryManagement.Domain.Models;
-using RAZOR_LibraryManagement.Domain.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using RAZOR_LibraryManagement.Models.Models;
+using RAZOR_LibraryManagement.Models.ViewModels;
 
 namespace RAZOR_LibraryManagement.Domain.Services
 {
     public class UserService : IUserService
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public UserService(IUserRepository userRepository)
+        public UserService(IUnitOfWork unitOfWork)
         {
-            _userRepository = userRepository;
+            _unitOfWork = unitOfWork;
         }
 
-        public async Task<vmUserCreate> CreateUserService(vmUserCreate vmCreateUser)
+        public async Task<vmNotification> CreateUserService(UserModel userModel)
         {
-            var vmUserResult = new vmUserCreate();
-            var createUser = new User
-            {
-                UserName = vmCreateUser.UserName,
-                Email = vmCreateUser.Email,
-                IsActive = true
-            };
+            var vmNotification = new vmNotification();
             try
             {
-                var userResult = await _userRepository.CreateUser(createUser);
-                vmUserResult.UserName = userResult.UserName;
-                vmUserResult.Email = userResult.Email;
+                if (!CheckIfEmailExists(userModel.Email).Result)
+                {
+                    var userResult = await _unitOfWork.UserRepository.CreateUser(userModel);
+                    _unitOfWork.Save();
+                    vmNotification.Type = Lang.Notification.NotificationType.Success;
+                    vmNotification.Message = "User created successfully";
+                    return vmNotification;
+                }
+                vmNotification.Type = Lang.Notification.NotificationType.Error;
+                vmNotification.Message = "Email exits in database";
+                return vmNotification;
+            }
+            catch (Exception ex)
+            {
+                vmNotification.Type = Lang.Notification.NotificationType.Error;
+                vmNotification.Message = "Exception thrown! " + ex.Message;
+            }
+            return vmNotification;
+        }
+
+        public async Task<IEnumerable<UserModel>> GetAllUsersService()
+        {
+            var usersList = new List<UserModel>();
+            try
+            {
+                usersList = (await _unitOfWork.UserRepository.GetAllUsers()).ToList();
             }
             catch (Exception ex)
             {
 
             }
-            return vmUserResult;
+            return usersList;
         }
-
-        public async Task<IEnumerable<vmUserIndex>> GetAllUsersService()
+        public async Task<UserModel> GetUserByIdService(int userId)
         {
-            var bookIndexList = new List<vmUserIndex>();
+            var user = new UserModel();
             try
             {
-                var usersList = (await _userRepository.GetAllUsers()).ToList();
-                foreach (var user in usersList)
-                {
-                    var vwUser = new vmUserIndex
-                    {
-                        UserName = user.UserName,
-                        Email = user.Email,
-                        IsActive = user.IsActive,
-                    };
+                user = (await _unitOfWork.UserRepository.GetAllUsers())
+                    .FirstOrDefault(u => u.UserId == userId);
+            }
+            catch (Exception ex)
+            {
 
-                    bookIndexList.Add(vwUser);
+            }
+            return user;
+        }
+
+        public async Task<vmNotification> UpdateUserService(UserModel userModel)
+        {
+            var vmNotification = new vmNotification();
+            try
+            {
+                var userResult = await _unitOfWork.UserRepository.UpdateUser(userModel);
+                if(userResult != null)
+                {
+                    _unitOfWork.Save();
+                    vmNotification.Type = Lang.Notification.NotificationType.Success;
+                    vmNotification.Message = "User updated successfully";
+                    return vmNotification;
+                }
+                else
+                {
+                    vmNotification.Type = Lang.Notification.NotificationType.Error;
+                    vmNotification.Message = "Something went wrong updating user.";
+                    return vmNotification;
                 }
             }
             catch (Exception ex)
             {
-
+                vmNotification.Type = Lang.Notification.NotificationType.Error;
+                vmNotification.Message = "Exception thrown! " + ex.Message;
             }
-            return bookIndexList;
+            return vmNotification;
         }
+
+        #region private methods
+        private async Task<bool> CheckIfEmailExists(string email)
+        {
+            var userIfExists = _unitOfWork.UserRepository.GetUserByEmail(email).Result;
+            if (userIfExists == null)
+            {
+                return false;
+            }
+            return true;
+        }
+        #endregion
     }
 }

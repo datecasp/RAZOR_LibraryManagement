@@ -1,0 +1,42 @@
+﻿@page
+@model RAZOR_LibraryManagement.Web.Pages.Admins.AdminsListModel
+@using RAZOR_LibraryManagement.Lang.Admins
+@{
+    ViewData["Title"] = "Admins list";
+}
+
+<div class="container mx-auto">
+    <div class="row justify-content-center">
+        <div class="clo-12 col-lg-6">
+            <div class="text-center">
+                <h1 class="display-4">@AdminList.Title</h1>
+                <partial name="_Notification" />
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                                @AdminList.UserName
+                            </th>
+                            <th>
+                                @AdminList.Email
+                            </th>
+                            <th>
+                                @AdminList.Role
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var admin in Model.vmAdminUserList)
+                        {
+                            <tr>
+                                <td>@admin.UserName</td>
+                                <td>@admin.Email</td>
+                                <td>@admin.Role</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

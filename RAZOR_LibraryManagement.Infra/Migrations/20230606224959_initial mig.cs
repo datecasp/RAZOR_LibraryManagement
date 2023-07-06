@@ -50,7 +50,7 @@ namespace RAZOR_LibraryManagement.Infra.Migrations
                     Author = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UrlHandle = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IsLoanable = table.Column<bool>(type: "bit", nullable: false),
+                    IsBorrowable = table.Column<bool>(type: "bit", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -97,7 +97,7 @@ namespace RAZOR_LibraryManagement.Infra.Migrations
                     BookId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false),
                     IsActualUser = table.Column<bool>(type: "bit", nullable: false),
-                    LoanDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    BorrowDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {

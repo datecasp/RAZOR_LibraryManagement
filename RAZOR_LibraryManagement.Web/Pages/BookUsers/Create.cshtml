@@ -1,0 +1,60 @@
+﻿@page
+@using RAZOR_LibraryManagement.Models.Models;
+@model RAZOR_LibraryManagement.Web.Pages.BookUsers.CreateModel
+@using RAZOR_LibraryManagement.Lang.BookUser;
+@{
+    ViewData["Title"] = "Assign book to user";
+}
+<div class="container mx-auto">
+    <div class="row justify-content-center">
+        <fieldset class="clo-12 col-lg-6">
+            <div class="text-center">
+                <h1 class="display-4 mb-3">@BookUserCreate.h1Assign</h1>
+                <partial name="_Notification" />
+            </div>
+            @if (Model.AllBooksAndUsers.Books != null
+            && Model.AllBooksAndUsers.Books.Count() > 0
+            && Model.AllBooksAndUsers.Users != null
+            && Model.AllBooksAndUsers.Users.Count() > 0)
+            {
+
+                <form method="post">
+                    <row class="d-flex list-group-horizontal-md mb-3 float-none">
+                        <div class="form-group">
+                            <label for="booksSelect">@BookUserCreate.Book</label>
+                            <select class="form-control w-150" id="booksSelect" name="bookId" required>
+                                @foreach (var book in Model.AllBooksAndUsers.Books)
+                                {
+                                    <option class="dropdown-item" value="@book.BookId">@book.Title</option>
+                                }
+                            </select>
+                        </div>
+                        &emsp;
+                        &emsp;
+                        &emsp;
+                        <div class="form-group">
+                            <label for="usersSelect">@BookUserCreate.User</label>
+                            <select class="form-control w-150" id="usersSelect" name="userId" required>
+                                @foreach (var user in Model.AllBooksAndUsers.Users)
+                                {
+                                    <option class="dropdown-item" value="@user.UserId">@user.UserName</option>
+                                }
+                            </select>
+                        </div>
+
+                    </row>
+                    <div class="mb-3">
+                        <button class="btn btn-success" type="submit">@BookUserCreate.btnAssign</button>
+                        <a class="btn btn-info" href="/books/list">@BookUserCreate.btnCancel</a>
+                    </div>
+                </form>
+            }
+            else
+            {
+                <div class="text-center">
+                    <h3 class="mb-3">There are no Books or Users to work with</h3>
+                </div>
+            }
+        </fieldset>
+    </div>
+</div>

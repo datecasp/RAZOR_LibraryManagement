@@ -1,29 +1,159 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+	  <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Book\" />
-    <Folder Include="Category\" />
-    <Folder Include="User\" />
-  </ItemGroup>
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
 
   <ItemGroup>
-    <Compile Update="_Layout\layout.Designer.cs">
+    <Compile Update="Admins\AdminCreate.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>layout.resx</DependentUpon>
+      <DependentUpon>AdminCreate.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Admins\AdminList.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AdminList.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Admins\AdminLogin.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AdminLogin.resx</DependentUpon>
+    </Compile>
+    <Compile Update="AppSettings\AppSettings.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AppSettings.resx</DependentUpon>
+    </Compile>
+    <Compile Update="BookUser\BookUserCreate.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>BookUserCreate.resx</DependentUpon>
+    </Compile>
+    <Compile Update="BookUser\BookUserEdit.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>BookUserEdit.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Book\BookEdit.Designer.cs">
+      <DependentUpon>BookEdit.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Book\BookCreate.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>BookCreate.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Book\BookDetails.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>BookDetails.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Book\BooksList.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>BooksList.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Category\CategoriesList.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CategoriesList.resx</DependentUpon>
+    </Compile>
+    <Compile Update="User\UserCreate.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>UserCreate.resx</DependentUpon>
+    </Compile>
+    <Compile Update="User\UserDetails.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>UserDetails.resx</DependentUpon>
+    </Compile>
+    <Compile Update="User\UserEdit.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>UserEdit.resx</DependentUpon>
+    </Compile>
+    <Compile Update="User\UsersList.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>UsersList.resx</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="_Layout\layout.resx">
+    <EmbeddedResource Update="Admins\AdminCreate.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>layout.Designer.cs</LastGenOutput>
+      <LastGenOutput>AdminCreate.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Admins\AdminList.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AdminList.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Admins\AdminLogin.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AdminLogin.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="AppSettings\AppSettings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppSettings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="BookUser\BookUserCreate.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>BookUserCreate.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="BookUser\BookUserEdit.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>BookUserEdit.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Book\BookEdit.resx">
+      <LastGenOutput>BookCreate - Copia.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Book\BookCreate.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>BookCreate.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Book\BookDetails.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>BookDetails.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Book\BookEdit.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>BookEdit.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Book\BooksList.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>BooksList.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Category\CategoriesList.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CategoriesList.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="User\UserCreate.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UserCreate.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="User\UserDetails.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UserDetails.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="User\UserEdit.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UserEdit.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="User\UsersList.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UsersList.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 

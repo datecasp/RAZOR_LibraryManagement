@@ -1,0 +1,29 @@
+﻿@page "{id:int}"
+@model RAZOR_LibraryManagement.Web.Pages.Books.DetailsModel
+@using RAZOR_LibraryManagement.Lang.Book
+@{
+    ViewData["Title"] = "Book details";
+}
+<div class="container">
+    <h1 class="text-dark mb-3">@Model.vmBookDetails.Title @BookDetails.Details</h1>
+    <div class="card mb-3" style="max-width: 720px;">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="@Model.vmBookDetails.ImageUrl" class="img-fluid rounded-start" alt="Book cover">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h4 class="card-title mb-2">@Model.vmBookDetails.Title</h4>
+                    <h5 class="card-subtitle mb-4">@Model.vmBookDetails.Author</h5>
+                    <h5 class="card-text mb-2">@BookDetails.BookDescription</h5>
+                    <p class="card-text">@Model.vmBookDetails.Description</p>
+                    <row class="d-flex list-group-horizontal align-items-baseline">
+                        <h5 class="card-text mb-2">@BookDetails.BookCategory &emsp;</h5>
+                        <p>@Model.vmBookDetails.Category</p>
+                    </row>
+                </div>
+            </div>
+            <p class="card-footer mb-0">@BookDetails.IsBorrowable @Model.vmBookDetails.isBorrowable</p>
+        </div>
+    </div>
+</div>

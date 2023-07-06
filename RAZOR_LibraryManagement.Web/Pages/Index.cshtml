@@ -1,10 +1,32 @@
 ﻿@page
 @model IndexModel
+@using RAZOR_LibraryManagement.Lang.Admins
 @{
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+<div class="container mx-auto">
+    <div class="row justify-content-center">
+        <div class="clo-12 col-lg-6">
+            <div class="text-center">
+                <h1 class="display-4">@AdminLogin.Welcome</h1>
+                <p>@AdminLogin.pLogin</p>
+                <partial name="_Notification" />
+            </div>
+            <form method="post">
+                <div class="mb-3">
+                    <label class="form-label">@AdminLogin.UserName</label>
+                    <input type="text" class="form-control" asp-for="vmLogin.UserName" />
+                </div>
+                <div class="mb-5">
+                    <label class="form-label">@AdminLogin.Password</label>
+                    <input type="text" class="form-control" asp-for="vmLogin.Password" />
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-info">@AdminLogin.btnLogin</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>

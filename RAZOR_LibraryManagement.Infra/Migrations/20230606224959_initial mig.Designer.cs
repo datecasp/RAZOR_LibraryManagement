@@ -62,7 +62,7 @@ namespace RAZOR_LibraryManagement.Infra.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsLoanable")
+                    b.Property<bool>("IsBorrowable")
                         .HasColumnType("bit");
 
                     b.Property<string>("Title")
@@ -94,7 +94,7 @@ namespace RAZOR_LibraryManagement.Infra.Migrations
                     b.Property<bool>("IsActualUser")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("LoanDate")
+                    b.Property<DateTime>("BorrowDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("UserId")

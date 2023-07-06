@@ -22,7 +22,53 @@ namespace RAZOR_LibraryManagement.Infra.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("RAZOR_LibraryManagement.Domain.Models.Book", b =>
+            modelBuilder.Entity("RAZOR_LibraryManagement.Models.Entities.AppSettingsEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("SettingParam")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Value")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppSettings");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            SettingParam = "DefaultFilled",
+                            Value = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            SettingParam = "DaysToWarningDate",
+                            Value = 25
+                        },
+                        new
+                        {
+                            Id = 3,
+                            SettingParam = "DaysToReturnDate",
+                            Value = 30
+                        },
+                        new
+                        {
+                            Id = 4,
+                            SettingParam = "MaxNumOfBooks",
+                            Value = 2
+                        });
+                });
+
+            modelBuilder.Entity("RAZOR_LibraryManagement.Models.Entities.Book", b =>
                 {
                     b.Property<int>("BookId")
                         .ValueGeneratedOnAdd()
@@ -45,7 +91,7 @@ namespace RAZOR_LibraryManagement.Infra.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsLoanable")
+                    b.Property<bool>("IsBorrowable")
                         .HasColumnType("bit");
 
                     b.Property<string>("Title")
@@ -63,7 +109,7 @@ namespace RAZOR_LibraryManagement.Infra.Migrations
                     b.ToTable("Books");
                 });
 
-            modelBuilder.Entity("RAZOR_LibraryManagement.Domain.Models.BookUser", b =>
+            modelBuilder.Entity("RAZOR_LibraryManagement.Models.Entities.BookUser", b =>
                 {
                     b.Property<int>("BookUserId")
                         .ValueGeneratedOnAdd()
@@ -74,11 +120,11 @@ namespace RAZOR_LibraryManagement.Infra.Migrations
                     b.Property<int>("BookId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("BorrowDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<bool>("IsActualUser")
                         .HasColumnType("bit");
-
-                    b.Property<DateTime>("LoanDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -92,7 +138,7 @@ namespace RAZOR_LibraryManagement.Infra.Migrations
                     b.ToTable("BookUsers");
                 });
 
-            modelBuilder.Entity("RAZOR_LibraryManagement.Domain.Models.Category", b =>
+            modelBuilder.Entity("RAZOR_LibraryManagement.Models.Entities.Category", b =>
                 {
                     b.Property<int>("CategoryId")
                         .ValueGeneratedOnAdd()
@@ -112,7 +158,7 @@ namespace RAZOR_LibraryManagement.Infra.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("RAZOR_LibraryManagement.Domain.Models.User", b =>
+            modelBuilder.Entity("RAZOR_LibraryManagement.Models.Entities.User", b =>
                 {
                     b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
@@ -127,7 +173,7 @@ namespace RAZOR_LibraryManagement.Infra.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Password")
+                    b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -140,9 +186,9 @@ namespace RAZOR_LibraryManagement.Infra.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("RAZOR_LibraryManagement.Domain.Models.Book", b =>
+            modelBuilder.Entity("RAZOR_LibraryManagement.Models.Entities.Book", b =>
                 {
-                    b.HasOne("RAZOR_LibraryManagement.Domain.Models.Category", "Category")
+                    b.HasOne("RAZOR_LibraryManagement.Models.Entities.Category", "Category")
                         .WithMany("Books")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -151,15 +197,15 @@ namespace RAZOR_LibraryManagement.Infra.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("RAZOR_LibraryManagement.Domain.Models.BookUser", b =>
+            modelBuilder.Entity("RAZOR_LibraryManagement.Models.Entities.BookUser", b =>
                 {
-                    b.HasOne("RAZOR_LibraryManagement.Domain.Models.Book", "Book")
+                    b.HasOne("RAZOR_LibraryManagement.Models.Entities.Book", "Book")
                         .WithMany("BookUsers")
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("RAZOR_LibraryManagement.Domain.Models.User", "User")
+                    b.HasOne("RAZOR_LibraryManagement.Models.Entities.User", "User")
                         .WithMany("BookUsers")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -170,17 +216,17 @@ namespace RAZOR_LibraryManagement.Infra.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("RAZOR_LibraryManagement.Domain.Models.Book", b =>
+            modelBuilder.Entity("RAZOR_LibraryManagement.Models.Entities.Book", b =>
                 {
                     b.Navigation("BookUsers");
                 });
 
-            modelBuilder.Entity("RAZOR_LibraryManagement.Domain.Models.Category", b =>
+            modelBuilder.Entity("RAZOR_LibraryManagement.Models.Entities.Category", b =>
                 {
                     b.Navigation("Books");
                 });
 
-            modelBuilder.Entity("RAZOR_LibraryManagement.Domain.Models.User", b =>
+            modelBuilder.Entity("RAZOR_LibraryManagement.Models.Entities.User", b =>
                 {
                     b.Navigation("BookUsers");
                 });

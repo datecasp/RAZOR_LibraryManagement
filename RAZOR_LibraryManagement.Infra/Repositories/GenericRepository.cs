@@ -7,25 +7,25 @@ using RAZOR_LibraryManagement.Infra.DataContext;
 
 namespace RAZOR_LibraryManagement.Infra.Repositories
 {
-    public class GenericRepository<TEntity> where TEntity : class 
+    public class GenericRepository<T> : IGenericRepository<T> where T : class 
     {
         private readonly LM_DbContext _context;
-        private readonly DbSet<TEntity> _dbSet;
+        private readonly DbSet<T> _dbSet;
         private readonly IMapper _mapper;
 
         public GenericRepository(LM_DbContext context, IMapper mapper)
         {
             context = context;
-            _dbSet = context.Set<TEntity>();
+            _dbSet = context.Set<T>();
             _mapper = mapper;
         }
 
-        public virtual IEnumerable<TEntity> Get(
-            Expression<Func<TEntity, bool>> filter = null,
-            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
+        public virtual IEnumerable<T> Get(
+            Expression<Func<T, bool>> filter = null,
+            Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
             string includeProperties = "")
         {
-            IQueryable<TEntity> query = _dbSet;
+            IQueryable<T> query = _dbSet;
 
             if (filter != null)
             {
@@ -48,23 +48,23 @@ namespace RAZOR_LibraryManagement.Infra.Repositories
             }
         }
 
-        public virtual TEntity GetByID(object id)
+        public virtual T GetByID(object id)
         {
             return _dbSet.Find(id);
         }
 
-        public virtual void Insert(TEntity entity)
+        public virtual void Insert(T entity)
         {
             _dbSet.Add(entity);
         }
 
         public virtual void Delete(object id)
         {
-            TEntity entityToDelete = _dbSet.Find(id);
+            T entityToDelete = _dbSet.Find(id);
             Delete(entityToDelete);
         }
 
-        public virtual void Delete(TEntity entityToDelete)
+        public virtual void Delete(T entityToDelete)
         {
             if (_context.Entry(entityToDelete).State == EntityState.Detached)
             {
@@ -73,7 +73,7 @@ namespace RAZOR_LibraryManagement.Infra.Repositories
             _dbSet.Remove(entityToDelete);
         }
 
-        public virtual void Update(TEntity entityToUpdate)
+        public virtual void Update(T entityToUpdate)
         {
             _dbSet.Attach(entityToUpdate);
             _context.Entry(entityToUpdate).State = EntityState.Modified;

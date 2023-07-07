@@ -26,7 +26,7 @@ namespace RAZOR_LibraryManagement.Domain.Services
 
         public async Task<IEnumerable<string>> GetBooksOfUser(int userId, bool? actualUser = null)
         {
-            var booksIdList = _unitOfWork.BookUserRepository.GetBooksOfUser(userId).Result.ToList();
+            var booksIdList = _unitOfWork.BookUserRepository.GetBooksOfUser(userId, actualUser).Result.ToList();
             var booksTitleList = new List<string>();
             foreach (var bookId in booksIdList)
             {

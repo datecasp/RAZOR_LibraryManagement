@@ -33,7 +33,7 @@ namespace RAZOR_LibraryManagement.Domain.Services
                 if (bookResult != null)
                 {
                     vmNotification.Type = Lang.Notification.NotificationType.Success;
-                    vmNotification.Message = "Book created successfully";
+                    vmNotification.Message = "Operation done successfully";
                     return vmNotification;
                 }
             }

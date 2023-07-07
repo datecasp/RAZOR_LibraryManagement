@@ -7,6 +7,9 @@ namespace RAZOR_LibraryManagement.Domain.Services
     public class AppSettingsService : IAppSettingsService
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IGenericRepository<AppSettingsModel> _genericRepository;
+
+        // TODO duda automapper en patron repo generico
 
         public AppSettingsService(IUnitOfWork unitOfWork)
         {

@@ -10,6 +10,7 @@ namespace RAZOR_LibraryManagement.Web.Configuration
 
         public static IServiceCollection ResolveDependencies(this IServiceCollection services)
         {
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IAdminService, AdminService>();
             services.AddScoped<IBookRepository, BookRepository>();

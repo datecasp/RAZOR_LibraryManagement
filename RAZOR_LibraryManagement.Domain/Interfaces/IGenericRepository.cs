@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace RAZOR_LibraryManagement.Domain.Interfaces
 {
-    public interface IGenericRepository<TEntity>
+    public interface IGenericRepository<T> where T : class
     {
-        IEnumerable<TEntity> Get(
-            Expression<Func<TEntity, bool>> filter = null,
-            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
+        IEnumerable<T> Get(
+            Expression<Func<T, bool>> filter = null,
+            Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
             string includeProperties = "");
-        TEntity GetByID(object id);
-        void Insert(TEntity entity);
+        T GetByID(object id);
+        void Insert(T entity);
         void Delete(object id);
-        void Delete(TEntity entityToDelete);
-        void Update(TEntity entityToUpdate);
+        void Delete(T entityToDelete);
+        void Update(T entityToUpdate);
     }
 }

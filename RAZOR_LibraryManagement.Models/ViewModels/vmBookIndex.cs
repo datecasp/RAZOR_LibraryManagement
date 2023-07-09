@@ -5,7 +5,7 @@ namespace RAZOR_LibraryManagement.Models.ViewModels
     public class vmBookIndex
     {
         [Required]
-        public int Id { get; set; }
+        public int BookId { get; set; }
         [Required]
         public string Title { get; set; }
         [Required]

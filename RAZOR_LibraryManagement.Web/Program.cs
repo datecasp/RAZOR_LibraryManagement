@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using RAZOR_LibraryManagement.Infra.DataContext;
 using RAZOR_LibraryManagement.Models.Entities;
+using RAZOR_LibraryManagement.Models.MapperProfiles;
 using RAZOR_LibraryManagement.Web.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,7 +27,7 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<AuthDbContext>();
 
 builder.Services.Configure<AppSettingsEntity>(builder.Configuration.GetSection("AppConfigs"));
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddAutoMapper(typeof(MapperProfiles));
 
 //If not logged, redirects to Index, where login lives
 builder.Services.ConfigureApplicationCookie(options =>

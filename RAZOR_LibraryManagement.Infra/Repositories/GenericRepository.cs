@@ -4,6 +4,7 @@ using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using RAZOR_LibraryManagement.Domain.Interfaces;
 using RAZOR_LibraryManagement.Infra.DataContext;
+using RAZOR_LibraryManagement.Models.ViewModels;
 
 namespace RAZOR_LibraryManagement.Infra.Repositories
 {
@@ -18,6 +19,13 @@ namespace RAZOR_LibraryManagement.Infra.Repositories
             context = context;
             _dbSet = context.Set<T>();
             _mapper = mapper;
+        }
+
+        public async Task<IEnumerable<T>> GetAllProfiled()
+        {
+            var elements = _dbSet.ToList();
+            var result = MapTo<List<T>>(elements);
+            return result;
         }
 
         public virtual IEnumerable<T> Get(
@@ -77,6 +85,12 @@ namespace RAZOR_LibraryManagement.Infra.Repositories
         {
             _dbSet.Attach(entityToUpdate);
             _context.Entry(entityToUpdate).State = EntityState.Modified;
+        }
+
+        // Mapping T <-> TagretObject
+        public TDestination MapTo<TDestination>(object source)
+        {
+            return _mapper.Map<TDestination>(source);
         }
     }
 }

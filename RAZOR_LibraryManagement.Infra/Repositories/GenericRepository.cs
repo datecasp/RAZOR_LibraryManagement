@@ -1,10 +1,10 @@
-﻿using System.Data;
-using System.Linq.Expressions;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using RAZOR_LibraryManagement.Domain.Interfaces;
 using RAZOR_LibraryManagement.Infra.DataContext;
-using RAZOR_LibraryManagement.Models.ViewModels;
+using RAZOR_LibraryManagement.Models.Models;
+using System.Data;
+using System.Linq.Expressions;
 
 namespace RAZOR_LibraryManagement.Infra.Repositories
 {
@@ -21,10 +21,11 @@ namespace RAZOR_LibraryManagement.Infra.Repositories
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<T>> GetAllProfiled()
+        public async Task<IEnumerable<TDestiny>> GetAllProfiled<TDestiny>()
         {
+            // TODO How to map to targetModel in repo layer
             var elements = _dbSet.ToList();
-            var result = MapTo<List<T>>(elements);
+            var result = MapTo<List<TDestiny>> (elements);
             return result;
         }
 

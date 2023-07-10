@@ -9,6 +9,6 @@
         public IAppSettingsRepository AppSettingsRepository { get; }
         void Save();
         void Dispose();
-
+        IGenericRepository<T> GetRepository<T>() where T : class;
     }
 }

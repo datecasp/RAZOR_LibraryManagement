@@ -9,6 +9,7 @@ namespace RAZOR_LibraryManagement.Infra.UnitOfWork
     {
         private readonly LM_DbContext _context;
         private readonly IMapper _mapper;
+        private readonly Dictionary<Type, object> _repositories;
 
         public ICategoryRepository CategoryRepository { get; set; }
         public IBookRepository BookRepository { get; set; }
@@ -20,6 +21,7 @@ namespace RAZOR_LibraryManagement.Infra.UnitOfWork
         {
             _context = lM_DbContext;
             _mapper = mapper;
+            _repositories = new Dictionary<Type, object>();
             CategoryRepository = new CategoryRepository(_context, _mapper);
             BookRepository = new BookRepository(_context, _mapper);
             UserRepository = new UserRepository(_context, _mapper);
@@ -36,20 +38,32 @@ namespace RAZOR_LibraryManagement.Infra.UnitOfWork
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!this.disposed && _context != null)
+            if (!disposed && _context != null)
             {
                 if (disposing)
                 {
                     _context.Dispose();
                 }
             }
-            this.disposed = true;
+            disposed = true;
         }
 
         public void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
+        }
+
+        public IGenericRepository<T> GetRepository<T>() where T : class
+        {
+            if (_repositories.ContainsKey(typeof(T)))
+            {
+                return (IGenericRepository<T>)_repositories[typeof(T)];
+            }
+
+            var repository = new GenericRepository<T>(_context, _mapper);
+            _repositories[typeof(T)] = repository;
+            return repository;
         }
     }
 }

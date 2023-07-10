@@ -9,6 +9,7 @@ namespace RAZOR_LibraryManagement.Domain.Interfaces
 {
     public interface IGenericRepository<T> where T : class
     {
+        Task<IEnumerable<TDestiny>> GetAllProfiled<TDestiny>();
         IEnumerable<T> Get(
             Expression<Func<T, bool>> filter = null,
             Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,

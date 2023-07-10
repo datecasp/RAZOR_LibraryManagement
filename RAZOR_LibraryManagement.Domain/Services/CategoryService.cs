@@ -1,4 +1,5 @@
 ﻿using RAZOR_LibraryManagement.Domain.Interfaces;
+using RAZOR_LibraryManagement.Lang.Book;
 using RAZOR_LibraryManagement.Models.Entities;
 using RAZOR_LibraryManagement.Models.Models;
 using RAZOR_LibraryManagement.Models.ViewModels;
@@ -45,7 +46,8 @@ namespace RAZOR_LibraryManagement.Domain.Services
             var categoriesList = new List<CategoryModel>();
             try
             {
-                categoriesList = (await _unitOfWork.CategoryRepository.GetAllCategories()).ToList();
+                var repo = _unitOfWork.GetRepository<Category>();
+                categoriesList = repo.GetAllProfiled<CategoryModel>().Result.ToList();
             }
             catch (Exception ex)
             {

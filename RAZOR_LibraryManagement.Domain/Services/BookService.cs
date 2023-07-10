@@ -1,5 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 using RAZOR_LibraryManagement.Domain.Interfaces;
+using RAZOR_LibraryManagement.Models.Entities;
 using RAZOR_LibraryManagement.Models.Models;
 using RAZOR_LibraryManagement.Models.ViewModels;
 
@@ -53,11 +54,15 @@ namespace RAZOR_LibraryManagement.Domain.Services
             var booksList = new List<BookModel>();
             try
             {
-                booksList = (await _unitOfWork.BookRepository.GetAllBooks()).ToList();
+                var repo = _unitOfWork.GetRepository<Book>();
+                booksList = repo.GetAllProfiled<BookModel>().Result.ToList();
             }
             catch (Exception ex)
             {
-
+                var vmNotification = new vmNotification();
+                vmNotification.Type = Lang.Notification.NotificationType.Error;
+                vmNotification.Message = "Hmmm something went wrong here....";
+                // TODO Send this to controller and loger
             }
             return booksList;
         }

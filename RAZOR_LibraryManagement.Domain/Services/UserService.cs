@@ -1,4 +1,6 @@
 ﻿using RAZOR_LibraryManagement.Domain.Interfaces;
+using RAZOR_LibraryManagement.Lang.Book;
+using RAZOR_LibraryManagement.Models.Entities;
 using RAZOR_LibraryManagement.Models.Models;
 using RAZOR_LibraryManagement.Models.ViewModels;
 
@@ -43,7 +45,8 @@ namespace RAZOR_LibraryManagement.Domain.Services
             var usersList = new List<UserModel>();
             try
             {
-                usersList = (await _unitOfWork.UserRepository.GetAllUsers()).ToList();
+                var repo = _unitOfWork.GetRepository<Book>();
+                usersList = repo.GetAllProfiled<UserModel>().Result.ToList();
             }
             catch (Exception ex)
             {

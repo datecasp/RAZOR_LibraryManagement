@@ -22,7 +22,7 @@ namespace RAZOR_LibraryManagement.Models.MapperProfiles
                 .ReverseMap();
 
             // Model <-> ViewModel
-            CreateMap<vmBookCreate, BookModel>()
+            CreateMap<vmBookEdit, BookModel>()
                 .ReverseMap();
             CreateMap<vmBookDetails, BookModel>()
                 .ReverseMap();

@@ -2,7 +2,7 @@
 
 namespace RAZOR_LibraryManagement.Models.ViewModels
 {
-    public class vmBookCreate
+    public class vmBookEdit
     {
         [Required]
         public int BookId { get; set; }

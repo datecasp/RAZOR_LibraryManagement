@@ -1,5 +1,6 @@
 ﻿using RAZOR_LibraryManagement.Domain.Interfaces;
 using RAZOR_LibraryManagement.Lang.Book;
+using RAZOR_LibraryManagement.Lang.Category;
 using RAZOR_LibraryManagement.Models.Entities;
 using RAZOR_LibraryManagement.Models.Models;
 using RAZOR_LibraryManagement.Models.ViewModels;
@@ -59,8 +60,8 @@ namespace RAZOR_LibraryManagement.Domain.Services
             var user = new UserModel();
             try
             {
-                user = (await _unitOfWork.UserRepository.GetAllUsers())
-                    .FirstOrDefault(u => u.UserId == userId);
+                var repo = _unitOfWork.GetRepository<User>();
+                user = repo.GetByIdProfiled<UserModel>(userId).Result;
             }
             catch (Exception ex)
             {

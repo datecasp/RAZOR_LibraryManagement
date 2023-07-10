@@ -13,18 +13,18 @@
                 <partial name="_Notification" />
             </div>
             <form method="post">
-                <div hidden><input type="text" class="form-control" asp-for="vmBookCreate.BookId"/></div>
+                <div hidden><input type="text" class="form-control" asp-for="vmBookEdit.BookId" /></div>
                 <div class="mb-3">
                     <label class="form-label">@BookEdit.Title</label>
-                    <input type="text" class="form-control" asp-for="vmBookCreate.Title" required />
+                    <input type="text" class="form-control" asp-for="vmBookEdit.Title" required />
                 </div>
                 <div class="mb-3">
                     <label class="form-label">@BookEdit.Author</label>
-                    <input type="text" class="form-control" asp-for="vmBookCreate.Author" required />
+                    <input type="text" class="form-control" asp-for="vmBookEdit.Author" required />
                 </div>
                 <div class="mb-3">
                     <label class="form-label">@BookEdit.Description</label>
-                    <input type="text" class="form-control" asp-for="vmBookCreate.Description" required />
+                    <input type="text" class="form-control" asp-for="vmBookEdit.Description" required />
                 </div>
 
                 <div class="mb-3">
@@ -33,7 +33,7 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label">@BookEdit.ImageUrl</label>
-                    <input type="text" class="form-control" asp-for="vmBookCreate.ImageUrl" id="imageUrlCloudinary" required />
+                    <input type="text" class="form-control" asp-for="vmBookEdit.ImageUrl" id="imageUrlCloudinary" required />
                 </div>
                 <fieldset class="row mb-3">
                     <legend class="col-form-label">
@@ -41,12 +41,24 @@
                     </legend>
                     @foreach (var cat in Model.vmCategoryIndexList)
                     {
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" asp-for="vmBookCreate.CategoryId" value="@cat.CatId" name="radioCategory" id="@cat.Name" required>
-                            <label class="form-check-label" for="@cat.Name">
-                                @cat.Name
-                            </label>
-                        </div>
+                        @if (cat.CategoryId == Model.vmBookEdit.CategoryId)
+                        {
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="vmBookEdit.CategoryId" checked value="@cat.CategoryId" name="radioCategory" id="@cat.Name" required>
+                                <label class="form-check-label" for="@cat.Name">
+                                    @cat.Name
+                                </label>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" asp-for="vmBookEdit.CategoryId" value="@cat.CategoryId" name="radioCategory" id="@cat.Name" required>
+                                <label class="form-check-label" for="@cat.Name">
+                                    @cat.Name
+                                </label>
+                            </div>
+                        }
                     }
                 </fieldset>
                 <div class="mb-3">
@@ -54,7 +66,7 @@
                         @BookEdit.pBorrow
                     </label>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" asp-for="vmBookCreate.IsBorrowable" />
+                        <input class="form-check-input" type="checkbox" asp-for="vmBookEdit.IsBorrowable" />
                         <label class="form-check-label" for="flexCheckDefault">
                             @BookEdit.Yes
                         </label>

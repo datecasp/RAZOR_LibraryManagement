@@ -1,5 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 using RAZOR_LibraryManagement.Domain.Interfaces;
+using RAZOR_LibraryManagement.Lang.Category;
 using RAZOR_LibraryManagement.Models.Entities;
 using RAZOR_LibraryManagement.Models.Models;
 using RAZOR_LibraryManagement.Models.ViewModels;
@@ -72,7 +73,8 @@ namespace RAZOR_LibraryManagement.Domain.Services
             var book = new BookModel();
             try
             {
-                book = await _unitOfWork.BookRepository.GetBookById(id);
+                var repo = _unitOfWork.GetRepository<Book>();
+                book = repo.GetByIdProfiled<BookModel>(id).Result;
             }
             catch (Exception ex)
             {

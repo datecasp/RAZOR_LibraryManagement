@@ -1,5 +1,6 @@
 ﻿using RAZOR_LibraryManagement.Domain.Interfaces;
 using RAZOR_LibraryManagement.Lang.Book;
+using RAZOR_LibraryManagement.Lang.Category;
 using RAZOR_LibraryManagement.Models.Entities;
 using RAZOR_LibraryManagement.Models.Models;
 using RAZOR_LibraryManagement.Models.ViewModels;
@@ -8,8 +9,7 @@ namespace RAZOR_LibraryManagement.Domain.Services
 {
     public class CategoryService : ICategoryService
     {
-        private readonly IUnitOfWork _unitOfWork
-            ;
+        private readonly IUnitOfWork _unitOfWork;
 
         public CategoryService(IUnitOfWork unitOfWork)
         {
@@ -77,7 +77,8 @@ namespace RAZOR_LibraryManagement.Domain.Services
             var result = new CategoryModel();
             try
             {
-                result = await _unitOfWork.CategoryRepository.GetCategoryById(id);
+                var repo = _unitOfWork.GetRepository<Category>();
+                result = repo.GetByIdProfiled<CategoryModel>(id).Result;
             }
             catch (Exception ex)
             {

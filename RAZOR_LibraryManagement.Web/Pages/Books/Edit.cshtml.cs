@@ -16,7 +16,7 @@ namespace RAZOR_LibraryManagement.Web.Pages.Books
         private readonly ICategoryService _categoryService;
 
         [BindProperty]
-        public vmBookCreate vmBookCreate { get; set; }
+        public vmBookEdit vmBookEdit { get; set; }
         [BindProperty]
         public vmCategoryIndex vmCategory { get; set; }
         [BindProperty]
@@ -41,13 +41,13 @@ namespace RAZOR_LibraryManagement.Web.Pages.Books
             var book = await _bookService.GetBookByIdService(id);
             var catList = (List<CategoryModel>)_categoryService.GetActiveCategoriesService().Result;
             vmCategoryIndexList = _mapper.Map<List<vmCategoryIndex>>(catList);
-            vmBookCreate = _mapper.Map<vmBookCreate>(book);
+            vmBookEdit = _mapper.Map<vmBookEdit>(book);
         }
 
         public async Task<IActionResult> OnPost(int radioCategory)
         {
-            vmBookCreate.CategoryId = radioCategory;
-            var bookModel = _mapper.Map<BookModel>(vmBookCreate);
+            vmBookEdit.CategoryId = radioCategory;
+            var bookModel = _mapper.Map<BookModel>(vmBookEdit);
             var notification = await _bookService.CreateUpdateBookService(bookModel, true);
             TempData["Notification"] = JsonSerializer.Serialize(notification);
 

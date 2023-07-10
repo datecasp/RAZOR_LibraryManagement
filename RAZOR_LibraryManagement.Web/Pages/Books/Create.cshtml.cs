@@ -16,7 +16,7 @@ namespace RAZOR_LibraryManagement.Web.Pages.Books
         private readonly ICategoryService _categoryService;
 
         [BindProperty]
-        public vmBookCreate vmBookCreate { get; set; }
+        public vmBookEdit vmBookCreate { get; set; }
         [BindProperty]
         public vmCategoryIndex vmCategory { get; set; }
         [BindProperty]

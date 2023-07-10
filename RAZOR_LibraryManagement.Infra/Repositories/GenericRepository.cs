@@ -28,6 +28,13 @@ namespace RAZOR_LibraryManagement.Infra.Repositories
             return result;
         }
 
+        public async Task<TDestiny> GetByIdProfiled<TDestiny>(int id)
+        {
+            var element = _dbSet.Find(id);
+            var result = MapTo<TDestiny>(element);
+            return result;
+        }
+
         public virtual IEnumerable<T> Get(
             Expression<Func<T, bool>> filter = null,
             Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,

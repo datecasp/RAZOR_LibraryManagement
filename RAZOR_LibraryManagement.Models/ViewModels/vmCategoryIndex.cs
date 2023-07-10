@@ -5,7 +5,7 @@ namespace RAZOR_LibraryManagement.Models.ViewModels
     public class vmCategoryIndex
     {
         [Required]
-        public int CatId { get; set; }
+        public int CategoryId { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]

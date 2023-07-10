@@ -23,7 +23,6 @@ namespace RAZOR_LibraryManagement.Infra.Repositories
 
         public async Task<IEnumerable<TDestiny>> GetAllProfiled<TDestiny>()
         {
-            // TODO How to map to targetModel in repo layer
             var elements = _dbSet.ToList();
             var result = MapTo<List<TDestiny>> (elements);
             return result;

@@ -1,4 +1,6 @@
 ﻿using RAZOR_LibraryManagement.Domain.Interfaces;
+using RAZOR_LibraryManagement.Lang.Book;
+using RAZOR_LibraryManagement.Models.Entities;
 using RAZOR_LibraryManagement.Models.Models;
 using RAZOR_LibraryManagement.Models.ViewModels;
 
@@ -9,8 +11,6 @@ namespace RAZOR_LibraryManagement.Domain.Services
         private readonly IUnitOfWork _unitOfWork;
         private readonly IGenericRepository<AppSettingsModel> _genericRepository;
 
-        // TODO duda automapper en patron repo generico
-
         public AppSettingsService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
@@ -18,7 +18,8 @@ namespace RAZOR_LibraryManagement.Domain.Services
 
         public async Task<IEnumerable<AppSettingsModel>> GetAllSettings()
         {
-            return await _unitOfWork.AppSettingsRepository.GetAllSettings();
+            var repo = _unitOfWork.GetRepository<AppSettingsEntity>();
+            return repo.GetAllProfiled<AppSettingsModel>().Result.ToList();
         }
 
         public async Task<vmNotification> UpdateSettingService(AppSettingsModel setting)

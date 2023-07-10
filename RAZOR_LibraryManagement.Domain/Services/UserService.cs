@@ -45,7 +45,7 @@ namespace RAZOR_LibraryManagement.Domain.Services
             var usersList = new List<UserModel>();
             try
             {
-                var repo = _unitOfWork.GetRepository<Book>();
+                var repo = _unitOfWork.GetRepository<User>();
                 usersList = repo.GetAllProfiled<UserModel>().Result.ToList();
             }
             catch (Exception ex)

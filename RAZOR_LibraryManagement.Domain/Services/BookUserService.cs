@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using RAZOR_LibraryManagement.Domain.Interfaces;
+using RAZOR_LibraryManagement.Models.Entities;
 using RAZOR_LibraryManagement.Models.Models;
 using RAZOR_LibraryManagement.Models.ViewModels;
 
@@ -65,8 +66,12 @@ namespace RAZOR_LibraryManagement.Domain.Services
 
         public async Task<AllBooksAndUsersModel> GetBorrowableBooksAndUsersService()
         {
-            var users = (await _unitOfWork.UserRepository.GetAllUsers()).Where(u => u.IsActive).ToList();
-            var books = (await _unitOfWork.BookRepository.GetAllBooks()).Where(b => b.IsBorrowable).ToList();
+            var userRepo = _unitOfWork.GetRepository<User>();
+            var bookRepo = _unitOfWork.GetRepository<Book>();
+            var users = userRepo.Get<UserModel>(u => u.IsActive);
+            var books = bookRepo.Get<BookModel>(b => b.IsBorrowable);
+            //var users = (await _unitOfWork.UserRepository.GetAllUsers()).Where(u => u.IsActive).ToList();
+            //var books = (await _unitOfWork.BookRepository.GetAllBooks()).Where(b => b.IsBorrowable).ToList();
             var borrowedBooksIds = (await _unitOfWork.BookUserRepository.GetBorrowedBooks()).ToList();
             var avaliableBooks = new List<BookModel>();
             foreach (var book in books)

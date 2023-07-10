@@ -35,7 +35,7 @@ namespace RAZOR_LibraryManagement.Infra.Repositories
             return result;
         }
 
-        public virtual IEnumerable<T> Get(
+        public virtual IEnumerable<TDestiny> Get<TDestiny>(
             Expression<Func<T, bool>> filter = null,
             Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
             string includeProperties = "")
@@ -55,11 +55,11 @@ namespace RAZOR_LibraryManagement.Infra.Repositories
 
             if (orderBy != null)
             {
-                return orderBy(query).ToList();
+                return MapTo<List<TDestiny>>(orderBy(query));
             }
             else
             {
-                return query.ToList();
+                return MapTo<List<TDestiny>>(query);
             }
         }
 

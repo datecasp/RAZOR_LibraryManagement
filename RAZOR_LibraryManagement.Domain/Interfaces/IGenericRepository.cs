@@ -11,7 +11,7 @@ namespace RAZOR_LibraryManagement.Domain.Interfaces
     {
         Task<IEnumerable<TDestiny>> GetAllProfiled<TDestiny>();
         Task<TDestiny> GetByIdProfiled<TDestiny>(int id);
-        IEnumerable<T> Get(
+        IEnumerable<TDestiny> Get<TDestiny>(
             Expression<Func<T, bool>> filter = null,
             Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
             string includeProperties = "");

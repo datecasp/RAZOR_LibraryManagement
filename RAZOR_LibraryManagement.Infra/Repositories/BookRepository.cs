@@ -1,9 +1,6 @@
 ﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
 using RAZOR_LibraryManagement.Domain.Interfaces;
 using RAZOR_LibraryManagement.Infra.DataContext;
-using RAZOR_LibraryManagement.Models.Entities;
-using RAZOR_LibraryManagement.Models.Models;
 
 namespace RAZOR_LibraryManagement.Infra.Repositories
 {
@@ -16,64 +13,6 @@ namespace RAZOR_LibraryManagement.Infra.Repositories
         {
             _lM_DbContext = lM_DbContext;
             _mapper = mapper;
-        }
-        public async Task<IEnumerable<BookModel>> GetAllBooks()
-        {
-            var result = new List<BookModel>();
-            try
-            {
-                var bookList = await _lM_DbContext.Books.ToListAsync();
-                result = _mapper.Map<List<BookModel>>(bookList);
-            }
-            catch (Exception ex)
-            {
-
-            }
-            return result;
-
-        }
-
-        public async Task<BookModel> GetBookById(int id)
-        {
-            var result = new BookModel();
-            try
-            {
-                var book = _lM_DbContext.Books.Where(b => b.BookId == id).FirstOrDefault();
-                result = _mapper.Map<BookModel>(book);
-            }
-            catch (Exception ex)
-            {
-
-            }
-            return result;
-        }
-
-        public async Task<BookModel> CreateBook(BookModel bookModel)
-        {
-            var book = _mapper.Map<Book>(bookModel);
-            try
-            {
-                var result = _lM_DbContext.Books.Add(book);
-                return _mapper.Map<BookModel>(result.Entity);
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-        }
-
-        public async Task<BookModel> UpdateBook(BookModel bookModel)
-        {
-            var book = _mapper.Map<Book>(bookModel);
-            try
-            {
-                var result = _lM_DbContext.Books.Update(book);
-                return _mapper.Map<BookModel>(result.Entity);
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
         }
     }
 }

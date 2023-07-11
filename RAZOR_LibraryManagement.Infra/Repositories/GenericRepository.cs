@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using RAZOR_LibraryManagement.Domain.Interfaces;
 using RAZOR_LibraryManagement.Infra.DataContext;
-using RAZOR_LibraryManagement.Models.Models;
 using System.Data;
 using System.Linq.Expressions;
 

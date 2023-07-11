@@ -1,6 +1,4 @@
 ﻿using RAZOR_LibraryManagement.Domain.Interfaces;
-using RAZOR_LibraryManagement.Lang.Book;
-using RAZOR_LibraryManagement.Lang.Category;
 using RAZOR_LibraryManagement.Models.Entities;
 using RAZOR_LibraryManagement.Models.Models;
 using RAZOR_LibraryManagement.Models.ViewModels;
@@ -103,7 +101,8 @@ namespace RAZOR_LibraryManagement.Domain.Services
         #region private methods
         private async Task<bool> CheckIfEmailExists(string email)
         {
-            var userIfExists = _unitOfWork.UserRepository.GetUserByEmail(email).Result;
+            var repo = _unitOfWork.GetRepository<User>();
+            var userIfExists = repo.Get<UserModel>(u => u.Email.Equals("email"));
             if (userIfExists == null)
             {
                 return false;

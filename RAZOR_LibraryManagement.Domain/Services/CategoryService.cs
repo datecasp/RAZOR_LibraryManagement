@@ -1,6 +1,4 @@
 ﻿using RAZOR_LibraryManagement.Domain.Interfaces;
-using RAZOR_LibraryManagement.Lang.Book;
-using RAZOR_LibraryManagement.Lang.Category;
 using RAZOR_LibraryManagement.Models.Entities;
 using RAZOR_LibraryManagement.Models.Models;
 using RAZOR_LibraryManagement.Models.ViewModels;
@@ -21,9 +19,10 @@ namespace RAZOR_LibraryManagement.Domain.Services
             var vmNotification = new vmNotification();
             try
             {
-                var categoryResult = await _unitOfWork.CategoryRepository.CreateCategory(categoryModel);
+                var repo = _unitOfWork.GetRepository<Category>();
+                var result = repo.Insert<CategoryModel>(categoryModel);
                 _unitOfWork.Save();
-                if(categoryResult != null)
+                if(result != null)
                 {
                     vmNotification.Type = Lang.Notification.NotificationType.Success;
                     vmNotification.Message = "Category created successfully";
@@ -61,9 +60,8 @@ namespace RAZOR_LibraryManagement.Domain.Services
             var categoriesList = new List<CategoryModel>();
             try
             {
-                categoriesList = (await _unitOfWork.CategoryRepository.GetAllCategories())
-                    .Where(c => c.IsActive)
-                    .ToList();
+                var repo = _unitOfWork.GetRepository<Category>();
+                categoriesList = repo.Get<CategoryModel>(c => c.IsActive).ToList();
             }
             catch (Exception ex)
             {

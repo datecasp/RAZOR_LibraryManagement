@@ -24,15 +24,17 @@ namespace RAZOR_LibraryManagement.Domain.Services
 
         public async Task<vmNotification> UpdateSettingService(AppSettingsModel setting)
         {
-            var result = await _unitOfWork.AppSettingsRepository.UpdateSetting(setting);
+            var repo = _unitOfWork.GetRepository<AppSettingsEntity>();
+            var result =repo.Update<AppSettingsModel>(setting);
             _unitOfWork.Save();
             return _NotificationFactory(result, null);
         }
 
         public async Task<vmNotification> UpdateSettingService(AppSettingsModel warningSetting, AppSettingsModel returnSetting)
         {
-            var resultWarn = await _unitOfWork.AppSettingsRepository.UpdateSetting(warningSetting);
-            var resultReturn = await _unitOfWork.AppSettingsRepository.UpdateSetting(returnSetting);
+            var repo = _unitOfWork.GetRepository<AppSettingsEntity>();
+            var resultWarn = repo.Update<AppSettingsModel>(warningSetting);
+            var resultReturn = repo.Update<AppSettingsModel>(returnSetting);
             _unitOfWork.Save();
             return _NotificationFactory(resultWarn, resultReturn);
         }

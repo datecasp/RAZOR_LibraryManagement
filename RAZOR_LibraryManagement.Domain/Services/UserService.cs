@@ -23,7 +23,8 @@ namespace RAZOR_LibraryManagement.Domain.Services
             {
                 if (!CheckIfEmailExists(userModel.Email).Result)
                 {
-                    var userResult = await _unitOfWork.UserRepository.CreateUser(userModel);
+                    var repo = _unitOfWork.GetRepository<User>();
+                    var result = repo.Insert<UserModel>(userModel);
                     _unitOfWork.Save();
                     vmNotification.Type = Lang.Notification.NotificationType.Success;
                     vmNotification.Message = "User created successfully";
@@ -75,8 +76,9 @@ namespace RAZOR_LibraryManagement.Domain.Services
             var vmNotification = new vmNotification();
             try
             {
-                var userResult = await _unitOfWork.UserRepository.UpdateUser(userModel);
-                if(userResult != null)
+                var repo = _unitOfWork.GetRepository<User>();
+                var result = repo.Update<UserModel>(userModel);
+                if (result != null)
                 {
                     _unitOfWork.Save();
                     vmNotification.Type = Lang.Notification.NotificationType.Success;

@@ -152,7 +152,7 @@ namespace RAZOR_LibraryManagement.Domain.Services
 
             var settingsRepo = _unitOfWork.GetRepository<AppSettingsEntity>();
             var bookUserRepository = _unitOfWork.GetRepository<BookUser>();
-            var setting = settingsRepo.Get<AppSettingsModel>(s => s.SettingParam.Equals("MaxNumOfBooks")).FirstOrDefault();
+            var setting = settingsRepo.Get<AppSettingsModel>(s => s.SettingParam.Equals("MaxNumberOfBooks")).FirstOrDefault();
             var borrowedBooksByUser = bookUserRepository.Get<BookUserModel>(bu => bu.UserId == userId && bu.IsActualUser == true).Count();
 
             if (borrowedBooksByUser < setting.Value)

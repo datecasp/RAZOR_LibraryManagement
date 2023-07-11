@@ -1,9 +1,8 @@
-﻿using System.Text.RegularExpressions;
-using RAZOR_LibraryManagement.Domain.Interfaces;
-using RAZOR_LibraryManagement.Lang.Category;
+﻿using RAZOR_LibraryManagement.Domain.Interfaces;
 using RAZOR_LibraryManagement.Models.Entities;
 using RAZOR_LibraryManagement.Models.Models;
 using RAZOR_LibraryManagement.Models.ViewModels;
+using System.Text.RegularExpressions;
 
 namespace RAZOR_LibraryManagement.Domain.Services
 {
@@ -15,9 +14,15 @@ namespace RAZOR_LibraryManagement.Domain.Services
         {
             _unitOfWork = unitOfWork;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bookModel"></param>
+        /// <param name="isUpdate"></param>
+        /// <returns></returns>
         public async Task<vmNotification> CreateUpdateBookService(BookModel bookModel, bool isUpdate)
         {
+            var bookRepository = _unitOfWork.GetRepository<Book>();
             var vmNotification = new vmNotification();
             bookModel.UrlHandle = FormatUrl(bookModel.Title);
             try
@@ -25,11 +30,11 @@ namespace RAZOR_LibraryManagement.Domain.Services
                 var bookResult = new BookModel();
                 if (isUpdate)
                 {
-                    bookResult = await _unitOfWork.BookRepository.UpdateBook(bookModel);
+                    bookResult = bookRepository.Update<BookModel>(bookModel);
                 }
                 else
                 {
-                    bookResult = await _unitOfWork.BookRepository.CreateBook(bookModel);
+                    bookResult = bookRepository.Insert<BookModel>(bookModel);
                 }
                 _unitOfWork.Save();
                 if (bookResult != null)
@@ -49,7 +54,10 @@ namespace RAZOR_LibraryManagement.Domain.Services
             vmNotification.Message = "Hmmm something went wrong here....";
             return vmNotification;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public async Task<IEnumerable<BookModel>> GetAllBooksService()
         {
             var booksList = new List<BookModel>();
@@ -67,7 +75,11 @@ namespace RAZOR_LibraryManagement.Domain.Services
             }
             return booksList;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<BookModel> GetBookByIdService(int id)
         {
             var book = new BookModel();
@@ -86,7 +98,11 @@ namespace RAZOR_LibraryManagement.Domain.Services
 
         #region Private methods
 
-        //Replace white spaces with dashes for readability in url 
+        /// <summary>
+        /// Replace white spaces with dashes for readability in url 
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
         private static string FormatUrl(string url)
         {
             var result = Regex.Replace(url, " ", "-").ToLower();

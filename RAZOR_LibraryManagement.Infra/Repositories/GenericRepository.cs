@@ -68,9 +68,12 @@ namespace RAZOR_LibraryManagement.Infra.Repositories
             return _dbSet.Find(id);
         }
 
-        public virtual void Insert(T entity)
+        public virtual TDestiny Insert<TDestiny>(TDestiny entity)
         {
-            _dbSet.Add(entity);
+            var res = _mapper.Map<T>(entity);
+            res = _dbSet.Add(res).Entity;
+            var resModel = _mapper.Map<TDestiny>(res);
+            return resModel;
         }
 
         public virtual void Delete(object id)
@@ -88,11 +91,13 @@ namespace RAZOR_LibraryManagement.Infra.Repositories
             _dbSet.Remove(entityToDelete);
         }
 
-        public virtual void Update<TDestiny>(TDestiny entityToUpdate)
+        public TDestiny Update<TDestiny>(TDestiny entityToUpdate)
         {
             var res = MapTo<T>(entityToUpdate);
             _dbSet.Attach(res);
             _context.Entry(res).State = EntityState.Modified;
+            var resModel = _mapper.Map<TDestiny>(res);
+            return resModel;
         }
 
         // Mapping T <-> TagretObject

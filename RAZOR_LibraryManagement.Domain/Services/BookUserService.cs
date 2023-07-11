@@ -16,42 +16,60 @@ namespace RAZOR_LibraryManagement.Domain.Services
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<BookUserModel> GetBookUserByIdService(int id)
         {
-            var bu = await _unitOfWork.BookUserRepository.GetBookUserById(id);
-            bu.Title = _unitOfWork.BookRepository.GetBookById(bu.BookId).Result.Title;
-            bu.UserName = _unitOfWork.UserRepository.GetAllUsers().Result.Where(u => u.UserId == bu.UserId).Select(u => u.UserName).FirstOrDefault();
+            var bookRepo = _unitOfWork.GetRepository<Book>();
+            var bookUserRepo = _unitOfWork.GetRepository<BookUser>();
+            var userRepo = _unitOfWork.GetRepository<User>();
+            var bu = await bookUserRepo.GetByIdProfiled<BookUserModel>(id);
+            bu.Title = bookRepo.GetByIdProfiled<BookModel>(bu.BookId).Result.Title;
+            bu.UserName = userRepo.Get<UserModel>(u => u.UserId == bu.UserId).Select(u => u.UserName).FirstOrDefault();
             return bu;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="actualUser"></param>
+        /// <returns></returns>
         public async Task<IEnumerable<string>> GetBooksOfUser(int userId, bool? actualUser = null)
         {
-            var booksIdList = _unitOfWork.BookUserRepository.GetBooksOfUser(userId, actualUser).Result.ToList();
+            var bookRepo = _unitOfWork.GetRepository<Book>();
+            var bookUserRepo = _unitOfWork.GetRepository<BookUser>();
+            var booksIdList = bookUserRepo.Get<BookUserModel>(bu => (bu.UserId == userId && bu.IsActualUser));
             var booksTitleList = new List<string>();
             foreach (var bookId in booksIdList)
             {
-                var title = _unitOfWork.BookRepository.GetBookById(bookId.BookId).Result.Title;
+                var title = bookRepo.GetByIdProfiled<BookModel>(bookId.BookId).Result.Title;
                 booksTitleList.Add(title);
             }
             return booksTitleList;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         public async Task<vmUserDetails> GetVmUserDetails(int userId)
         {
-            var vmUser = new vmUserDetails();
-            var user = _unitOfWork.UserRepository.GetAllUsers().Result
-                .Where(u => u.UserId == userId).FirstOrDefault();
-            vmUser.UserId = user.UserId;
-            vmUser.UserName = user.UserName;
-            vmUser.PhoneNumber = user.PhoneNumber;
-            vmUser.Email = user.Email;
-            vmUser.IsActive = user.IsActive;
+            var bookRepo = _unitOfWork.GetRepository<Book>();
+            var bookUserRepo = _unitOfWork.GetRepository<BookUser>();
+            var userRepo = _unitOfWork.GetRepository<User>();
+
+            var user = userRepo.Get<UserModel>(u => u.UserId == userId).FirstOrDefault();
+            var vmUser = _mapper.Map<vmUserDetails>(user);
+            
             vmUser.ActualBooks = new List<string>();
             vmUser.HistoricBooks = new List<string>();
-            var bookUserList = _unitOfWork.BookUserRepository.GetBooksOfUser(userId).Result.ToList();
+            var bookUserList = bookUserRepo.Get<BookUserModel>(bu => bu.UserId == userId);
             foreach (var bookUser in bookUserList)
             {
-                var book = _unitOfWork.BookRepository.GetBookById(bookUser.BookId).Result;
+                var book = bookRepo.Get<BookModel>(b => b.BookId == bookUser.BookId).FirstOrDefault();
                 if (bookUser.IsActualUser)
                 {
                     vmUser.ActualBooks.Add(book.Title);
@@ -63,16 +81,18 @@ namespace RAZOR_LibraryManagement.Domain.Services
             }
             return vmUser;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public async Task<AllBooksAndUsersModel> GetBorrowableBooksAndUsersService()
         {
             var userRepo = _unitOfWork.GetRepository<User>();
             var bookRepo = _unitOfWork.GetRepository<Book>();
+            var bookUsersRepo = _unitOfWork.GetRepository<BookUser>();
             var users = userRepo.Get<UserModel>(u => u.IsActive);
             var books = bookRepo.Get<BookModel>(b => b.IsBorrowable);
-            //var users = (await _unitOfWork.UserRepository.GetAllUsers()).Where(u => u.IsActive).ToList();
-            //var books = (await _unitOfWork.BookRepository.GetAllBooks()).Where(b => b.IsBorrowable).ToList();
-            var borrowedBooksIds = (await _unitOfWork.BookUserRepository.GetBorrowedBooks()).ToList();
+            var borrowedBooksIds = bookUsersRepo.Get<BookUserModel>(bu => bu.IsActualUser).Select(bu => bu.BookId);
             var avaliableBooks = new List<BookModel>();
             foreach (var book in books)
             {
@@ -88,17 +108,31 @@ namespace RAZOR_LibraryManagement.Domain.Services
             };
             return result;
         }
-
+        /// <summary>
+        /// 
+        /// 
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         public async Task<bool> UserHasBooks(int userId)
         {
-            return _unitOfWork.BookUserRepository.GetBooksOfUser(userId, true).Result.Any();
+            var bookUserRepo = _unitOfWork.GetRepository<BookUser>();
+            return bookUserRepo.Get<BookUserModel>(bu => (bu.UserId == userId && bu.IsActualUser)).Any();
+            //return _unitOfWork.BookUserRepository.GetBooksOfUser(userId, true).Result.Any();
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public async Task<IEnumerable<BookUserModel>> GetBookUserListService()
         {
-            var res = _unitOfWork.BookUserRepository.GetAll().Result.Where(bu => bu.IsActualUser);
-            var books = await _unitOfWork.BookRepository.GetAllBooks();
-            var users = await _unitOfWork.UserRepository.GetAllUsers();
+            var userRepo = _unitOfWork.GetRepository<User>();
+            var bookRepo = _unitOfWork.GetRepository<Book>();
+            var bookUsersRepo = _unitOfWork.GetRepository<BookUser>();
+
+            var res = bookUsersRepo.Get<BookUserModel>(bu => bu.IsActualUser);
+            var books = await bookRepo.GetAllProfiled<BookModel>();
+            var users = await userRepo.GetAllProfiled<UserModel>();
             foreach (var bu in res)
             {
                 bu.Title = books.Where(b => b.BookId == bu.BookId).Select(b => b.Title).FirstOrDefault();
@@ -106,19 +140,21 @@ namespace RAZOR_LibraryManagement.Domain.Services
             }
             return res;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="bookId"></param>
+        /// <returns></returns>
         public async Task<vmNotification> AddBookToUserService(int userId, int bookId)
         {
             var vmNotification = new vmNotification();
 
-            var setting = _unitOfWork.AppSettingsRepository
-                .GetAllSettings().Result
-                .First(b => b.SettingParam.Equals("MaxNumOfBooks")
-                );
-            var borrowedBooksByUser = _unitOfWork.BookUserRepository
-                .GetBooksOfUser(userId).Result
-                .Where(bu => bu.IsActualUser)
-                .Count();
+            var settingsRepo = _unitOfWork.GetRepository<AppSettingsEntity>();
+            var bookUserRepository = _unitOfWork.GetRepository<BookUser>();
+            var setting = settingsRepo.Get<AppSettingsModel>(s => s.SettingParam.Equals("MaxNumOfBooks")).FirstOrDefault();
+            var borrowedBooksByUser = bookUserRepository.Get<BookUserModel>(bu => bu.UserId == userId && bu.IsActualUser == true).Count();
+
             if (borrowedBooksByUser < setting.Value)
             {
                 var bookUser = new BookUserModel
@@ -149,27 +185,22 @@ namespace RAZOR_LibraryManagement.Domain.Services
 
             return vmNotification;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bu"></param>
+        /// <returns></returns>
         public async Task<vmNotification> ToggleBookUserIsActualUser(BookUserModel bu)
         {
             var vmNotification = new vmNotification();
             try
             {
-                //var bu = await GetBookUserByIdService(id);
-                //bu.IsActualUser = !bu.IsActualUser;
-                
-                var res = await _unitOfWork.BookUserRepository.UpdateBookUser(bu);
-                if(bu != null)
-                {
-                    _unitOfWork.Save();
-                    vmNotification.Type = Lang.Notification.NotificationType.Success;
-                    vmNotification.Message = "Operation success";
-                }
-                else
-                {
-                    vmNotification.Type = Lang.Notification.NotificationType.Error;
-                    vmNotification.Message = "Hmmm something went wrong here....";
-                }
+                var bookUserRepository = _unitOfWork.GetRepository<BookUser>();
+                bookUserRepository.Update<BookUserModel>(bu);
+
+                _unitOfWork.Save();
+                vmNotification.Type = Lang.Notification.NotificationType.Success;
+                vmNotification.Message = "Operation success";
             }
             catch (Exception e)
             {

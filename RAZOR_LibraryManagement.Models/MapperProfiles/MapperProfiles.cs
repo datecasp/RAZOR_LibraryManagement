@@ -37,6 +37,8 @@ namespace RAZOR_LibraryManagement.Models.MapperProfiles
             CreateMap<vmUserEdit, UserModel>()
                 .ReverseMap();
             CreateMap<vmUserCreate, UserModel>()
+                .ReverseMap(); 
+            CreateMap<vmUserDetails, UserModel>()
                 .ReverseMap();
         }
     }

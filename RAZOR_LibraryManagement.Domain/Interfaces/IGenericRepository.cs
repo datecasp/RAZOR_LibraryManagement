@@ -19,6 +19,6 @@ namespace RAZOR_LibraryManagement.Domain.Interfaces
         void Insert(T entity);
         void Delete(object id);
         void Delete(T entityToDelete);
-        void Update(T entityToUpdate);
+        void Update<TDestiny>(TDestiny entityToUpdate);
     }
 }

@@ -16,7 +16,7 @@ namespace RAZOR_LibraryManagement.Infra.Repositories
 
         public GenericRepository(LM_DbContext context, IMapper mapper)
         {
-            context = context;
+            _context = context;
             _dbSet = context.Set<T>();
             _mapper = mapper;
         }
@@ -88,10 +88,11 @@ namespace RAZOR_LibraryManagement.Infra.Repositories
             _dbSet.Remove(entityToDelete);
         }
 
-        public virtual void Update(T entityToUpdate)
+        public virtual void Update<TDestiny>(TDestiny entityToUpdate)
         {
-            _dbSet.Attach(entityToUpdate);
-            _context.Entry(entityToUpdate).State = EntityState.Modified;
+            var res = MapTo<T>(entityToUpdate);
+            _dbSet.Attach(res);
+            _context.Entry(res).State = EntityState.Modified;
         }
 
         // Mapping T <-> TagretObject

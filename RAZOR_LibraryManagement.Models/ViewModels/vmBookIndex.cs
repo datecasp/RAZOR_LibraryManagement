@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace RAZOR_LibraryManagement.Models.ViewModels
+﻿namespace RAZOR_LibraryManagement.Models.ViewModels
 {
     public class vmBookIndex
     {

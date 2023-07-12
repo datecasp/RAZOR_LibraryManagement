@@ -34,11 +34,11 @@
                             <td>@bu.UserName</td>
                             @if (DateTime.Now >= bu.BorrowDate.AddDays(Model.DaysToReturnOriginal))
                             {
-                                <td class="bg-danger text-light">@bu.BorrowDate.ToShortDateString()</td>
+                                <td class="bg-danger text-light" data-bs-toggle="tooltip" data-bs-title="Return date was @bu.BorrowDate.AddDays(Model.DaysToReturnOriginal).ToShortDateString()">@bu.BorrowDate.ToShortDateString()</td>
                             }
                             else if (DateTime.Now >= bu.BorrowDate.AddDays(Model.DaysToWarnOriginal))
                             {
-                                <td class="bg-warning">@bu.BorrowDate.ToShortDateString()</td>
+                                <td class="bg-warning" data-bs-toggle="tooltip" data-bs-title="Return date is @bu.BorrowDate.AddDays(Model.DaysToReturnOriginal).ToShortDateString()">@bu.BorrowDate.ToShortDateString()</td>
                             }
                             else
                             {

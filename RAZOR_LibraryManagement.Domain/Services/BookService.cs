@@ -1,10 +1,7 @@
-﻿using AutoMapper;
-using RAZOR_LibraryManagement.Domain.Interfaces;
+﻿using RAZOR_LibraryManagement.Domain.Interfaces;
 using RAZOR_LibraryManagement.Models.Entities;
 using RAZOR_LibraryManagement.Models.Models;
 using RAZOR_LibraryManagement.Models.ViewModels;
-using System;
-using System.Net;
 using System.Text.RegularExpressions;
 
 namespace RAZOR_LibraryManagement.Domain.Services
@@ -12,12 +9,10 @@ namespace RAZOR_LibraryManagement.Domain.Services
     public class BookService : IBookService
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IMapper _mapper;
 
-        public BookService(IUnitOfWork unitOfWork, IMapper mapper)
+        public BookService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            _mapper = mapper;
         }
         /// <summary>
         /// 
@@ -70,7 +65,6 @@ namespace RAZOR_LibraryManagement.Domain.Services
             {
                 var repo = _unitOfWork.GetRepository<Book>(); 
                 var bookUserRepo = _unitOfWork.GetRepository<BookUser>();
-                var books = repo.Get<BookModel>().ToList();
                 booksList = (await repo.GetAllProfiled<vmBookIndex>()).ToList();
                 foreach(var book in booksList)
                 {
@@ -125,21 +119,6 @@ namespace RAZOR_LibraryManagement.Domain.Services
         {
             var result = Regex.Replace(url, " ", "-").ToLower();
             return result;
-        }
-
-        private class BookEqualityComparer : IEqualityComparer<vmBookIndex>
-        {
-            public bool Equals(vmBookIndex x, vmBookIndex y)
-            {
-                // Compare persons based on their name
-                return x.BookId == y.BookId;
-            }
-
-            public int GetHashCode(vmBookIndex obj)
-            {
-                // Use the name's hash code as the hash code for the person
-                return obj.BookId.GetHashCode();
-            }
         }
 
         #endregion

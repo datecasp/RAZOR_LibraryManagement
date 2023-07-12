@@ -140,7 +140,7 @@ namespace RAZOR_LibraryManagement.Domain.Services
             var bookRepo = _unitOfWork.GetRepository<Book>();
             var bookUsersRepo = _unitOfWork.GetRepository<BookUser>();
 
-            var res = bookUsersRepo.Get<BookUserModel>(bu => bu.IsActualUser);
+            var res = bookUsersRepo.Get<BookUserModel>(bu => bu.IsActualUser).OrderBy(bu => bu.BorrowDate);
             var books = await bookRepo.GetAllProfiled<BookModel>();
             var users = await userRepo.GetAllProfiled<UserModel>();
             foreach (var bu in res)

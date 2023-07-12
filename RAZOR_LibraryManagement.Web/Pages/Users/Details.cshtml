@@ -3,7 +3,6 @@
 @using RAZOR_LibraryManagement.Lang.User
 @{
     ViewData["Title"] = "User details";
-    var tog = "Change user isActive with toggle slider";
 }
 <div class="container">
     <h1 class="text-dark mb-3">@UserDetails.Info &nbsp; @Model.vmUserDetails.UserName </h1>
@@ -38,7 +37,7 @@
             </div>
         </div>
         <div class="card-footer mb-0  d-flex list-group-horizontal">
-            <div data-bs-toggle="tooltip" data-bs-title="@tog">
+            <div>
                 @UserDetails.IsActive
                 &emsp;
                 @Model.vmUserDetails.IsActive

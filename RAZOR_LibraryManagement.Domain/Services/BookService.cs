@@ -68,7 +68,7 @@ namespace RAZOR_LibraryManagement.Domain.Services
                 booksList = (await repo.GetAllProfiled<vmBookIndex>()).ToList();
                 foreach(var book in booksList)
                 {
-                    if(bookUserRepo.Get<BookUserModel>(bu => (bu.BookId == book.BookId && bu.IsActualUser)).Any())
+                    if(bookUserRepo.Get<BookUserModel>(bu => (bu.BookId == book.BookId && bu.IsActualUser)).Any() || !book.IsBorrowable)
                     {
                         book.IsBorrowed = true;
                     }

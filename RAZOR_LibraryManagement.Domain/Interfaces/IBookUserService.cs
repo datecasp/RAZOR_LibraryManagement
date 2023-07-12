@@ -7,6 +7,7 @@ namespace RAZOR_LibraryManagement.Domain.Interfaces
     {
         Task<BookUserModel> GetBookUserByIdService(int id);
         Task<bool> UserHasBooks(int userId);
+        Task<bool> BookIsBorrowed(int bookId);
         Task<IEnumerable<BookUserModel>> GetBookUserListService();
         Task<IEnumerable<string>> GetBooksOfUser(int userId, bool? actualUser = null);
         Task<vmUserDetails> GetVmUserDetails(int userId);

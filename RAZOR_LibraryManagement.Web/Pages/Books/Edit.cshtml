@@ -3,6 +3,7 @@
 @using RAZOR_LibraryManagement.Lang.Book
 @{
     ViewData["Title"] = "Edit book";
+    var disabled = "Disabled if book is borrowed";
 }
 
 <div class="container mx-auto">
@@ -66,8 +67,8 @@
                         @BookEdit.pBorrow
                     </label>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" asp-for="vmBookEdit.IsBorrowable" />
-                        <label class="form-check-label" for="flexCheckDefault">
+                        <input class="form-check-input" type="checkbox" asp-for="vmBookEdit.IsBorrowable" disabled="@Model.isBorrowed" />
+                        <label class="form-check-label" for="flexCheckDefault" data-bs-toggle="tooltip" data-bs-title="@disabled">
                             @BookEdit.Yes
                         </label>
                     </div>
@@ -83,6 +84,7 @@
 
 @section Scripts{
     <script>
+        //Upload image to cloud
         const featuredImageElement = document.getElementById('featuredImageId');
         const imageUrlCloudinaryElement = document.getElementById('imageUrlCloudinary')
 
@@ -106,6 +108,9 @@
 
         featuredImageElement.addEventListener('change', uploadFeaturedImage);
 
+        //ToolTip trigger
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 
     </script>
 }

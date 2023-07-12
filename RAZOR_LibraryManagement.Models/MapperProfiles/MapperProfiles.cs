@@ -28,6 +28,8 @@ namespace RAZOR_LibraryManagement.Models.MapperProfiles
                 .ReverseMap();
             CreateMap<vmBookIndex, BookModel>()
                 .ReverseMap();
+            CreateMap<vmBookIndex, Book>()
+                .ReverseMap();
             CreateMap<vmBookUser, BookUserModel>()
                 .ReverseMap();
             CreateMap<vmCategoryIndex, CategoryModel>()

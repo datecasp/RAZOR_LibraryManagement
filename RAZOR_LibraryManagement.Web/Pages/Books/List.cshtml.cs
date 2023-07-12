@@ -27,8 +27,7 @@ namespace RAZOR_LibraryManagement.Web.Pages.Books
             {
                 ViewData["Notification"] = JsonSerializer.Deserialize<vmNotification>(notificationJson);
             }
-            var booksList = (await _bookService.GetAllBooksService()).ToList();
-            vmBookIndexList = _mapper.Map<List<vmBookIndex>>(booksList);
+            vmBookIndexList = (await _bookService.GetAllBooksService()).ToList();
         }
     }
 }

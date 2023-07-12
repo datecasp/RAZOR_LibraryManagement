@@ -4,7 +4,8 @@
 @{
     ViewData["Title"] = "Books list";
     var bookInfo = "Book info";
-    var IsActive = "Is available?";
+    var isActive = "Is available?";
+    var isBorrowed = "Is free to borrow?";
     var edit = "Edit book info";
 }
 <div class="container mx-auto">
@@ -35,11 +36,19 @@
                             <td>
                                 @if (book.IsBorrowable)
                                 {
-                                    <i class="bi bi-check-lg mx-3 btn-outline-success" data-bs-toggle="tooltip" data-bs-title="@IsActive"></i>
+                                    <i class="bi bi-check-lg mx-3 btn-outline-success" data-bs-toggle="tooltip" data-bs-title="@isActive"></i>
                                 }
                                 else
                                 {
-                                    <i class="bi bi-x-lg mx-3 btn-outline-danger" data-bs-toggle="tooltip" data-bs-title="@IsActive"></i>
+                                    <i class="bi bi-x-lg mx-3 btn-outline-danger" data-bs-toggle="tooltip" data-bs-title="@isActive"></i>
+                                }
+                                @if (book.IsBorrowed)
+                                {
+                                    <i class="bi bi-x-lg mx-3 btn-outline-danger" data-bs-toggle="tooltip" data-bs-title="@isBorrowed"></i>
+                                }
+                                else
+                                {
+                                    <i class="bi bi-check-lg mx-3 btn-outline-success" data-bs-toggle="tooltip" data-bs-title="@isBorrowed"></i>
                                 }
                                 <a href="/books/details/@book.BookId"><i class="bi bi-book-half mx-3 btn-outline-info" data-bs-toggle="tooltip" data-bs-title="@bookInfo"></i></a>
                                 <a href="/books/edit/@book.BookId"><i class="bi bi-book mx-3 btn-outline-success" data-bs-toggle="tooltip" data-bs-title="@edit"></i></a>

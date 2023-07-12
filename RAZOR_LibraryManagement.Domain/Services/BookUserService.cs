@@ -118,7 +118,17 @@ namespace RAZOR_LibraryManagement.Domain.Services
         {
             var bookUserRepo = _unitOfWork.GetRepository<BookUser>();
             return bookUserRepo.Get<BookUserModel>(bu => (bu.UserId == userId && bu.IsActualUser)).Any();
-            //return _unitOfWork.BookUserRepository.GetBooksOfUser(userId, true).Result.Any();
+        }
+        /// <summary>
+        /// 
+        /// 
+        /// </summary>
+        /// <param name="bookId"></param>
+        /// <returns></returns>
+        public async Task<bool> BookIsBorrowed(int bookId)
+        {
+            var bookUserRepo = _unitOfWork.GetRepository<BookUser>();
+            return bookUserRepo.Get<BookUserModel>(bu => (bu.BookId == bookId && bu.IsActualUser)).Any();
         }
         /// <summary>
         /// 
